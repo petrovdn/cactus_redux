@@ -1,0 +1,24 @@
+import React from 'React'
+import {
+    AppRegistry,
+    StyleSheet,
+    View,
+    Text } from 'react-native'
+
+/**
+ * ### Router-Flux
+ *
+ * Necessary components from Router-Flux
+ */
+import {
+    Router,
+    Scene} from 'react-native-router-flux'
+
+/**
+ * ### Redux
+ *
+ * ```Provider``` will tie the React-Native to the Redux store
+ */
+import {
+    Provider} from 'react-redux'
+    
