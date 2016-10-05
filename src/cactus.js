@@ -33,11 +33,11 @@ import configureStore from './lib/configureStore'
  */
 var I18n = require('react-native-i18n')
 
-// Support fallbacks so en-US & en-BR both use en
-I18n.fallbacks = true
-
 import Translations from './lib/Translations'
 I18n.translations = Translations
+// Support fallbacks so en-US & en-BR both use en
+I18n.fallbacks = true
+I18n.Locale = 'ru'
     /**
      * ### containers
      *
@@ -141,6 +141,7 @@ class cactus_redux extends Component {
     // store.dispatch(setPlatform(platform))
     store.dispatch(setVersion(VERSION))
     store.dispatch(setStore(store))
+    store.dispatch(setPlatform('ios'))
 
                 // setup the router table with App selected as the initial component
                 // note: See https://github.com/aksonov/react-native-router-flux/issues/948

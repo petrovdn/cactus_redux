@@ -55,8 +55,8 @@ var styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   mark: {
-    height: 100,
-    width: 100
+    height: 110,
+    width: 80
   }
 
 })
@@ -147,7 +147,7 @@ var Header = React.createClass({
           <TouchableHighlight onPress={this._onPressMark}>
 
             <Image style={styles.mark}
-              source={require('../images/Snowflake.png')}
+              source={require('../images/cactus.png')}
             />
           </TouchableHighlight>
           {this.props.isFetching

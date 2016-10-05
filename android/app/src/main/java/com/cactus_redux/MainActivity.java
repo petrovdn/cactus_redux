@@ -1,6 +1,7 @@
 package com.cactus_redux;
 
 import com.facebook.react.ReactActivity;
+import com.burnweb.rnsimplealertdialog.RNSimpleAlertDialogPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.i18n.reactnativei18n.ReactNativeI18n;
 

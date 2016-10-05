@@ -76,7 +76,8 @@ var styles = StyleSheet.create({
   summary: {
     fontFamily: 'BodoniSvtyTwoITCTT-Book',
     fontSize: 18,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginTop: 10
   }
 })
 
@@ -116,7 +117,7 @@ let App = React.createClass({
           onGetState={this.props.actions.getState}
           onSetState={this.props.actions.setState} />
 
-        <Text style={styles.summary}>Snowflake {I18n.t('App.version')}:{this.props.deviceVersion}</Text>
+        <Text style={styles.summary}>cuctus {I18n.t('App.version')}:{this.props.deviceVersion}</Text>
 
       </View>
     )
