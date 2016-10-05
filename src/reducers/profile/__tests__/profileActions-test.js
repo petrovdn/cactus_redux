@@ -130,7 +130,7 @@ describe('profileActions', () => {
     ]
 
     const store = mockStore({})
-    return store.dispatch(actions.updateProfile('userid', 'username', 'email'))
+    return store.dispatch(actions.updateProfile('userid', 'login', 'email'))
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions)
       })

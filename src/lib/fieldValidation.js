@@ -1,7 +1,7 @@
 /**
  * # fieldValidation.js
  *
- * Define the validation rules for various fields such as email, username,
+ * Define the validation rules for various fields such as email, login,
  * and passwords.  If the rules are not passed, the appropriate
  * message is displayed to the user
  *
@@ -34,14 +34,14 @@ const emailConstraints = {
 }
 
 /**
-* ## username validation rule
+* ## login validation rule
 * read the message.. ;)
 */
-const usernamePattern = /^[a-zA-Z0-9]{6,12}$/
-const usernameConstraints = {
-  username: {
+const loginPattern = /^[a-zA-Z0-9]{1,50}$/
+const loginConstraints = {
+  login: {
     format: {
-      pattern: usernamePattern,
+      pattern: loginPattern,
       flags: 'i'
     }
   }
@@ -77,19 +77,19 @@ export default function fieldValidation (state, action) {
 
   switch (field) {
     /**
-     * ### username validation
+     * ### login validation
      * set the form field error
      */
-    case ('username'):
-      let validUsername = _.isUndefined(validate({username: value},
-                                                usernameConstraints))
-      if (validUsername) {
-        return state.setIn(['form', 'fields', 'usernameHasError'],
+    case ('login'):
+      let validlogin = _.isUndefined(validate({login: value},
+                                                loginConstraints))
+      if (validlogin) {
+        return state.setIn(['form', 'fields', 'loginHasError'],
                          false)
-        .setIn(['form', 'fields', 'usernameErrorMsg'], '')
+        .setIn(['form', 'fields', 'loginErrorMsg'], '')
       } else {
-        return state.setIn(['form', 'fields', 'usernameHasError'], true)
-        .setIn(['form', 'fields', 'usernameErrorMsg'],
+        return state.setIn(['form', 'fields', 'loginHasError'], true)
+        .setIn(['form', 'fields', 'loginErrorMsg'],
                I18n.t('FieldValidation.valid_user_name'))
       }
 

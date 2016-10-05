@@ -93,7 +93,7 @@ export function profileUpdateFailure (json) {
 /**
  * ## updateProfile
  * @param {string} userId -  objectId
- * @param {string} username - the users name
+ * @param {string} login - the users name
  * @param {string] email - user's email
  * @param {Object} sessionToken - the sessionToken
  *
@@ -104,14 +104,14 @@ export function profileUpdateFailure (json) {
  * the data as now persisted on the serverx
  *
  */
-export function updateProfile (userId, username, email, sessionToken) {
+export function updateProfile (userId, login, email, sessionToken) {
   return dispatch => {
     dispatch(profileUpdateRequest())
     return appAuthToken.getSessionToken(sessionToken)
       .then((token) => {
         return BackendFactory(token).updateProfile(userId,
           {
-            username: username,
+            login: login,
             email: email
           }
         )

@@ -21,15 +21,15 @@
       "navigate": "Navigate to Subview"
     },
     "Profile": {
-      "username": "User name",
+      "login": "User name",
       "email": "Email",
       "update": "Update Profile",
       "verified": "Email verified",
       "display": "display only"
     },
     "LoginForm": {
-      "username": "Логин",
-      "usernamePlaceHolder":"Только почта или телефон",
+      "login": "Логин",
+      "loginPlaceHolder":"Только почта или телефон",
       "email": "Email",
       "password": "Password",
       "password_again": "Password again"
@@ -78,14 +78,14 @@
       "navigate": "Accédez à sous-vue"
     },
     "Profile": {
-      "username": "Nom d'utilisateur",
+      "login": "Nom d'utilisateur",
       "email": "Email",
       "update": "Mettre à jour le profil",
       "verified": "Email verifié",
       "display": "afficher seulement"
     },
     "LoginForm": {
-      "username": "Nom d'utilisateur",
+      "login": "Nom d'utilisateur",
       "email": "Email",
       "password": "Mot de passe",
       "password_again": "Mot de passe à nouveau"
@@ -134,14 +134,14 @@
         "navigate": "Navigate to Subview"
       },
       "Profile": {
-        "username": "User name",
+        "login": "User name",
         "email": "Email",
         "update": "Update Profile",
         "verified": "Email verified",
         "display": "display only"
       },
       "LoginForm": {
-        "username": "User name",
+        "login": "User name",
         "email": "Email",
         "password": "Password",
         "password_again": "Password again"
@@ -190,14 +190,14 @@
         "navigate": "Accédez à sous-vue"
       },
       "Profile": {
-        "username": "Nom d'utilisateur",
+        "login": "Nom d'utilisateur",
         "email": "Email",
         "update": "Mettre à jour le profil",
         "verified": "Email verifié",
         "display": "afficher seulement"
       },
       "LoginForm": {
-        "username": "Nom d'utilisateur",
+        "login": "Nom d'utilisateur",
         "email": "Email",
         "password": "Mot de passe",
         "password_again": "Mot de passe à nouveau"
@@ -246,14 +246,14 @@
       "navigate": "Navegue hasta subview"
     },
     "Profile": {
-      "username": "Nombre de usuario",
+      "login": "Nombre de usuario",
       "email": "Correo electrónico",
       "update": "Actualización del perfil",
      "verified": "Correo electrónico verificado",
       "display": "solo mostrar"
     },
     "LoginForm": {
-      "username": "Nombre de usuario",
+      "login": "Nombre de usuario",
       "email": "Email",
       "password": "Contraseña",
       "password_again": "Contraseña de nuevo"

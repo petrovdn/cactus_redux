@@ -17,34 +17,42 @@ export default class Backend {
    *
    * @param data object
    *
-   * {username: "barton", email: "foo@gmail.com", password: "Passw0rd!"}
+   * {login: "foo@gmail.com" or mobile number}
    *
    * @return
-   * if ok, {createdAt: "2015-12-30T15:17:05.379Z",
-   *   objectId: "5TgExo2wBA",
-   *   sessionToken: "r:dEgdUkcs2ydMV9Y9mt8HcBrDM"}
-   *
-   * if error, {code: xxx, error: 'message'}
-   */
+   * if ok,
+   *{
+   *"status": "success",
+   *"password": "713b8d",
+   *"message": "Учетная запись зарегистрирована. Пароль выслан вам на указанный email адрес."
+   *}
+   * if error,
+   {
+    "status": "error",
+      "error": {
+      "login": "Введите корректный email или номер телефона"
+    },
+      "message": "Введите корректный email или номер телефона"
+      }
   signup (data) {
-
   }
  /**
+
    * ### login
    * encode the data and and call _fetch
    *
    * @param data
    *
-   *  {username: "barton", password: "Passw0rd!"}
+   *  {login: "barton@lll.rr or +79200047779, password: "Passw0rd!"}
    *
    * @returns
-   *
-   * createdAt: "2015-12-30T15:29:36.611Z"
-   * email: "barton@foo.com"
-   * objectId: "Z4yvP19OeL"
-   * sessionToken: "r:Kt9wXIBWD0dNijNIq2u5rRllW"
-   * updatedAt: "2015-12-30T16:08:50.419Z"
-   * username: "barton"
+   * error:
+   *{"status": "error"}
+   * success
+   * c{
+   *"status": "success",
+   *"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNDc1NjcwMDA3fQ.fIHVG8z3fbArsg6PoGJBqCHjSpvkM3iW_gJuhCOFiuw"
+   *}
    *
    */
   login (data) {
@@ -84,7 +92,7 @@ export default class Backend {
    *  objectId: "Z4yvP19OeL"
    *  sessionToken: "r:uFeYONgIsZMPyxOWVJ6VqJGqv"
    *  updatedAt: "2015-12-30T15:29:36.611Z"
-   *  username: "barton"}
+   *  login: "barton"}
    *
    * if error, {code: xxx, error: 'message'}
    */
@@ -97,10 +105,9 @@ export default class Backend {
    *
    * @param userId
    * @param data object:
-   * {username: "barton", email: "barton@foo.com"}
+   * {login: "barton", email: "barton@foo.com"}
    */
   updateProfile (userId, data) {
   }
 
 }
-

@@ -15,11 +15,11 @@
  * As there are only two fields, the form is valid if they are
  */
 export default function formValidation (state) {
-  if (state.form.fields.username !== '' &&
+  if (state.form.fields.login !== '' &&
         state.form.fields.email !== '' &&
-        !state.form.fields.usernameHasError &&
+        !state.form.fields.loginHasError &&
         !state.form.fields.emailHasError &&
-        (state.form.fields.username !== state.form.originalProfile.username ||
+        (state.form.fields.login !== state.form.originalProfile.login ||
          state.form.fields.email !== state.form.originalProfile.email)
        ) {
     return state.setIn(['form', 'isValid'], true)

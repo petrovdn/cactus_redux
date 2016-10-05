@@ -65,28 +65,17 @@ var LoginForm = React.createClass({
       }
     }
 
-    let username = {
-      label: I18n.t('LoginForm.username'),
-      maxLength: 12,
+    let login = {
+      label: I18n.t('LoginForm.login'),
+      maxLength: 40,
       editable: !this.props.form.isFetching,
-      hasError: this.props.form.fields.usernameHasError,
-      error: this.props.form.fields.usernameErrorMsg
+      hasError: this.props.form.fields.loginHasError,
+      error: this.props.form.fields.loginErrorMsg
     }
-
-    let email = {
-      label: I18n.t('LoginForm.email'),
-      keyboardType: 'email-address',
-      editable: !this.props.form.isFetching,
-      hasError: this.props.form.fields.emailHasError,
-      error: this.props.form.fields.emailErrorMsg
-    }
-
-    let secureTextEntry = !this.props.form.fields.showPassword
 
     let password = {
       label: I18n.t('LoginForm.password'),
       maxLength: 12,
-      secureTextEntry: secureTextEntry,
       editable: !this.props.form.isFetching,
       hasError: this.props.form.fields.passwordHasError,
       error: this.props.form.fields.passwordErrorMsg
@@ -100,11 +89,11 @@ var LoginForm = React.createClass({
        */
       case (REGISTER):
         loginForm = t.struct({
-          username: t.String
+          login: t.String
         })
-        options.fields['username'] = username
-        options.fields['username'].placeholder = I18n.t('LoginForm.usernamePlaceHolder')
-        options.fields['username'].autoCapitalize = 'none'
+        options.fields['login'] = login
+        options.fields['login'].placeholder = I18n.t('LoginForm.loginPlaceHolder')
+        options.fields['login'].autoCapitalize = 'none'
         break
 
       /**
@@ -113,14 +102,14 @@ var LoginForm = React.createClass({
        */
       case (LOGIN):
         loginForm = t.struct({
-          username: t.String,
+          login: t.String,
           password: t.String
         })
-        options.fields['username'] = username
-        options.fields['username'].placeholder = I18n.t('LoginForm.username')
-        options.fields['username'].autoCapitalize = 'none'
-        options.fields['password'] = password
-        options.fields['password'].placeholder = I18n.t('LoginForm.password')
+        options.fields['login'] = login
+        options.fields['login'].placeholder = I18n.t('LoginForm.loginPlaceHolder')
+        options.fields['login'].autoCapitalize = 'none'
+        options.fields['login'] = password
+        options.fields['login'].placeholder = I18n.t('LoginForm.password')
         break
 
       /**
@@ -131,9 +120,9 @@ var LoginForm = React.createClass({
         loginForm = t.struct({
           email: t.String
         })
-        options.fields['email'] = email
+        options.fields['email'] = login
         options.fields['email'].autoCapitalize = 'none'
-        options.fields['email'].placeholder = I18n.t('LoginForm.email')
+        options.fields['email'].placeholder = I18n.t('LoginForm.login')
         break
     } // switch
 

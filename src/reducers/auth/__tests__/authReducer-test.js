@@ -152,14 +152,14 @@ describe('authReducer', () => {
       }
       let init = authReducer(initialState, action)
       let withFields =
-            init.setIn(['form', 'fields', 'username'], 'dummy')
+            init.setIn(['form', 'fields', 'login'], 'dummy')
             .setIn(['form', 'fields', 'email'], 'notvalid')
             .setIn(['form', 'fields', 'password'], 'foo')
             .setIn(['form', 'fields', 'passwordAgain'], 'foo')
       let next = authReducer(withFields, action)
       expect(next.form.state).toBe(LOGOUT)
       expect(next.form.isValid).toBe(true)
-      expect(next.form.fields.username).toBe('')
+      expect(next.form.fields.login).toBe('')
       expect(next.form.fields.email).toBe('')
       expect(next.form.fields.password).toBe('')
       expect(next.form.fields.passwordAgain).toBe('')
@@ -280,18 +280,18 @@ describe('authReducer', () => {
      * provide valid input and the form should be valid
      */
     it('form is  valid with valid fields', () => {
-      const userNameFieldChangeAction = {
+      const loginFieldChangeAction = {
         type: ON_AUTH_FORM_FIELD_CHANGE,
-        payload: {field: 'username', value: 'barton'}
+        payload: {field: 'login', value: 'barton'}
       }
       const passwordFieldChangeAction = {
         type: ON_AUTH_FORM_FIELD_CHANGE,
         payload: {field: 'password', value: 'Bart0n!'}
       }
 
-      let userNameState = authReducer(initialState,
-                                      userNameFieldChangeAction)
-      let passwordState = authReducer(userNameState,
+      let loginState = authReducer(initialState,
+                                      loginFieldChangeAction)
+      let passwordState = authReducer(loginState,
                                       passwordFieldChangeAction)
 
       const action = {
@@ -300,7 +300,7 @@ describe('authReducer', () => {
 
       let next = authReducer(passwordState, action)
       expect(next.form.state).toBe(LOGIN)
-      expect(next.form.fields.usernameHasError).toBe(false)
+      expect(next.form.fields.loginHasError).toBe(false)
       expect(next.form.fields.passwordHasError).toBe(false)
       expect(next.form.isValid).toBe(true)
     })
@@ -311,18 +311,18 @@ describe('authReducer', () => {
      * formValidation will flag as such
      */
     it('form is invalid with invalid fields', () => {
-      const userNameFieldChangeAction = {
+      const loginFieldChangeAction = {
         type: ON_AUTH_FORM_FIELD_CHANGE,
-        payload: {field: 'username', value: 'bart'}
+        payload: {field: 'login', value: 'bart'}
       }
       const passwordFieldChangeAction = {
         type: ON_AUTH_FORM_FIELD_CHANGE,
         payload: {field: 'password', value: 'Bart!'}
       }
 
-      let userNameState = authReducer(initialState,
-                                      userNameFieldChangeAction)
-      let passwordState = authReducer(userNameState,
+      let loginState = authReducer(initialState,
+                                      loginFieldChangeAction)
+      let passwordState = authReducer(loginState,
                                       passwordFieldChangeAction)
 
       const action = {
@@ -331,7 +331,7 @@ describe('authReducer', () => {
 
       let next = authReducer(passwordState, action)
       expect(next.form.state).toBe(LOGIN)
-      expect(next.form.fields.usernameHasError).toBe(true)
+      expect(next.form.fields.loginHasError).toBe(true)
       expect(next.form.fields.passwordHasError).toBe(true)
       expect(next.form.isValid).toBe(false)
     })
@@ -375,9 +375,9 @@ describe('authReducer', () => {
      * Provide valid input and get a valid form
      */
     it('form is  valid with valid fields', () => {
-      const userNameFieldChangeAction = {
+      const loginFieldChangeAction = {
         type: ON_AUTH_FORM_FIELD_CHANGE,
-        payload: {field: 'username', value: 'barton'}
+        payload: {field: 'login', value: 'barton'}
       }
       const emailFieldChangeAction = {
         type: ON_AUTH_FORM_FIELD_CHANGE,
@@ -392,9 +392,9 @@ describe('authReducer', () => {
         payload: {field: 'passwordAgain', value: 'Bart0n!'}
       }
 
-      let userNameState = authReducer(initialState,
-                                      userNameFieldChangeAction)
-      let emailState = authReducer(userNameState,
+      let loginState = authReducer(initialState,
+                                      loginFieldChangeAction)
+      let emailState = authReducer(loginState,
                                    emailFieldChangeAction)
       let passwordState = authReducer(emailState,
                                       passwordFieldChangeAction)
@@ -407,7 +407,7 @@ describe('authReducer', () => {
 
       let next = authReducer(passwordAgainState, action)
       expect(next.form.state).toBe(REGISTER)
-      expect(next.form.fields.usernameHasError).toBe(false)
+      expect(next.form.fields.loginHasError).toBe(false)
       expect(next.form.fields.emailHasError).toBe(false)
       expect(next.form.fields.passwordHasError).toBe(false)
       expect(next.form.fields.passwordAgainHasError).toBe(false)
@@ -419,9 +419,9 @@ describe('authReducer', () => {
      * Bad data in, invalid form out!
      */
     it('form is  invalid with invalid fields', () => {
-      const userNameFieldChangeAction = {
+      const loginFieldChangeAction = {
         type: ON_AUTH_FORM_FIELD_CHANGE,
-        payload: {field: 'username', value: 'bart'}
+        payload: {field: 'login', value: 'bart'}
       }
       const emailFieldChangeAction = {
         type: ON_AUTH_FORM_FIELD_CHANGE,
@@ -436,9 +436,9 @@ describe('authReducer', () => {
         payload: {field: 'passwordAgain', value: 'Ba!'}
       }
 
-      let userNameState = authReducer(initialState,
-                                      userNameFieldChangeAction)
-      let emailState = authReducer(userNameState,
+      let loginState = authReducer(initialState,
+                                      loginFieldChangeAction)
+      let emailState = authReducer(loginState,
                                    emailFieldChangeAction)
       let passwordState = authReducer(emailState,
                                       passwordFieldChangeAction)
@@ -451,7 +451,7 @@ describe('authReducer', () => {
 
       let next = authReducer(passwordAgainState, action)
       expect(next.form.state).toBe(REGISTER)
-      expect(next.form.fields.usernameHasError).toBe(true)
+      expect(next.form.fields.loginHasError).toBe(true)
       expect(next.form.fields.emailHasError).toBe(true)
       expect(next.form.fields.passwordHasError).toBe(true)
       expect(next.form.fields.passwordAgainHasError).toBe(true)

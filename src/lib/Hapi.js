@@ -40,7 +40,7 @@ export class Hapi extends Backend {
    *
    * @param data object
    *
-   * {username: "barton", email: "foo@gmail.com", password: "Passw0rd!"}
+   * {login: foo@gmail.com", password: "Passw0rd!"}
    *
    * @return
    * if ok, res.json={createdAt: "2015-12-30T15:17:05.379Z",
@@ -52,7 +52,7 @@ export class Hapi extends Backend {
   async signup (data) {
     return await this._fetch({
       method: 'POST',
-      url: '/account/register',
+      url: '/register',
       body: data
     })
       .then((res) => {
@@ -72,7 +72,7 @@ export class Hapi extends Backend {
    *
    * @param data
    *
-   *  {username: "barton", password: "Passw0rd!"}
+   *  {login: "barton", password: "Passw0rd!"}
    *
    * @returns
    *
@@ -81,7 +81,7 @@ export class Hapi extends Backend {
    * objectId: "Z4yvP19OeL"
    * email: "barton@foo.com"
    * sessionToken: "r:Kt9wXIBWD0dNijNIq2u5rRllW"
-   * username: "barton"
+   * login: "barton"
    *
    */
   async login (data) {
@@ -165,7 +165,7 @@ export class Hapi extends Backend {
    *  objectId: "Z4yvP19OeL"
    *  sessionToken: "r:uFeYONgIsZMPyxOWVJ6VqJGqv"
    *  updatedAt: "2015-12-30T15:29:36.611Z"
-   *  username: "barton"}
+   *  login: "barton"}
    *
    * if error, {code: xxx, error: 'message'}
    */
@@ -192,7 +192,7 @@ export class Hapi extends Backend {
    *
    * @param userId  _id
    * @param data object:
-   * {username: "barton", email: "barton@foo.com"}
+   * {login: "barton", email: "barton@foo.com"}
    */
   async updateProfile (userId, data) {
     return await this._fetch({
