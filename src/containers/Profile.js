@@ -2,7 +2,7 @@
  * # Profile.js
  *
  * This component provides an interface for a logged in user to change
- * their login and email.
+ * their username and email.
  * It too is a container so there is boilerplate from Redux similar to
  * ```App``` and ```Login```
  */
@@ -110,7 +110,7 @@ class Profile extends Component {
     this.errorAlert = new ErrorAlert()
     this.state = {
       formValues: {
-        login: '',
+        username: '',
         email: ''
       }
     }
@@ -123,8 +123,8 @@ class Profile extends Component {
    *
    */
   onChange (value) {
-    if (value.login !== '') {
-      this.props.actions.onProfileFormFieldChange('login', value.login)
+    if (value.username !== '') {
+      this.props.actions.onProfileFormFieldChange('username', value.username)
     }
     if (value.email !== '') {
       this.props.actions.onProfileFormFieldChange('email', value.email)
@@ -140,7 +140,7 @@ class Profile extends Component {
   componentWillReceiveProps (props) {
     this.setState({
       formValues: {
-        login: props.profile.form.fields.login,
+        username: props.profile.form.fields.username,
         email: props.profile.form.fields.email
       }
     })
@@ -153,12 +153,12 @@ class Profile extends Component {
    * form fields.  Otherwise, we need to go fetch the fields
    */
   componentDidMount () {
-    if (this.props.profile.form.fields.login === '' && this.props.profile.form.fields.email === '') {
+    if (this.props.profile.form.fields.username === '' && this.props.profile.form.fields.email === '') {
       this.props.actions.getProfile(this.props.global.currentUser)
     } else {
       this.setState({
         formValues: {
-          login: this.props.profile.form.fields.login,
+          username: this.props.profile.form.fields.username,
           email: this.props.profile.form.fields.email
         }
       })
@@ -175,7 +175,7 @@ class Profile extends Component {
     let self = this
 
     let ProfileForm = t.struct({
-      login: t.String,
+      username: t.String,
       email: t.String
     })
     /**
@@ -185,12 +185,12 @@ class Profile extends Component {
     let options = {
       auto: 'placeholders',
       fields: {
-        login: {
-          label: I18n.t('Profile.login'),
+        username: {
+          label: I18n.t('Profile.username'),
           maxLength: 12,
           editable: !this.props.profile.form.isFetching,
-          hasError: this.props.profile.form.fields.loginHasError,
-          error: this.props.profile.form.fields.loginErrorMsg
+          hasError: this.props.profile.form.fields.usernameHasError,
+          error: this.props.profile.form.fields.usernameErrorMsg
         },
         email: {
           label: I18n.t('Profile.email'),
@@ -211,7 +211,7 @@ class Profile extends Component {
     let onButtonPress = () => {
       this.props.actions.updateProfile(
         this.props.profile.form.originalProfile.objectId,
-        this.props.profile.form.fields.login,
+        this.props.profile.form.fields.username,
         this.props.profile.form.fields.email,
         this.props.global.currentUser)
     }

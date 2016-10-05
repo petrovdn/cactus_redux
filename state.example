@@ -6,9 +6,9 @@
       "isValid":false,
       "isFetching":false,
       "fields":
-        {"login":"",
-          "loginHasError":false,
-          "loginErrorMsg":"",
+        {"username":"",
+          "usernameHasError":false,
+          "usernameErrorMsg":"",
           "email":"",
           "emailHasError":false,
           "emailErrorMsg":"",
@@ -30,7 +30,7 @@
     "profile":
       {"form":
           {"originalProfile":
-              {"login":null,
+              {"username":null,
                 "email":null,
                 "objectId":null,
                 "emailVerified":null
@@ -40,9 +40,9 @@
           "isValid":false,
           "isFetching":false,
           "fields":
-              {"login":"",
-              "loginHasError":false,
-              "loginErrorMsg":"",
+              {"username":"",
+              "usernameHasError":false,
+              "usernameErrorMsg":"",
               "email":"",
               "emailHasError":false,
               "emailErrorMsg":"",

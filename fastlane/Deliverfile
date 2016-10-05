@@ -7,4 +7,4 @@
 # Feel free to remove the following line if you use fastlane (which you should)
 
 app_identifier "mobi.snowflake.demo" # The bundle identifier of your app
-login "bartonhammond@gmail.com" # your Apple ID user
+username "bartonhammond@gmail.com" # your Apple ID user
