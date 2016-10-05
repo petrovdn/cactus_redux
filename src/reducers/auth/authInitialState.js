@@ -32,16 +32,9 @@ const Form = Record({
     username: '',
     usernameHasError: false,
     usernameErrorMsg: '',
-    email: '',
-    emailHasError: false,
-    emailErrorMsg: '',
     password: '',
     passwordHasError: false,
-    passwordErrorMsg: '',
-    passwordAgain: '',
-    passwordAgainHasError: false,
-    passwordAgainErrorMsg: '',
-    showPassword: false
+    passwordErrorMsg: ''
   }))
 })
 
@@ -53,4 +46,3 @@ var InitialState = Record({
   form: new Form()
 })
 export default InitialState
-

@@ -266,35 +266,29 @@ export function saveSessionToken (json) {
 /**
  * ## signup
  * @param {string} username - name of user
- * @param {string} email - user's email
- * @param {string} password - user's password
  *
  * Call the server signup and if good, save the sessionToken,
  * set the state to logout and signal success
  *
  * Otherwise, dispatch the error so the user can see
  */
-export function signup (username, email, password) {
+export function signup (username) {
   return dispatch => {
     dispatch(signupRequest())
     return BackendFactory().signup({
-      username: username,
-      email: email,
-      password: password
+      login: username
     })
 
       .then((json) => {
         return saveSessionToken(
           Object.assign({}, json,
-            { username: username,
-              email: email
+            { username: username
             })
           )
           .then(() => {
             dispatch(signupSuccess(
               Object.assign({}, json,
-               { username: username,
-                 email: email
+               { username: username
                })
             ))
             dispatch(logoutState())

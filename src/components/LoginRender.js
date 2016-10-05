@@ -41,10 +41,6 @@ import FormButton from '../components/FormButton'
  * textinput and displays the error messages
  */
 import LoginForm from '../components/LoginForm'
-/**
- * The itemCheckbox will toggle the display of the password fields
- */
-import ItemCheckbox from '../components/ItemCheckbox'
 
 /**
  * The necessary React components
@@ -117,9 +113,7 @@ class LoginRender extends Component {
     this.state = {
       value: {
         username: this.props.auth.form.fields.username,
-        email: this.props.auth.form.fields.email,
-        password: this.props.auth.form.fields.password,
-        passwordAgain: this.props.auth.form.fields.passwordAgain
+        password: this.props.auth.form.fields.password
       }
     }
   }
@@ -132,9 +126,7 @@ class LoginRender extends Component {
     this.setState({
       value: {
         username: nextprops.auth.form.fields.username,
-        email: nextprops.auth.form.fields.email,
-        password: nextprops.auth.form.fields.password,
-        passwordAgain: nextprops.auth.form.fields.passwordAgain
+        password: nextprops.auth.form.fields.password
       }
     })
   }
@@ -152,14 +144,8 @@ class LoginRender extends Component {
     if (value.username !== '') {
       this.props.actions.onAuthFormFieldChange('username', value.username)
     }
-    if (value.email !== '') {
-      this.props.actions.onAuthFormFieldChange('email', value.email)
-    }
     if (value.password !== '') {
       this.props.actions.onAuthFormFieldChange('password', value.password)
-    }
-    if (value.passwordAgain !== '') {
-      this.props.actions.onAuthFormFieldChange('passwordAgain', value.passwordAgain)
     }
     this.setState(
       {value}
@@ -216,11 +202,9 @@ class LoginRender extends Component {
     var formType = this.props.formType
     var loginButtonText = this.props.loginButtonText
     var onButtonPress = this.props.onButtonPress
-    var displayPasswordCheckbox = this.props.displayPasswordCheckbox
     var leftMessageType = this.props.leftMessageType
     var rightMessageType = this.props.rightMessageType
 
-    var passwordCheckbox = <Text />
     let leftMessage = this.getMessage(leftMessageType, this.props.actions)
     let rightMessage = this.getMessage(rightMessageType, this.props.actions)
 
@@ -228,23 +212,6 @@ class LoginRender extends Component {
 
     // display the login / register / change password screens
     this.errorAlert.checkError(this.props.auth.form.error)
-
-    /**
-     * Toggle the display of the Password and PasswordAgain fields
-     */
-    if (displayPasswordCheckbox) {
-      passwordCheckbox =
-        <ItemCheckbox
-          text={I18n.t('LoginRender.show_password')}
-          disabled={this.props.auth.form.isFetching}
-          onCheck={() => {
-            this.props.actions.onAuthFormFieldChange('showPassword', true)
-          }}
-          onUncheck={() => {
-            this.props.actions.onAuthFormFieldChange('showPassword', false)
-          }}
-      />
-    }
 
     /**
      * The LoginForm is now defined with the required fields.  Just
@@ -270,7 +237,6 @@ class LoginRender extends Component {
                 form={this.props.auth.form}
                 value={this.state.value}
                 onChange={self.onChange.bind(self)} />
-              {passwordCheckbox}
             </View>
 
             <FormButton

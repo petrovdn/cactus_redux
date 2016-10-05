@@ -35,13 +35,7 @@ export default function formValidation (state) {
      */
     case REGISTER:
       if (state.form.fields.username !== '' &&
-          state.form.fields.email !== '' &&
-          state.form.fields.password !== '' &&
-          state.form.fields.passwordAgain !== '' &&
-          !state.form.fields.usernameHasError &&
-          !state.form.fields.emailHasError &&
-          !state.form.fields.passwordHasError &&
-        !state.form.fields.passwordAgainHasError) {
+          !state.form.fields.usernameHasError) {
         return state.setIn(['form', 'isValid'], true)
       } else {
         return state.setIn(['form', 'isValid'], false)
