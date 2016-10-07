@@ -83,8 +83,8 @@ var styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   button: {
-    backgroundColor: '#FF3366',
-    borderColor: '#FF3366',
+    backgroundColor: '#6ec740',
+    borderColor: '#6ec740',
     marginLeft: 10,
     marginRight: 10
   }

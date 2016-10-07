@@ -156,7 +156,7 @@ class cactus_redux extends Component {
               initial />
 
             <Scene key='InitialLoginForm'
-              component={Register}
+              component={Login}
               type='replace' />
 
             <Scene key='Login'

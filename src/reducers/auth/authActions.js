@@ -130,14 +130,11 @@ export function logout () {
     return appAuthToken.getSessionToken()
 
       .then((token) => {
-        return BackendFactory(token).logout()
-      })
-
-      .then(() => {
         dispatch(loginState())
         dispatch(logoutSuccess())
         dispatch(deleteSessionToken())
         Actions.InitialLoginForm()
+
       })
 
       .catch((error) => {
@@ -279,8 +276,8 @@ export function signup (username) {
       login: username
     })
       .then((json) => {
-        console.log(json)
         dispatch(signupSuccess(json))
+        Actions.Login()
       })
       .catch((error) => {
         dispatch(signupFailure(error.message))

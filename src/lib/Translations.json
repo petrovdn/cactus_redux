@@ -38,16 +38,16 @@
       "register": "Зарегистрироваться"
     },
     "ForgotPassword": {
-      "reset_password": "Reset password"
+      "reset_password": "Восстановить пароль"
     },
     "Login": {
-      "login": "Log in"
+      "login": "Войти"
     },
     "Register": {
       "register": "Зарегистрироваться"
     },
     "FieldValidation": {
-      "valid_user_name": "6-12 in length with letters or numbers",
+      "valid_user_name": "длина имени пользователя",
       "valid_email": "Provide valid email",
       "valid_password": "6-12 in length, with a number and special character: !@#$%^&*",
       "valid_password_again": "Passwords must match"

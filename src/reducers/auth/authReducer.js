@@ -138,6 +138,7 @@ export default function authReducer (state = initialState, action) {
       return formValidation(
       state.setIn(['form', 'state'], 'LOGIN')
         .setIn(['form', 'error'], null)
+        .setIn(['form', 'fields', 'password'], action.payload.password)
         .setIn(['form', 'isFetching'], false)
       )
 
