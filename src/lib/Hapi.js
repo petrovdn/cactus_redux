@@ -52,7 +52,7 @@ export class Hapi extends Backend {
   async signup (data) {
     return await this._fetch({
       method: 'POST',
-      url: '/account/register',
+      url: '/register',
       body: data
     })
       .then((res) => {
@@ -87,7 +87,7 @@ export class Hapi extends Backend {
   async login (data) {
     return await this._fetch({
       method: 'POST',
-      url: '/account/login',
+      url: '/login',
       body: data
     })
       .then((res) => {
@@ -108,7 +108,7 @@ export class Hapi extends Backend {
   async logout () {
     return await this._fetch({
       method: 'POST',
-      url: '/account/logout',
+      url: '/login',
       body: {}
     })
       .then((res) => {

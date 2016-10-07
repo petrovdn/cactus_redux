@@ -83,9 +83,7 @@ export default function authReducer (state = initialState, action) {
       state.setIn(['form', 'state'], action.type)
         .setIn(['form', 'error'], null)
         .setIn(['form', 'fields', 'username'], '')
-        .setIn(['form', 'fields', 'email'], '')
         .setIn(['form', 'fields', 'password'], '')
-        .setIn(['form', 'fields', 'passwordAgain'], '')
     )
 
     /**
@@ -126,11 +124,22 @@ export default function authReducer (state = initialState, action) {
      */
     case SESSION_TOKEN_SUCCESS:
     case SESSION_TOKEN_FAILURE:
-    case SIGNUP_SUCCESS:
     case LOGIN_SUCCESS:
     case LOGOUT_SUCCESS:
     case RESET_PASSWORD_SUCCESS:
       return state.setIn(['form', 'isFetching'], false)
+    /**
+     * ### Request good
+     * Set the fetching flag so the forms will be enabled
+     * user needs to login
+     */
+
+    case SIGNUP_SUCCESS:
+      return formValidation(
+      state.setIn(['form', 'state'], 'LOGIN')
+        .setIn(['form', 'error'], null)
+        .setIn(['form', 'isFetching'], false)
+      )
 
     /**
      *
@@ -159,12 +168,8 @@ export default function authReducer (state = initialState, action) {
           .setIn(['form', 'isFetching'], form.isFetching)
           .setIn(['form', 'fields', 'username'], form.fields.username)
           .setIn(['form', 'fields', 'usernameHasError'], form.fields.usernameHasError)
-          .setIn(['form', 'fields', 'email'], form.fields.email)
-          .setIn(['form', 'fields', 'emailHasError'], form.fields.emailHasError)
           .setIn(['form', 'fields', 'password'], form.fields.password)
           .setIn(['form', 'fields', 'passwordHasError'], form.fields.passwordHasError)
-          .setIn(['form', 'fields', 'passwordAgain'], form.fields.passwordAgain)
-          .setIn(['form', 'fields', 'passwordAgainHasError'], form.fields.passwordAgainHasError)
 
       return next
 

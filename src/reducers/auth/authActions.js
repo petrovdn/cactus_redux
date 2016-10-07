@@ -278,26 +278,12 @@ export function signup (username) {
     return BackendFactory().signup({
       login: username
     })
-
       .then((json) => {
-        return saveSessionToken(
-          Object.assign({}, json,
-            { username: username
-            })
-          )
-          .then(() => {
-            dispatch(signupSuccess(
-              Object.assign({}, json,
-               { username: username
-               })
-            ))
-            dispatch(logoutState())
-            // navigate to Tabbar
-            Actions.Tabbar()
-          })
+        console.log(json)
+        dispatch(signupSuccess(json))
       })
       .catch((error) => {
-        dispatch(signupFailure(error))
+        dispatch(signupFailure(error.message))
       })
   }
 }
@@ -340,46 +326,46 @@ export function login (username, password) {
   return dispatch => {
     dispatch(loginRequest())
     return BackendFactory().login({
-      username: username,
+      login: username,
       password: password
     })
 
       .then(function (json) {
-        return saveSessionToken(json)
+        return saveSessionToken(json.token)
           .then(function () {
-            dispatch(loginSuccess(json))
+            dispatch(loginSuccess(json.token))
             // navigate to Tabbar
             Actions.Tabbar()
             dispatch(logoutState())
           })
       })
       .catch((error) => {
-        dispatch(loginFailure(error))
+        dispatch(loginFailure(error.status))
       })
   }
 }
 
-/**
- * ## ResetPassword actions
- */
-export function resetPasswordRequest () {
-  return {
-    type: RESET_PASSWORD_REQUEST
-  }
-}
-
-export function resetPasswordSuccess () {
-  return {
-    type: RESET_PASSWORD_SUCCESS
-  }
-}
-
-export function resetPasswordFailure (error) {
-  return {
-    type: RESET_PASSWORD_FAILURE,
-    payload: error
-  }
-}
+// /**
+//  * ## ResetPassword actions
+//  */
+// export function resetPasswordRequest () {
+//   return {
+//     type: RESET_PASSWORD_REQUEST
+//   }
+// }
+//
+// export function resetPasswordSuccess () {
+//   return {
+//     type: RESET_PASSWORD_SUCCESS
+//   }
+// }
+//
+// export function resetPasswordFailure (error) {
+//   return {
+//     type: RESET_PASSWORD_FAILURE,
+//     payload: error
+//   }
+// }
 /**
  * ## ResetPassword
  *
@@ -392,19 +378,19 @@ export function resetPasswordFailure (error) {
  * With that enabled, an email can be sent w/ a
  * form for setting the new password.
  */
-export function resetPassword (email) {
-  return dispatch => {
-    dispatch(resetPasswordRequest())
-    return BackendFactory().resetPassword({
-      email: email
-    })
-      .then(() => {
-        dispatch(loginState())
-        dispatch(resetPasswordSuccess())
-        Actions.Login()
-      })
-      .catch((error) => {
-        dispatch(resetPasswordFailure(error))
-      })
-  }
-}
+// export function resetPassword (username) {
+//   return dispatch => {
+//     dispatch(resetPasswordRequest())
+//     return BackendFactory().resetPassword({
+//       username: username
+//     })
+//       .then(() => {
+//         dispatch(loginState())
+//         dispatch(resetPasswordSuccess())
+//         Actions.Login()
+//       })
+//       .catch((error) => {
+//         dispatch(resetPasswordFailure(error))
+//       })
+//   }
+// }

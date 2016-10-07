@@ -73,14 +73,6 @@ var LoginForm = React.createClass({
       error: this.props.form.fields.usernameErrorMsg
     }
 
-    let email = {
-      label: I18n.t('LoginForm.email'),
-      keyboardType: 'email-address',
-      editable: !this.props.form.isFetching,
-      hasError: this.props.form.fields.emailHasError,
-      error: this.props.form.fields.emailErrorMsg
-    }
-
     let secureTextEntry = !this.props.form.fields.showPassword
 
     let password = {
@@ -117,7 +109,7 @@ var LoginForm = React.createClass({
           password: t.String
         })
         options.fields['username'] = username
-        options.fields['username'].placeholder = I18n.t('LoginForm.username')
+        options.fields['username'].placeholder = I18n.t('LoginForm.usernamePlaceHolder')
         options.fields['username'].autoCapitalize = 'none'
         options.fields['password'] = password
         options.fields['password'].placeholder = I18n.t('LoginForm.password')
@@ -129,11 +121,11 @@ var LoginForm = React.createClass({
        */
       case (FORGOT_PASSWORD):
         loginForm = t.struct({
-          email: t.String
+          username: t.String
         })
-        options.fields['email'] = email
-        options.fields['email'].autoCapitalize = 'none'
-        options.fields['email'].placeholder = I18n.t('LoginForm.email')
+        options.fields['username'] = username
+        options.fields['username'].autoCapitalize = 'none'
+        options.fields['username'].placeholder = I18n.t('LoginForm.usernamePlaceHolder')
         break
     } // switch
 
