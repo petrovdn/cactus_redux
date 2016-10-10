@@ -12,13 +12,38 @@
       "subview": "Subview",
       "back": "Back"
     },
-    "Snowflake": {
-      "logout": "Log out",
-      "main": "Main",
-      "profile":"Profile"
+    "cactus": {
+      "logout": "Выйти",
+      "tasks":"Задачи",
+      "reports":"Отчеты",
+      "profile":"Профиль"
     },
     "Main": {
       "navigate": "Navigate to Subview"
+    },
+    "taskbox": {
+      "addtask": "Новая задача",
+      "getlist": "Получить список"
+    },
+    "taskedit": {
+      "taskTitle": "Содержание задачи",
+      "taskTitlePlaceHolder": "Содержание задачи",
+      "editButton": "Редактировать",
+      "saveButton": "Сохранить",
+      "cancelButton": "Отменить",
+      "sendButton": "Отправить"
+    },
+    "repbox": {
+      "addrep": "Новый отчет",
+      "getlist": "Получить отчеты"
+    },
+    "repedit": {
+      "repTitle": "Заголовок отчета",
+      "repTitlePlaceHolder": "Заголовок задачи",
+      "editButton": "Редактировать",
+      "saveButton": "Сохранить",
+      "cancelButton": "Отменить",
+      "sendButton": "Отправить"
     },
     "Profile": {
       "username": "User name",

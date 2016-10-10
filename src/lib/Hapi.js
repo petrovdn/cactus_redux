@@ -29,7 +29,7 @@ export class Hapi extends Backend {
       throw new Error('TokenMissing')
     }
     this._sessionToken =
-      _.isNull(token) ? null : token.sessionToken.sessionToken
+      _.isNull(token) ? null : token.sessionToken
 
     this.API_BASE_URL = CONFIG.backend.hapiLocal
           ? CONFIG.HAPI.local.url
@@ -101,57 +101,7 @@ export class Hapi extends Backend {
         throw (error)
       })
   }
-  /**
-   * ### logout
-   * prepare the request and call _fetch
-   */
-  async logout () {
-    return await this._fetch({
-      method: 'POST',
-      url: '/login',
-      body: {}
-    })
-      .then((res) => {
-        if ((res.status === 200 || res.status === 201) ||
-            (res.status === 400 && res.code === 209)) {
-          return {}
-        } else {
-          throw new Error({code: res.statusCode, error: res.message})
-        }
-      })
-      .catch((error) => {
-        throw (error)
-      })
-  }
-  /**
-   * ### resetPassword
-   * the data is already in a JSON format, so call _fetch
-   *
-   * @param data
-   * {email: "barton@foo.com"}
-   *
-   * @returns empty object
-   *
-   * if error:  {code: xxx, error: 'message'}
-   */
-  async resetPassword (data) {
-    return await this._fetch({
-      method: 'POST',
-      url: '/account/resetPasswordRequest',
-      body: data
-    })
-      .then((response) => {
-        if ((response.status === 200 || response.status === 201)) {
-          return {}
-        } else {
-          var res = JSON.parse(response._bodyInit)
-          throw (res)
-        }
-      })
-      .catch((error) => {
-        throw (error)
-      })
-  }
+
   /**
    * ### getProfile
    * Using the sessionToken, we'll get everything about
@@ -172,7 +122,7 @@ export class Hapi extends Backend {
   async getProfile () {
     return await this._fetch({
       method: 'GET',
-      url: '/account/profile/me'
+      url: '/user/profile'
     })
       .then((res) => {
         if ((res.status === 200 || res.status === 201)) {
@@ -211,6 +161,42 @@ export class Hapi extends Backend {
         throw (error)
       })
   }
+
+  async getTasklist (sessionToken) {
+    return await this._fetch({
+      method: 'GET',
+      url: '/tasks'
+    })
+      .then((res) => {
+        if ((res.status === 200 || res.status === 201)) {
+          return res.json
+        } else {
+          throw (res.json)
+        }
+      })
+      .catch((error) => {
+        throw (error)
+      })
+  }
+
+  async addTask (data) {
+    return await this._fetch({
+      method: 'POST',
+      url: '/tasks',
+      body: data
+    })
+      .then((res) => {
+        if ((res.status === 200 || res.status === 201)) {
+          return {}
+        } else {
+          throw (res.json)
+        }
+      })
+      .catch((error) => {
+        throw (error)
+      })
+  }
+
   /**
    * ### _fetch
    * A generic function that prepares the request

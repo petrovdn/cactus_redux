@@ -51,6 +51,8 @@ import Register from './containers/Register'
 import ForgotPassword from './containers/ForgotPassword'
 import Profile from './containers/Profile'
 import Main from './containers/Main'
+import TaskBox from './containers/TaskBox'
+import RepBox from './containers/RepBox'
 import Subview from './containers/Subview'
 
     /**
@@ -77,6 +79,8 @@ import AuthInitialState from './reducers/auth/authInitialState'
 import DeviceInitialState from './reducers/device/deviceInitialState'
 import GlobalInitialState from './reducers/global/globalInitialState'
 import ProfileInitialState from './reducers/profile/profileInitialState'
+import TaskBoxInitialState from './reducers/taskbox/taskboxInitialState'
+import RepBoxInitialState from './reducers/repbox/repboxInitialState'
 
     /**
      *  The version of the app but not  displayed yet
@@ -94,8 +98,10 @@ function getInitialState () {
   const _initState = {
     auth: new AuthInitialState(),
     device: (new DeviceInitialState()).set('isMobile', true),
-    global: (new GlobalInitialState()),
-    profile: new ProfileInitialState()
+    global: new GlobalInitialState(),
+    profile: new ProfileInitialState(),
+    taskbox: new TaskBoxInitialState(),
+    repbox: new RepBoxInitialState()
   }
   return _initState
 }
@@ -113,7 +119,7 @@ const styles = StyleSheet.create({
      */
 class TabIcon extends React.Component {
   render () {
-    var color = this.props.selected ? '#FF3366' : '#FFB3B3'
+    var color = this.props.selected ? 'black' : 'green'
     return (
       <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', alignSelf: 'center'}}>
         <Icon style={{color: color}} name={this.props.iconName} size={30} />
@@ -148,7 +154,7 @@ class cactus_redux extends Component {
     return (
 
       <Provider store={store}>
-        <Router sceneStyle={{ backgroundColor: 'white' }}>
+        <Router sceneStyle={{ backgroundColor: 'lightgreen' }}>
           <Scene key='root' hideNavBar>
             <Scene key='App'
               component={App}
@@ -181,22 +187,39 @@ class cactus_redux extends Component {
               default='Main'>
 
               <Scene key='Logout'
-                title={I18n.t('Snowflake.logout')}
+                title={I18n.t('cactus.logout')}
                 icon={TabIcon}
                 iconName={'sign-out'}
                 hideNavBar
                 component={Logout} />
 
+              <Scene key='TaskBox'
+                title={I18n.t('cactus.tasks')}
+                iconName={'list-alt'}
+                icon={TabIcon}
+                hideNavBar
+                component={TaskBox}
+                initial />
+
               <Scene key='Main'
-                title={I18n.t('Snowflake.main')}
-                iconName={'home'}
+                title={I18n.t('cactus.reports')}
+                iconName={'sign-in'}
                 icon={TabIcon}
                 hideNavBar
                 component={Main}
                 initial />
 
+                <Scene key='RepBox'
+                  title={I18n.t('cactus.reports')}
+                  iconName={'file-text'}
+                  icon={TabIcon}
+                  hideNavBar
+                  component={RepBox}
+                  />
+
+
               <Scene key='Profile'
-                title={I18n.t('Snowflake.profile')}
+                title={I18n.t('cactus.profile')}
                 icon={TabIcon}
                 iconName={'gear'}
                 hideNavBar

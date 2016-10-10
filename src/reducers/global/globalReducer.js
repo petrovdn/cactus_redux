@@ -97,6 +97,8 @@ export default function globalReducer (state = initialState, action) {
         newState['auth'] = _state.auth.toJS()
         newState['device'] = _state.device.toJS()
         newState['profile'] = _state.profile.toJS()
+        newState['taskbox'] = _state.taskbox.toJS()
+        newState['repbox'] = _state.repbox.toJS()
 
       // Make sure global doesn't have the previous currentState
         // let _noCurrentState =  _state.global.set('currentState',null);

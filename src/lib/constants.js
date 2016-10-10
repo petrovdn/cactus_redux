@@ -52,6 +52,28 @@ export default keyMirror({
 
   FORGOT_PASSWORD: null,
   LOGIN: null,
-  REGISTER: null
+  REGISTER: null,
+
+  TASKLIST: null,
+  TASKEDIT: null,
+
+  TASKLIST_REQUEST: null,
+  TASKLIST_SUCCESS: null,
+  TASKLIST_FAILURE: null,
+
+  ADDTASK_REQUEST: null,
+  ADDTASK_SUCCESS: null,
+  ADDTASK_FAILURE: null,
+
+  REPLIST: null,
+  REPEDIT: null,
+
+  REPLIST_REQUEST: null,
+  REPLIST_SUCCESS: null,
+  REPLIST_FAILURE: null,
+
+  ADDREP_REQUEST: null,
+  ADDREP_SUCCESS: null,
+  ADDREP_FAILURE: null
 
 })
