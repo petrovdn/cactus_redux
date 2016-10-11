@@ -15,6 +15,7 @@
     "cactus": {
       "logout": "Выйти",
       "tasks":"Задачи",
+      "main":"Главное",
       "reports":"Отчеты",
       "profile":"Профиль"
     },
@@ -46,11 +47,13 @@
       "sendButton": "Отправить"
     },
     "Profile": {
-      "username": "User name",
-      "email": "Email",
-      "update": "Update Profile",
-      "verified": "Email verified",
-      "display": "display only"
+      "inn": "ИНН",
+      "surname": "Фамилия",
+      "name": "Имя",
+      "middlename": "Отчество",
+      "adress": "Адрес по прописке",
+      "okved": "Основной код ОКВЭД",
+      "phone": "Телефон"
     },
     "LoginForm": {
       "username": "Логин",

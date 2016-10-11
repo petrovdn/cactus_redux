@@ -147,7 +147,7 @@ export class Hapi extends Backend {
   async updateProfile (userId, data) {
     return await this._fetch({
       method: 'POST',
-      url: '/account/profile/' + userId,
+      url: '/profile/' + userId,
       body: data
     })
       .then((res) => {

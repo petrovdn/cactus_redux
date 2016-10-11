@@ -158,8 +158,13 @@ class Profile extends Component {
     } else {
       this.setState({
         formValues: {
-          username: this.props.profile.form.fields.username,
-          email: this.props.profile.form.fields.email
+          inn: this.props.profile.form.fields.inn,
+          surname: this.props.profile.form.fields.surname,
+          name: this.props.profile.form.fields.name,
+          middlename: this.props.profile.form.fields.middlename,
+          adress: this.props.profile.form.fields.adress,
+          okved: this.props.profile.form.fields.okved,
+          phone: this.props.profile.form.fields.phone
         }
       })
     }
@@ -175,8 +180,13 @@ class Profile extends Component {
     let self = this
 
     let ProfileForm = t.struct({
-      username: t.String,
-      email: t.String
+      inn: t.String,
+      surname: t.String,
+      name: t.String,
+      middlename: t.String,
+      adress: t.String,
+      okved: t.String,
+      phone: t.String
     })
     /**
      * Set up the field definitions.  If we're fetching, the fields
@@ -185,19 +195,41 @@ class Profile extends Component {
     let options = {
       auto: 'placeholders',
       fields: {
-        username: {
-          label: I18n.t('Profile.username'),
+        inn: {
+          label: I18n.t('Profile.inn'),
+          placeholder: I18n.t('Profile.inn'),
           maxLength: 12,
-          editable: !this.props.profile.form.isFetching,
-          hasError: this.props.profile.form.fields.usernameHasError,
-          error: this.props.profile.form.fields.usernameErrorMsg
+          editable: !this.props.profile.form.isFetching
         },
-        email: {
-          label: I18n.t('Profile.email'),
-          keyboardType: 'email-address',
-          editable: !this.props.profile.form.isFetching,
-          hasError: this.props.profile.form.fields.emailHasError,
-          error: this.props.profile.form.fields.emailErrorMsg
+        surname: {
+          label: I18n.t('Profile.surname'),
+          placeholder: I18n.t('Profile.surname'),
+          editable: !this.props.profile.form.isFetching
+        },
+        name: {
+          label: I18n.t('Profile.name'),
+          placeholder: I18n.t('Profile.name'),
+          editable: !this.props.profile.form.isFetching
+        },
+        middlename: {
+          label: I18n.t('Profile.middlename'),
+          placeholder: I18n.t('Profile.middlename'),
+          editable: !this.props.profile.form.isFetching
+        },
+        adress: {
+          label: I18n.t('Profile.adress'),
+          placeholder: I18n.t('Profile.adress'),
+          editable: !this.props.profile.form.isFetching
+        },
+        okved: {
+          label: I18n.t('Profile.okved'),
+          placeholder: I18n.t('Profile.okved'),
+          editable: !this.props.profile.form.isFetching
+        },
+        phone: {
+          label: I18n.t('Profile.phone'),
+          placeholder: I18n.t('Profile.phone'),
+          editable: !this.props.profile.form.isFetching
         }
       }
     }
@@ -210,10 +242,14 @@ class Profile extends Component {
     let profileButtonText = I18n.t('Profile.update')
     let onButtonPress = () => {
       this.props.actions.updateProfile(
-        this.props.profile.form.originalProfile.objectId,
-        this.props.profile.form.fields.username,
-        this.props.profile.form.fields.email,
-        this.props.global.currentUser)
+        this.props.global.currentUser,
+        this.props.profile.form.fields.inn,
+        this.props.profile.form.fields.surname,
+        this.props.profile.form.fields.name,
+        this.props.profile.form.fields.middlename,
+        this.props.profile.form.fields.adress,
+        this.props.profile.form.fields.okved,
+        this.props.profile.form.fields.phone)
     }
     /**
      * Wrap the form with the header and button.  The header props are

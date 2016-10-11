@@ -45,9 +45,9 @@ export default class extends Component {
               underlayColor={'#AAA'}>
               <View style={styles.rowFront}>
                 <View>
-                  <Text> № {data[0]} </Text>
-                  <Text> {data[1]}</Text>
-                  <Text> Статус: {data[2]}, Дата создания: {data[3]}</Text>
+                  <Text> {data[2]} {data[1]} </Text>
+                  <Text> {data[3]}</Text>
+                  <Text> Статус: {data[4]}</Text>
                 </View>
               </View>
             </TouchableHighlight>

@@ -202,7 +202,7 @@ class cactus_redux extends Component {
                 initial />
 
               <Scene key='Main'
-                title={I18n.t('cactus.reports')}
+                title={I18n.t('cactus.main')}
                 iconName={'sign-in'}
                 icon={TabIcon}
                 hideNavBar

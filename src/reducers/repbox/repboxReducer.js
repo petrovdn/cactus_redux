@@ -56,7 +56,7 @@ export default function repboxReducer (state = initialState, action) {
       return nextState
 
     case REPLIST_SUCCESS:
-      return state.setIn(['form', 'REPlist'], action.payload)
+      return state.setIn(['form', 'replist'], action.payload)
         .setIn(['form', 'isFetching'], false)
     case REPLIST_FAILURE:
       return state.setIn(['form', 'isFetching'], false)
