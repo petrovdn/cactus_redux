@@ -34,13 +34,6 @@ import FormButton from '../components/FormButton'
  */
 import Header from '../components/Header'
 
-/**
- * The itemCheckbox will display the state of the email verified
- */
-import ItemCheckbox from '../components/ItemCheckbox'
-/**
- * The necessary React components
- */
 import React, {Component} from 'react'
 import
 {
@@ -50,13 +43,6 @@ import
 from 'react-native'
 
 /**
-* The form processing component
-*/
-import t from 'tcomb-form-native'
-
-let Form = t.form.Form
-
-/**
  * ## Styles
  */
 var styles = StyleSheet.create({
@@ -64,14 +50,14 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
     backgroundColor: 'transparent'
-  },
-  inputs: {
-    marginTop: 10,
-    marginBottom: 10,
-    marginLeft: 10,
-    marginRight: 10
   }
 })
+
+/**
+* The form processing component
+*/
+import t from 'tcomb-form-native'
+let Form = t.form.Form
 
 /**
 * ## Redux boilerplate
@@ -123,11 +109,26 @@ class Profile extends Component {
    *
    */
   onChange (value) {
-    if (value.username !== '') {
-      this.props.actions.onProfileFormFieldChange('username', value.username)
+    if (value.inn !== '') {
+      this.props.actions.onProfileFormFieldChange('inn', value.inn)
     }
-    if (value.email !== '') {
-      this.props.actions.onProfileFormFieldChange('email', value.email)
+    if (value.surname !== '') {
+      this.props.actions.onProfileFormFieldChange('surname', value.surname)
+    }
+    if (value.name !== '') {
+      this.props.actions.onProfileFormFieldChange('name', value.name)
+    }
+    if (value.middlename !== '') {
+      this.props.actions.onProfileFormFieldChange('middlename', value.middlename)
+    }
+    if (value.adress !== '') {
+      this.props.actions.onProfileFormFieldChange('adress', value.adress)
+    }
+    if (value.okved !== '') {
+      this.props.actions.onProfileFormFieldChange('okved', value.okved)
+    }
+    if (value.phone !== '') {
+      this.props.actions.onProfileFormFieldChange('phone', value.phone)
     }
     this.setState({value})
   }
@@ -194,6 +195,7 @@ class Profile extends Component {
      */
     let options = {
       auto: 'placeholders',
+      stylesheet: formStylesheet,
       fields: {
         inn: {
           label: I18n.t('Profile.inn'),
@@ -276,9 +278,6 @@ class Profile extends Component {
             value={this.state.formValues}
             onChange={this.onChange.bind(self)}
           />
-          <ItemCheckbox text={verfiedText}
-            disabled
-            checked={this.props.profile.form.fields.emailVerified} />
         </View>
 
         <FormButton
@@ -290,4 +289,179 @@ class Profile extends Component {
     )
   }
 }
+
+var LABEL_COLOR = '#000000'
+var INPUT_COLOR = '#000000'
+var ERROR_COLOR = '#a94442'
+var HELP_COLOR = '#999999'
+var BORDER_COLOR = '#cccccc'
+var DISABLED_COLOR = '#777777'
+var DISABLED_BACKGROUND_COLOR = '#eeeeee'
+var FONT_SIZE = 20
+var FONT_WEIGHT = '500'
+var formStylesheet = Object.freeze({
+  fieldset: {},
+  // the style applied to the container of all inputs
+  formGroup: {
+    normal: {
+      marginLeft: 10,
+      marginRight: 10,
+      marginBottom: 5
+    },
+    error: {
+      marginBottom: 10
+    }
+  },
+  controlLabel: {
+    normal: {
+      color: LABEL_COLOR,
+      fontSize: 14,
+      marginBottom: 3,
+      fontWeight: FONT_WEIGHT
+    },
+    // the style applied when a validation error occours
+    error: {
+      color: ERROR_COLOR,
+      fontSize: FONT_SIZE,
+      marginBottom: 3,
+      fontWeight: FONT_WEIGHT
+    }
+  },
+  helpBlock: {
+    normal: {
+      color: HELP_COLOR,
+      fontSize: FONT_SIZE,
+      marginBottom: 2
+    },
+    // the style applied when a validation error occours
+    error: {
+      color: HELP_COLOR,
+      fontSize: FONT_SIZE,
+      marginBottom: 2
+    }
+  },
+  errorBlock: {
+    fontSize: FONT_SIZE,
+    marginBottom: 2,
+    color: ERROR_COLOR
+  },
+  textbox: {
+    normal: {
+      color: INPUT_COLOR,
+      fontSize: FONT_SIZE,
+      height: 36,
+      padding: 7,
+      borderRadius: 4,
+      borderColor: BORDER_COLOR,
+      borderWidth: 1,
+      marginBottom: 1
+    },
+    // the style applied when a validation error occours
+    error: {
+      color: INPUT_COLOR,
+      fontSize: FONT_SIZE,
+      height: 36,
+      padding: 7,
+      borderRadius: 4,
+      borderColor: ERROR_COLOR,
+      borderWidth: 1,
+      marginBottom: 5
+    },
+    // the style applied when the textbox is not editable
+    notEditable: {
+      fontSize: FONT_SIZE,
+      height: 36,
+      padding: 7,
+      borderRadius: 4,
+      borderColor: BORDER_COLOR,
+      borderWidth: 1,
+      marginBottom: 5,
+      color: DISABLED_COLOR,
+      backgroundColor: DISABLED_BACKGROUND_COLOR
+    }
+  },
+  checkbox: {
+    normal: {
+      marginBottom: 4
+    },
+    // the style applied when a validation error occours
+    error: {
+      marginBottom: 4
+    }
+  },
+  select: {
+    normal: {
+      marginBottom: 4
+    },
+    // the style applied when a validation error occours
+    error: {
+      marginBottom: 4
+    }
+  },
+  pickerTouchable: {
+    normal: {
+      height: 44,
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+    error: {
+      height: 44,
+      flexDirection: 'row',
+      alignItems: 'center'
+    }
+  },
+  pickerValue: {
+    normal: {
+      fontSize: FONT_SIZE,
+      paddingLeft: 7
+    },
+    error: {
+      fontSize: FONT_SIZE,
+      paddingLeft: 7
+    }
+  },
+  datepicker: {
+    normal: {
+      marginBottom: 4
+    },
+    // the style applied when a validation error occours
+    error: {
+      marginBottom: 4
+    }
+  },
+  dateTouchable: {
+    normal: {},
+    error: {}
+  },
+  dateValue: {
+    normal: {
+      color: INPUT_COLOR,
+      fontSize: FONT_SIZE,
+      padding: 7,
+      marginBottom: 5
+    },
+    error: {
+      color: ERROR_COLOR,
+      fontSize: FONT_SIZE,
+      padding: 7,
+      marginBottom: 5
+    }
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  button: {
+    height: 36,
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  }
+})
+
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)

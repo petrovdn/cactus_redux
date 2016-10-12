@@ -49,14 +49,15 @@ var styles = StyleSheet.create({
     marginTop: 10
   },
   header: {
+    flexDirection: 'row',
     marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent'
   },
   mark: {
-    height: 110,
-    width: 80
+    height: 35,
+    width: 20
   }
 
 })
@@ -143,7 +144,6 @@ var Header = React.createClass({
     return (
       <View>
         <View style={styles.header}>
-
           <TouchableHighlight onPress={this._onPressMark}>
 
             <Image style={styles.mark}

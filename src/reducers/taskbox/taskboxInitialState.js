@@ -8,9 +8,7 @@ const {
 
 const Form = Record({
   state: TASKLIST,
-  tasklist: [
-    [1097, 'Передать данные в Сов.налоговую', 'В работе', '08.09.2016']
-  ],
+  tasklist: [],
   disabled: false,
   error: null,
   isValid: false,

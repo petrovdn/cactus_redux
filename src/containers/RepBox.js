@@ -90,9 +90,6 @@ class RepBox extends Component {
   handlePressAddRep () {
     this.props.actions.repeditState('Add')
   }
-  handlePressGetList () {
-    this.props.actions.getReplist(this.props.global.currentUser)
-  }
   /**
    * ### componentDidMount
    *
@@ -101,7 +98,7 @@ class RepBox extends Component {
    * form fields.  Otherwise, we need to go fetch the fields
    */
   componentDidMount () {
-    //this.props.actions.getTasklist(this.props.global.currentUser)
+    this.props.actions.getReplist(this.props.global.currentUser)
   }
 
   render () {
@@ -114,9 +111,6 @@ class RepBox extends Component {
               currentState={this.props.global.currentState}
               onGetState={this.props.actions.getState}
               onSetState={this.props.actions.setState} />
-            <Button style={styles.button} onPress={this.handlePressGetList.bind(this)}>
-              {I18n.t('repbox.getlist')}
-            </Button>
             <Button style={styles.button} onPress={this.handlePressAddRep.bind(this)}>
               {I18n.t('repbox.addrep')}
             </Button>
