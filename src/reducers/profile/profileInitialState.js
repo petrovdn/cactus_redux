@@ -22,12 +22,18 @@ const {Record} = require('immutable')
  */
 const Form = Record({
   originalProfile: new (Record({
-    username: null,
-    objectId: null
+    inn: '',
+    surname: '',
+    name: '',
+    middlename: '',
+    adress: '',
+    okved: '',
+    phone: ''
   })),
   disabled: false,
   error: null,
   isValid: false,
+  isChanged: false,
   isFetching: false,
   fields: new (Record({
     inn: '',

@@ -1,37 +1,12 @@
-/**
- * # Profile.js
- *
- * This component provides an interface for a logged in user to change
- * their username and email.
- * It too is a container so there is boilerplate from Redux similar to
- * ```App``` and ```Login```
- */
 'use strict'
-/**
-* ## Imports
-*
-* Redux
-*/
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-/**
- * The actions we need
- */
 import * as profileActions from '../reducers/profile/profileActions'
 import * as globalActions from '../reducers/global/globalActions'
 
-/**
- * The ErrorAlert will display any and all errors
- */
 import ErrorAlert from '../components/ErrorAlert'
-/**
- * The FormButton will respond to the press
- */
 import FormButton from '../components/FormButton'
-/**
- * The Header will display a Image and support Hot Loading
- */
 import Header from '../components/Header'
 
 import React, {Component} from 'react'
@@ -42,9 +17,6 @@ import
 }
 from 'react-native'
 
-/**
- * ## Styles
- */
 var styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
@@ -53,15 +25,8 @@ var styles = StyleSheet.create({
   }
 })
 
-/**
-* The form processing component
-*/
 import t from 'tcomb-form-native'
 let Form = t.form.Form
-
-/**
-* ## Redux boilerplate
-*/
 
 function mapStateToProps (state) {
   return {
@@ -79,25 +44,23 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators({ ...profileActions, ...globalActions }, dispatch)
   }
 }
-/**
- * ### Translations
- */
 var I18n = require('react-native-i18n')
 import Translations from '../lib/Translations'
 I18n.translations = Translations
 
 class Profile extends Component {
-  /**
-   * ## Profile class
-   * Set the initial state and prepare the errorAlert
-   */
   constructor (props) {
     super(props)
     this.errorAlert = new ErrorAlert()
     this.state = {
-      formValues: {
-        username: '',
-        email: ''
+      value: {
+        inn: '',
+        surname: '',
+        name: '',
+        middlename: '',
+        adress: '',
+        okved: '',
+        phone: ''
       }
     }
   }
@@ -141,34 +104,15 @@ class Profile extends Component {
   componentWillReceiveProps (props) {
     this.setState({
       formValues: {
-        username: props.profile.form.fields.username,
-        email: props.profile.form.fields.email
+        inn: props.profile.form.fields.inn,
+        surname: props.profile.form.fields.surname,
+        name: props.profile.form.fields.name,
+        middlename: props.profile.form.fields.middlename,
+        adress: props.profile.form.fields.adress,
+        okved: props.profile.form.fields.okved,
+        phone: props.profile.form.fields.phone
       }
     })
-  }
-  /**
-   * ### componentDidMount
-   *
-   * During Hot Loading, when the component mounts due the state
-   * immediately being in a "logged in" state, we need to just set the
-   * form fields.  Otherwise, we need to go fetch the fields
-   */
-  componentDidMount () {
-    if (this.props.profile.form.fields.username === '' && this.props.profile.form.fields.email === '') {
-      this.props.actions.getProfile(this.props.global.currentUser)
-    } else {
-      this.setState({
-        formValues: {
-          inn: this.props.profile.form.fields.inn,
-          surname: this.props.profile.form.fields.surname,
-          name: this.props.profile.form.fields.name,
-          middlename: this.props.profile.form.fields.middlename,
-          adress: this.props.profile.form.fields.adress,
-          okved: this.props.profile.form.fields.okved,
-          phone: this.props.profile.form.fields.phone
-        }
-      })
-    }
   }
 
   /**
@@ -275,13 +219,13 @@ class Profile extends Component {
             ref='form'
             type={ProfileForm}
             options={options}
-            value={this.state.formValues}
+            value={this.state.value}
             onChange={this.onChange.bind(self)}
           />
         </View>
 
         <FormButton
-          isDisabled={!this.props.profile.form.isValid || this.props.profile.form.isFetching}
+          isDisabled={!this.props.profile.form.isChanged || this.props.profile.form.isFetching}
           onPress={onButtonPress.bind(self)}
           buttonText={profileButtonText} />
 

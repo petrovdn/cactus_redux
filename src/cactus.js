@@ -186,37 +186,14 @@ class cactus_redux extends Component {
               tabBarStyle={styles.tabBar}
               default='Main'>
 
-              <Scene key='Logout'
-                title={I18n.t('cactus.logout')}
-                icon={TabIcon}
-                iconName={'sign-out'}
-                hideNavBar
-                component={Logout} />
-
-              <Scene key='TaskBox'
-                title={I18n.t('cactus.tasks')}
-                iconName={'list-alt'}
+              <Scene key='RepBox'
+                title={I18n.t('cactus.reports')}
+                iconName={'file-text'}
                 icon={TabIcon}
                 hideNavBar
-                component={TaskBox}
-                initial />
-
-              <Scene key='Main'
-                title={I18n.t('cactus.main')}
-                iconName={'sign-in'}
-                icon={TabIcon}
-                hideNavBar
-                component={Main}
-                initial />
-
-                <Scene key='RepBox'
-                  title={I18n.t('cactus.reports')}
-                  iconName={'file-text'}
-                  icon={TabIcon}
-                  hideNavBar
-                  component={RepBox}
-                  />
-
+                component={RepBox}
+                initial
+                />
 
               <Scene key='Profile'
                 title={I18n.t('cactus.profile')}
@@ -224,6 +201,13 @@ class cactus_redux extends Component {
                 iconName={'gear'}
                 hideNavBar
                 component={Profile} />
+
+              <Scene key='Logout'
+                title={I18n.t('cactus.logout')}
+                icon={TabIcon}
+                iconName={'sign-out'}
+                hideNavBar
+                component={Logout} />
             </Scene>
           </Scene>
         </Router>

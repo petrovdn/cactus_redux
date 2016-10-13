@@ -77,14 +77,22 @@ export default function profileReducer (state = initialState, action) {
      */
     case GET_PROFILE_SUCCESS:
       nextProfileState = state.setIn(['form', 'isFetching'], false)
-      .setIn(['form', 'fields', 'username'], action.payload.username)
-      .setIn(['form', 'fields', 'email'], action.payload.email)
-      .setIn(['form', 'fields', 'emailVerified'],
-             action.payload.emailVerified)
-      .setIn(['form', 'originalProfile', 'username'], action.payload.username)
-      .setIn(['form', 'originalProfile', 'email'], action.payload.email)
-      .setIn(['form', 'originalProfile', 'emailVerified'], action.payload.emailVerified)
-      .setIn(['form', 'originalProfile', 'objectId'], action.payload.objectId)
+      .setIn(['form', 'fields', 'inn'], action.payload.inn)
+      .setIn(['form', 'fields', 'surname'], action.payload.surname)
+      .setIn(['form', 'fields', 'name'], action.payload.name)
+      .setIn(['form', 'fields', 'middlename'], action.payload.middlename)
+      .setIn(['form', 'fields', 'adress'], action.payload.adress)
+      .setIn(['form', 'fields', 'okved'], action.payload.okved)
+      .setIn(['form', 'fields', 'okved'], action.payload.phone)
+
+      .setIn(['form', 'originalProfile', 'inn'], action.payload.inn)
+      .setIn(['form', 'originalProfile', 'surname'], action.payload.surname)
+      .setIn(['form', 'originalProfile', 'name'], action.payload.name)
+      .setIn(['form', 'originalProfile', 'middlename'], action.payload.middlename)
+      .setIn(['form', 'originalProfile', 'adress'], action.payload.adress)
+      .setIn(['form', 'originalProfile', 'okved'], action.payload.okved)
+      .setIn(['form', 'originalProfile', 'okved'], action.payload.phone)
+
       .setIn(['form', 'error'], null)
 
       return formValidation(
@@ -142,25 +150,20 @@ export default function profileReducer (state = initialState, action) {
       var next = state.setIn(['form', 'disabled'], profile.disabled)
           .setIn(['form', 'error'], profile.error)
           .setIn(['form', 'isValid'], profile.isValid)
+          .setIn(['form', 'isChanged'], profile.isChanged)
           .setIn(['form', 'isFetching'], profile.isFetching)
-          .setIn(['form', 'originalProfile',
-                  'username'], profile.originalProfile.username)
-          .setIn(['form', 'originalProfile',
-                  'email'], profile.originalProfile.email)
-          .setIn(['form', 'originalProfile',
-                  'objectId'], profile.originalProfile.objectId)
-          .setIn(['form', 'originalProfile',
-                  'emailVerified'], profile.originalProfile.emailVerified)
-          .setIn(['form', 'fields',
-                  'username'], profile.fields.username)
-          .setIn(['form', 'fields',
-                  'usernameHasError'], profile.fields.usernameHasError)
-          .setIn(['form', 'fields',
-                  'email'], profile.fields.email)
-          .setIn(['form', 'fields',
-                  'emailHasError'], profile.fields.emailHasError)
-          .setIn(['form', 'fields',
-                  'emailVerified'], profile.fields.emailVerified)
+          .setIn(['form', 'originalProfile', 'inn'], profile.originalProfile.inn)
+          .setIn(['form', 'originalProfile', 'surname'], profile.originalProfile.surname)
+          .setIn(['form', 'originalProfile', 'name'], profile.originalProfile.name)
+          .setIn(['form', 'originalProfile', 'middlename'], profile.originalProfile.middlename)
+          .setIn(['form', 'originalProfile', 'adress'], profile.originalProfile.adress)
+          .setIn(['form', 'originalProfile', 'phone'], profile.originalProfile.phone)
+          .setIn(['form', 'fields', 'inn'], profile.fields.inn)
+          .setIn(['form', 'fields', 'surname'], profile.fields.surname)
+          .setIn(['form', 'fields', 'name'], profile.fields.name)
+          .setIn(['form', 'fields', 'middlename'], profile.fields.middlename)
+          .setIn(['form', 'fields', 'adress'], profile.fields.adress)
+          .setIn(['form', 'fields', 'phone'], profile.fields.phone)
       return next
 
   }// switch
