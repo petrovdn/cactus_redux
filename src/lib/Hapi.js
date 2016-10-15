@@ -197,6 +197,23 @@ export class Hapi extends Backend {
       })
   }
 
+  async getEnvdList (sessionToken) {
+    return await this._fetch({
+      method: 'GET',
+      url: '/envd'
+    })
+      .then((res) => {
+        if ((res.status === 200 || res.status === 201)) {
+          return res.json
+        } else {
+          throw (res.json)
+        }
+      })
+      .catch((error) => {
+        throw (error)
+      })
+  }
+
   /**
    * ### _fetch
    * A generic function that prepares the request

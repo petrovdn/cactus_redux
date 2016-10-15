@@ -11,7 +11,7 @@ import {
 import {Actions} from 'react-native-router-flux'
 import { SwipeListView } from 'react-native-swipe-list-view'
 var I18n = require('react-native-i18n')
-import Translations from '../lib/Translations'
+import Translations from '../../lib/Translations'
 I18n.translations = Translations
 
 export default class extends Component {
@@ -19,7 +19,7 @@ export default class extends Component {
     super(props)
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
-      listViewData: this.props.replist
+      listViewData: this.props.envdlist
     }
   }
 
@@ -31,7 +31,7 @@ export default class extends Component {
   }
 
   componentWillReceiveProps (nextprops) {
-    this.setState({ listViewData: nextprops.replist })
+    this.setState({ listViewData: nextprops.envdlist })
   }
 
   render () {

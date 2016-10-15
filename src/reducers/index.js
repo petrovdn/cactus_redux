@@ -15,7 +15,7 @@ import device from './device/deviceReducer'
 import global from './global/globalReducer'
 import profile from './profile/profileReducer'
 import taskbox from './taskbox/taskboxReducer'
-import repbox from './repbox/repboxReducer'
+import envdbox from './envdbox/envdboxReducer'
 
 import { combineReducers } from 'redux'
 
@@ -31,7 +31,7 @@ const rootReducer = combineReducers({
   global,
   profile,
   taskbox,
-  repbox
+  envdbox
 })
 
 export default rootReducer

@@ -65,15 +65,26 @@ export default keyMirror({
   ADDTASK_SUCCESS: null,
   ADDTASK_FAILURE: null,
 
-  REPLIST: null,
-  REPEDIT: null,
+  ENVDLIST: null,
+  STEP1: null,
+  STEP2: null,
+  STEP3: null,
+  STEP4: null,
+  STEP5: null,
+  STEP6: null,
 
-  REPLIST_REQUEST: null,
-  REPLIST_SUCCESS: null,
-  REPLIST_FAILURE: null,
+  ADD_STEP1_DATA: null,
 
-  ADDREP_REQUEST: null,
-  ADDREP_SUCCESS: null,
-  ADDREP_FAILURE: null
+  ENVDLIST_REQUEST: null,
+  ENVDLIST_SUCCESS: null,
+  ENVDLIST_FAILURE: null,
+
+  ADDENVD_REQUEST: null,
+  ADDENVD_SUCCESS: null,
+  ADDENVD_FAILURE: null,
+
+  ACTIVITY_LIST_REQUEST: null,
+  ACTIVITY_LIST_SUCCESS: null,
+  ACTIVITY_LIST_FAILURE: null
 
 })

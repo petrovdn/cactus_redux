@@ -13,8 +13,8 @@
  * the actions being addressed
  */
 const {
-  REPLIST,
-  REPEDIT
+  ENVDLIST,
+  ENVDEDIT
 } = require('../../lib/constants').default
 
 /**
@@ -26,12 +26,12 @@ export default function formValidation (state) {
     /**
      * ### tasklist has no fields, so always valid
      */
-    case REPLIST:
+    case ENVDLIST:
       return state.setIn(['form', 'isValid'], true)
     /**
      * ### Registration has 4 fields
      */
-    case REPEDIT:
+    case ENVDEDIT:
     /**
      * ### taskedit has no fields, so always valid
      */

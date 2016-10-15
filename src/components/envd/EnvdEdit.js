@@ -5,7 +5,7 @@ import {
 } from 'react-native'
 
 var I18n = require('react-native-i18n')
-import Translations from '../lib/Translations'
+import Translations from '../../lib/Translations'
 I18n.translations = Translations
 
 const t = require('tcomb-form-native')
@@ -32,33 +32,33 @@ export default class extends Component {
     }
 
     let repTitle = {
-      label: I18n.t('repedit.repTitle'),
+      label: I18n.t('envdedit.repTitle'),
       maxLength: 200,
       editable: true
     }
 
-    let repeditForm = t.struct({
+    let envdeditForm = t.struct({
       repTitle: t.String
     })
     options.fields['repTitle'] = repTitle
-    options.fields['repTitle'].placeholder = I18n.t('repedit.repTitlePlaceHolder')
+    options.fields['repTitle'].placeholder = I18n.t('envdedit.repTitlePlaceHolder')
     options.fields['repTitle'].autoCapitalize = 'none'
 
     return (
       <View style={styles.container}>
 
-        <Form ref='repeditForm'
-          type={repeditForm}
+        <Form ref='envdeditForm'
+          type={envdeditForm}
           options={options}
       />
       <Button style={styles.button} onPress={this.handlePressSend.bind(this)}>
-        {I18n.t('repedit.sendButton')}
+        {I18n.t('envdedit.sendButton')}
       </Button>
       <Button style={styles.button} onPress={this.handlePressSave.bind(this)}>
-        {I18n.t('repedit.saveButton')}
+        {I18n.t('envdedit.saveButton')}
       </Button>
       <Button style={styles.button} onPress={() => this.props.onCancel()}>
-        {I18n.t('repedit.cancelButton')}
+        {I18n.t('envdedit.cancelButton')}
       </Button>
       </View>
     )

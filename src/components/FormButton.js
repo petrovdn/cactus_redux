@@ -13,7 +13,8 @@ import React from 'react'
 import
 {
   StyleSheet,
-  View
+  View,
+  Text
 } from 'react-native'
 
 /**
@@ -32,6 +33,11 @@ var styles = StyleSheet.create({
   button: {
     backgroundColor: '#6ec740',
     borderColor: '#6ec740'
+  },
+  nestedViewStyle: {
+  },
+  textButton: {
+    fontSize: 18
   }
 
 })
@@ -46,14 +52,17 @@ var FormButton = React.createClass({
     return (
       <View style={styles.signin}>
         <Button style={styles.button}
-          textStyle={{fontSize: 18}}
           isDisabled={this.props.isDisabled}
           onPress={this.props.onPress} >
-          {this.props.buttonText}
+          <View style={styles.nestedViewStyle}>
+            <Text style={styles.textButton}>{this.props.buttonText}</Text>
+          </View>
         </Button>
       </View>
     )
   }
 })
+
+
 
 module.exports = FormButton

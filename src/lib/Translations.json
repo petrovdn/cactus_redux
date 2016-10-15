@@ -8,9 +8,9 @@
       "see_console": "see console",
       "update_state": "Update State"
     },
-    "Subview": {
-      "subview": "Subview",
-      "back": "Back"
+    "Steps": {
+      "title1": "Реквизиты ИП",
+      "back1": "<-"
     },
     "cactus": {
       "logout": "Выйти",
@@ -34,11 +34,11 @@
       "cancelButton": "Отменить",
       "sendButton": "Отправить"
     },
-    "repbox": {
-      "addrep": "Новый отчет",
+    "envdbox": {
+      "addenvd": "Новый отчет",
       "getlist": "Получить отчеты"
     },
-    "repedit": {
+    "envdedit": {
       "repTitle": "Заголовок отчета",
       "repTitlePlaceHolder": "Заголовок задачи",
       "editButton": "Редактировать",

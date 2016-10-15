@@ -50,9 +50,7 @@ import Logout from './containers/Logout'
 import Register from './containers/Register'
 import ForgotPassword from './containers/ForgotPassword'
 import Profile from './containers/Profile'
-import Main from './containers/Main'
-import TaskBox from './containers/TaskBox'
-import RepBox from './containers/RepBox'
+import EnvdBox from './containers/EnvdBox'
 import Subview from './containers/Subview'
 
     /**
@@ -80,7 +78,7 @@ import DeviceInitialState from './reducers/device/deviceInitialState'
 import GlobalInitialState from './reducers/global/globalInitialState'
 import ProfileInitialState from './reducers/profile/profileInitialState'
 import TaskBoxInitialState from './reducers/taskbox/taskboxInitialState'
-import RepBoxInitialState from './reducers/repbox/repboxInitialState'
+import EnvdBoxInitialState from './reducers/envdbox/envdboxInitialState'
 
     /**
      *  The version of the app but not  displayed yet
@@ -101,7 +99,7 @@ function getInitialState () {
     global: new GlobalInitialState(),
     profile: new ProfileInitialState(),
     taskbox: new TaskBoxInitialState(),
-    repbox: new RepBoxInitialState()
+    envdbox: new EnvdBoxInitialState()
   }
   return _initState
 }
@@ -186,12 +184,12 @@ class cactus_redux extends Component {
               tabBarStyle={styles.tabBar}
               default='Main'>
 
-              <Scene key='RepBox'
+              <Scene key='EnvdBox'
                 title={I18n.t('cactus.reports')}
                 iconName={'file-text'}
                 icon={TabIcon}
                 hideNavBar
-                component={RepBox}
+                component={EnvdBox}
                 initial
                 />
 
@@ -200,7 +198,8 @@ class cactus_redux extends Component {
                 icon={TabIcon}
                 iconName={'gear'}
                 hideNavBar
-                component={Profile} />
+                component={Profile}
+                />
 
               <Scene key='Logout'
                 title={I18n.t('cactus.logout')}
