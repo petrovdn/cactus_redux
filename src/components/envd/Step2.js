@@ -24,7 +24,7 @@ export default class extends Component {
     return (
       <View>
         <NavigationBar
-          title={{title: 'Скопировать данные? (2 из 6)'}}
+          title={{title: 'Скопировать данные?'}}
           leftButton={{
             title: '<-',
             handler: this.onPressBack.bind(this)

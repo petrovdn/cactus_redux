@@ -45,6 +45,10 @@ import Step1 from '../components/envd/Step1'
 import Step2 from '../components/envd/Step2'
 import Step3 from '../components/envd/Step3'
 import Step4 from '../components/envd/Step4'
+import Step5 from '../components/envd/Step5'
+import Step6 from '../components/envd/Step6'
+import Step7 from '../components/envd/Step7'
+import Step8 from '../components/envd/Step8'
 
 /**
  * The platform neutral button
@@ -91,6 +95,7 @@ function mapStateToProps (state) {
           quarter: state.envdbox.form.fields.quarter,
           k2: state.envdbox.form.fields.k2,
           factors: state.envdbox.form.fields.factors,
+          taxBase: state.envdbox.form.fields.taxBase,
           taxRate: state.envdbox.form.fields.taxRate,
           insurancePayments: state.envdbox.form.fields.insurancePayments,
           taxDecrease: state.envdbox.form.fields.taxDecrease,
@@ -124,14 +129,14 @@ I18n.translations = Translations
 
 class EnvdBox extends Component {
 
-  handleSteps (direction, currentstep, value) {
+  handleSteps (direction, currentstep, value1, value2) {
     switch (currentstep) {
       case 'step0':
         this.props.actions.step1State()
         return
       case 'step1':
         if (direction === 'forvard') {
-          this.props.actions.addStep1Data(value)
+          this.props.actions.addStep1Data(value1)
           this.props.actions.step2State()
         } else {
           this.props.actions.envdlistState()
@@ -146,9 +151,47 @@ class EnvdBox extends Component {
         return
       case 'step3':
         if (direction === 'forvard') {
+          this.props.actions.addStep3Data(value1, value2)
           this.props.actions.step4State()
         } else {
           this.props.actions.step2State()
+        }
+        return
+      case 'step4':  // ввод адреса
+        if (direction === 'forvard') {
+          this.props.actions.addStep4Data(value1)
+          this.props.actions.step5State()
+        } else {
+          this.props.actions.step3State()
+        }
+        return
+      case 'step5': // ввод коэффициентов и факторов
+        if (direction === 'forvard') {
+          this.props.actions.step6State()
+          this.props.actions.addStep5Data(value1)
+        } else {
+          this.props.actions.step4State()
+        }
+        return
+      case 'step6':
+        if (direction === 'forvard') {
+          this.props.actions.step7State()
+        } else {
+          this.props.actions.step5State()
+        }
+        return
+      case 'step7':
+        if (direction === 'forvard') {
+          this.props.actions.step8State()
+        } else {
+          this.props.actions.step6State()
+        }
+        return
+      case 'step8':
+        if (direction === 'forvard') {
+          this.props.actions.envdlistState()
+        } else {
+          this.props.actions.step7State()
         }
         return
     }
@@ -175,13 +218,8 @@ class EnvdBox extends Component {
         return (
           <View style={styles.container}>
             <View>
-              <Header isFetching={this.props.envdbox.form.isFetching}
-                showState={this.props.global.showState}
-                currentState={this.props.global.currentState}
-                onGetState={this.props.actions.getState}
-                onSetState={this.props.actions.setState} />
               <Button style={styles.button} onPress={this.handlePressAddEnvd.bind(this)}>
-                {I18n.t('envdbox.addenvd')}
+                {'Новая декларация'}
               </Button>
               <EnvdList
                 envdlist={this.props.envdbox.form.envdlist}
@@ -214,7 +252,9 @@ class EnvdBox extends Component {
             <Step3
               handleSteps={this.handleSteps.bind(this)}
               Activitylist={this.props.envdbox.form.Activitylist}
-              activityType={this.props.envdbox.form.activityType} />
+              activityType={this.props.envdbox.form.fields.activityType}
+              taxBase={this.props.envdbox.form.fields.taxBase}
+              />
           </View>
         )
       case 'STEP4':
@@ -222,11 +262,46 @@ class EnvdBox extends Component {
           <View style={styles.container}>
             <Step4
               handleSteps={this.handleSteps.bind(this)}
-              city={this.props.envdbox.form.fields.city}
-              street={this.props.envdbox.form.fields.street}
-              house={this.props.envdbox.form.fields.house}
-              building={this.props.envdbox.form.fields.building}
-              flat={this.props.envdbox.form.fields.flat}/>
+              city={this.props.envdbox.form.fields.address.city}
+              street={this.props.envdbox.form.fields.address.street}
+              house={this.props.envdbox.form.fields.address.house}
+              building={this.props.envdbox.form.fields.address.building}
+              flat={this.props.envdbox.form.fields.address.flat} />
+          </View>
+        )
+      case 'STEP5':
+        return (
+          <View style={styles.container}>
+            <Step5
+              handleSteps={this.handleSteps.bind(this)}
+              taxBase={this.props.envdbox.form.fields.taxBase}
+              taxRate={this.props.envdbox.form.fields.taxRate}
+              factor1={this.props.envdbox.form.fields.factors[0]}
+              factor2={this.props.envdbox.form.fields.factors[1]}
+              factor3={this.props.envdbox.form.fields.factors[2]}
+              k2={this.props.envdbox.form.fields.k2}
+               />
+          </View>
+        )
+      case 'STEP6':
+        return (
+          <View style={styles.container}>
+            <Step6
+              handleSteps={this.handleSteps.bind(this)} />
+          </View>
+        )
+      case 'STEP7':
+        return (
+          <View style={styles.container}>
+            <Step7
+              handleSteps={this.handleSteps.bind(this)} />
+          </View>
+        )
+      case 'STEP8':
+        return (
+          <View style={styles.container}>
+            <Step8
+              handleSteps={this.handleSteps.bind(this)} />
           </View>
         )
     }
@@ -235,7 +310,6 @@ class EnvdBox extends Component {
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: 'lightblue',
     marginBottom: 80,
     flexDirection: 'column',
     flex: 1
@@ -248,6 +322,7 @@ var styles = StyleSheet.create({
   button: {
     backgroundColor: '#6ec740',
     borderColor: '#6ec740',
+    marginTop: 40,
     marginLeft: 10,
     marginRight: 10
   }

@@ -152,7 +152,7 @@ class cactus_redux extends Component {
     return (
 
       <Provider store={store}>
-        <Router sceneStyle={{ backgroundColor: 'lightgreen' }}>
+        <Router sceneStyle={{ backgroundColor: 'lightgreen' }} >
           <Scene key='root' hideNavBar>
             <Scene key='App'
               component={App}

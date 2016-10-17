@@ -25,8 +25,16 @@ const {
   STEP4,
   STEP5,
   STEP6,
+  STEP7,
+  STEP8,
 
   ADD_STEP1_DATA,
+  ADD_STEP2_DATA,
+  ADD_STEP3_DATA,
+  ADD_STEP4_DATA,
+  ADD_STEP5_DATA,
+  ADD_STEP6_DATA,
+  ADD_STEP7_DATA,
 
   ENVDLIST_REQUEST,
   ENVDLIST_SUCCESS,
@@ -61,6 +69,8 @@ export default function envdboxReducer (state = initialState, action) {
     case STEP4:
     case STEP5:
     case STEP6:
+    case STEP7:
+    case STEP8:
       return state.setIn(['form', 'state'], action.type)
         .setIn(['form', 'error'], null)
 
@@ -71,6 +81,25 @@ export default function envdboxReducer (state = initialState, action) {
       .setIn(['form', 'fields', 'patronymic'], action.payload.patronymic)
       .setIn(['form', 'fields', 'okved'], action.payload.okved)
         .setIn(['form', 'error'], null)
+    case ADD_STEP3_DATA:
+      return state.setIn(['form', 'fields', 'activityType'], action.payload.activityType)
+      .setIn(['form', 'fields', 'taxBase'], action.payload.taxBase)
+        .setIn(['form', 'error'], null)
+
+    case ADD_STEP4_DATA:
+      return state.setIn(['form', 'fields', 'address', 'city'], action.payload.city)
+      .setIn(['form', 'fields', 'address', 'street'], action.payload.street)
+      .setIn(['form', 'fields', 'address', 'house'], action.payload.house)
+      .setIn(['form', 'fields', 'address', 'building'], action.payload.building)
+      .setIn(['form', 'fields', 'address', 'flat'], action.payload.flat)
+        .setIn(['form', 'error'], null)
+
+    case ADD_STEP5_DATA:
+      var factors = [action.payload.factor1, action.payload.factor2, action.payload.factor3]
+      return state.setIn(['form', 'fields', 'factors'], factors)
+          .setIn(['form', 'fields', 'k2'], action.payload.k2)
+          .setIn(['form', 'fields', 'taxRate'], action.payload.taxRate)
+          .setIn(['form', 'error'], null)
 
     case ENVDLIST_REQUEST:
       let nextState = state.setIn(['form', 'isFetching'], true)

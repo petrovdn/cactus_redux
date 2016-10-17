@@ -31,10 +31,10 @@ export default class extends Component {
   }
 
   onPressForvard () {
-    this.props.handleSteps('forvard', 'step1', this.state.value)
+    this.props.handleSteps('forvard', 'step4', this.state.value)
   }
   onPressBack () {
-    this.props.handleSteps('back', 'step1')
+    this.props.handleSteps('back', 'step4')
   }
 
   render () {
@@ -58,18 +58,14 @@ export default class extends Component {
     }
 
     return (
-      <View style={{
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-between'
-      }}>
+      <View style={styles.container}>
         <NavigationBar
-          title={{title: 'Реквизиты ИП (1 из 6)'}}
+          title={{title: 'Адрес деятельности (2 из 6)'}}
           leftButton={{
             title: '<-',
             handler: this.onPressBack.bind(this)
           }} />
-        <View style={styles.container}>
+        <View style={styles.containerData}>
           <View style={styles.inputs}>
             <Form
               ref='form'
@@ -77,14 +73,13 @@ export default class extends Component {
               options={options}
               value={this.state.value}
               onChange={this.onChange.bind(this)}
-          />
-            <TouchableHighlight style={styles.button}
-              underlayColor='lavenderblush'
-              onPress={() => this.onPressForvard()}>
-              <Text style={styles.textButton}>Далее</Text>
-            </TouchableHighlight>
-
+              />
           </View>
+          <TouchableHighlight style={styles.button}
+            underlayColor='lavenderblush'
+            onPress={() => this.onPressForvard()}>
+            <Text style={styles.textButton}>Далее</Text>
+          </TouchableHighlight>
         </View>
       </View>
     )
@@ -92,8 +87,14 @@ export default class extends Component {
 }
 var styles = StyleSheet.create({
   container: {
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
+  containerData: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
     padding: 10
   },
   button: {

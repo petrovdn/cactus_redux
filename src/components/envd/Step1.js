@@ -74,7 +74,7 @@ export default class extends Component {
         justifyContent: 'space-between'
       }}>
         <NavigationBar
-          title={{title: 'Реквизиты ИП (1 из 6)'}}
+          title={{title: 'Реквизиты ИП'}}
           leftButton={{
             title: '<-',
             handler: this.onPressBack.bind(this)

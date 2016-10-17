@@ -3,7 +3,8 @@
 
 import {Record} from 'immutable'
 const {
-  ENVDLIST
+  ENVDLIST,
+  STEP7
 } = require('../../lib/constants').default
 
 const Form = Record({
@@ -37,7 +38,8 @@ const Form = Record({
     activityType: 0,
     quarter: 0,
     k2: 0,
-    factors: [],
+    factors: [0, 0, 0],
+    taxBase: 0,
     taxRate: 0,
     insurancePayments: 0,
     taxDecrease: 0,

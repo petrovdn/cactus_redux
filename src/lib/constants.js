@@ -72,8 +72,16 @@ export default keyMirror({
   STEP4: null,
   STEP5: null,
   STEP6: null,
+  STEP7: null,
+  STEP8: null,
 
   ADD_STEP1_DATA: null,
+  ADD_STEP2_DATA: null,
+  ADD_STEP3_DATA: null,
+  ADD_STEP4_DATA: null,
+  ADD_STEP5_DATA: null,
+  ADD_STEP6_DATA: null,
+  ADD_STEP7_DATA: null,
 
   ENVDLIST_REQUEST: null,
   ENVDLIST_SUCCESS: null,

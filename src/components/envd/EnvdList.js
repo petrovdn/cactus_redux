@@ -8,7 +8,6 @@ import {
   TouchableHighlight,
   View
 } from 'react-native'
-import {Actions} from 'react-native-router-flux'
 import { SwipeListView } from 'react-native-swipe-list-view'
 var I18n = require('react-native-i18n')
 import Translations from '../../lib/Translations'

@@ -16,18 +16,20 @@ export default class extends Component {
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
       listViewData: this.props.Activitylist,
-      activityType: this.props.activityType
+      activityType: this.props.activityType,
+      taxBase:this.props.taxBase
     }
   }
   componentWillReceiveProps (nextprops) {
     this.setState({
       listViewData: nextprops.Activitylist,
-      activityType: this.props.activityType
+      activityType: this.props.activityType,
+      taxBase:this.props.taxBase
     })
   }
 
   onPressForvard (isCopy) {
-    this.props.handleSteps('forvard', 'step3')
+    this.props.handleSteps('forvard', 'step3', this.state.activityType, this.state.taxBase)
   }
 
   onPressBack () {
@@ -43,7 +45,8 @@ export default class extends Component {
 
   _pressRow (data, secId, rowId, rowMap) {
     this.setState({
-      activityType: data[0]
+      activityType: data[0],
+      taxBase: data[2]
     })
   }
 
@@ -78,7 +81,7 @@ export default class extends Component {
     return (
       <View style={styles.container}>
         <NavigationBar
-          title={{title: 'Вид деятельности? (3 из 6)'}}
+          title={{title: 'Вид деятельности? (1 из 6)'}}
           leftButton={{
             title: '<-',
             handler: this.onPressBack.bind(this)
