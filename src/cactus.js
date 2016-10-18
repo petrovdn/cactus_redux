@@ -81,7 +81,9 @@ class cactus_redux extends Component {
           <Scene key='root'>
             <Scene key='drawer' component={MyDrawer} open={false} >
               <Scene key='Tabbar' tabs >
-                <Scene key='EnvdBox' component={EnvdBox} sceneStyle={{marginTop: 50}} />
+                <Scene key='EnvdBox' component={EnvdBox} hideNavBar
+                  sceneStyle={{marginTop: 50}} navigationBarStyle={{ backgroundColor: 'rgb(252,100,75)' }}
+                  titleStyle={{ color: 'white' }} getTitle={(step) => navState.key}/>
                 <Scene key='Profile' component={Profile} sceneStyle={{marginTop: 50}} />
                 <Scene key='Logout'component={Logout} sceneStyle={{marginTop: 50}} />
               </Scene>

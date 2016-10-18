@@ -60,6 +60,7 @@ export default class extends Component {
               <Text style={styles.rowText}>
                 <Text style={{ color: 'rgb(252, 100, 75)' }}> {data[1]} </Text>
                 {data[3]} </Text>
+
             </View>
           </View>
         </TouchableHighlight>
@@ -70,8 +71,10 @@ export default class extends Component {
           underlayColor={'#AAA'}>
           <View style={styles.rowFrontDetail}>
             <View >
-              <Text style={styles.rowText}> {data[1]} {data[3]}</Text>
-              <Text style={styles.rowDetail}> {data[4]}}</Text>
+              <Text style={styles.rowText}>
+                <Text style={{ color: 'rgb(252, 100, 75)' }}> {data[1]} </Text>
+                {data[3]} </Text>
+              <Text style={styles.rowDetail}> {data[4]}</Text>
             </View>
           </View>
         </TouchableHighlight>
