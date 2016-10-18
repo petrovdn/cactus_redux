@@ -131,17 +131,10 @@ export function logout () {
     return appAuthToken.getSessionToken()
 
       .then((token) => {
-          console.log(token)
         dispatch(deleteSessionToken())
-        console.log(token)
-
-        console.log('bliyat3')
         dispatch(logoutSuccess())
-        console.log('bliyat4')
-          console.log('bliyat5')
         dispatch(loginState())
-        Actions.Login()
-
+        Actions.Drawer()
       })
 
       .catch((error) => {
