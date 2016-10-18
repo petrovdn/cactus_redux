@@ -125,21 +125,29 @@ export function logoutFailure (error) {
  * device and logged out there.
  */
 export function logout () {
+  console.log('bliyat')
   return dispatch => {
     dispatch(logoutRequest())
     return appAuthToken.getSessionToken()
 
       .then((token) => {
-        dispatch(loginState())
-        dispatch(logoutSuccess())
+          console.log(token)
         dispatch(deleteSessionToken())
-        Actions.InitialLoginForm()
+        console.log(token)
+
+        console.log('bliyat3')
+        dispatch(logoutSuccess())
+        console.log('bliyat4')
+          console.log('bliyat5')
+        dispatch(loginState())
+        Actions.Login()
 
       })
 
       .catch((error) => {
         dispatch(loginState())
         dispatch(logoutFailure(error))
+        Actions.Login()
       })
   }
 }
@@ -237,7 +245,7 @@ export function getSessionToken () {
         if (token) {
           dispatch(sessionTokenRequestSuccess(token))
           dispatch(logoutState())
-          Actions.Tabbar()
+          Actions.drawer()
         } else {
           dispatch(sessionTokenRequestFailure())
           Actions.InitialLoginForm()
@@ -319,7 +327,7 @@ export function loginFailure (error) {
  * otherwise, dispatch a failure
  */
 
-export function login (username, password) {
+export function login (username = '', password = '') {
   return dispatch => {
     dispatch(loginRequest())
     return BackendFactory().login({
@@ -332,7 +340,7 @@ export function login (username, password) {
           .then(function () {
             dispatch(loginSuccess(json.token))
             // navigate to Tabbar
-            Actions.Tabbar()
+            Actions.drawer()
             dispatch(logoutState())
           })
       })

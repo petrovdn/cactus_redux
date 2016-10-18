@@ -57,7 +57,9 @@ export default class extends Component {
           underlayColor={'#AAA'}>
           <View style={styles.rowFront}>
             <View>
-              <Text style={styles.rowText}> {data[1]} {data[3]} </Text>
+              <Text style={styles.rowText}>
+                <Text style={{ color: 'rgb(252, 100, 75)' }}> {data[1]} </Text>
+                {data[3]} </Text>
             </View>
           </View>
         </TouchableHighlight>
@@ -104,25 +106,38 @@ export default class extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: 'rgb(240,240,240)'
   },
   rowFront: {
     marginTop: 10,
     marginLeft: 10,
     marginRight: 10,
     padding: 10,
-    backgroundColor: '#CCC',
-    borderBottomColor: 'darkgreen',
-    borderBottomWidth: 1
+    backgroundColor: 'white',
+    borderRadius: 10,
+    shadowColor: 'rgb(173,186,195)',
+    shadowOffset: {
+      height: 10,
+      width: 0
+    },
+    shadowOpacity: 10,
+    shadowRadius: 10
   },
   rowFrontDetail: {
     marginTop: 10,
     marginLeft: 10,
     marginRight: 10,
     padding: 10,
-    backgroundColor: 'green',
-    borderBottomColor: 'darkgreen',
-    borderBottomWidth: 1
+    backgroundColor: 'white',
+    borderRadius: 10,
+    shadowColor: 'rgb(173,186,195)',
+    shadowOffset: {
+      height: 10,
+      width: 0
+    },
+    shadowOpacity: 10,
+    shadowRadius: 10
   },
   rowText: {
     fontSize: 18,
