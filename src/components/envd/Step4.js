@@ -12,11 +12,13 @@ import
 from 'react-native'
 
 import ErrorAlert from '../../components/ErrorAlert'
-import formStylesheet from '../envd/formStylesheet'
-import {Actions} from 'react-native-router-flux'
 
 import t from 'tcomb-form-native'
 let Form = t.form.Form
+import formStylesheet from '../envd/formStylesheet4'
+
+import CONFIG from '../../lib/config'
+let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
 
 export default class extends Component {
   constructor (props) {
@@ -60,27 +62,30 @@ export default class extends Component {
     return (
       <View style={styles.container}>
         <NavigationBar
-          title={{title: 'Адрес деятельности (2 из 6)'}}
+          style={styles.navBarStyle}
+          title={{
+            title: 'Адрес деятельности (2 из 6)',
+            tintColor: 'white'
+          }}
           leftButton={{
-            title: '<-',
+            title: '<',
+            tintColor: 'white',
             handler: this.onPressBack.bind(this)
           }} />
-        <View style={styles.containerData}>
-          <View style={styles.inputs}>
-            <Form
-              ref='form'
-              type={Step4Form}
-              options={options}
-              value={this.state.value}
-              onChange={this.onChange.bind(this)}
+        <View style={styles.inputs}>
+          <Form
+            ref='form'
+            type={Step4Form}
+            options={options}
+            value={this.state.value}
+            onChange={this.onChange.bind(this)}
               />
-          </View>
-          <TouchableHighlight style={styles.button}
-            underlayColor='lavenderblush'
-            onPress={() => this.onPressForvard()}>
-            <Text style={styles.textButton}>Далее</Text>
-          </TouchableHighlight>
         </View>
+        <TouchableHighlight style={styles.button}
+          underlayColor='lavenderblush'
+          onPress={() => this.onPressForvard()}>
+          <Text style={styles.textButton}>Далее</Text>
+        </TouchableHighlight>
       </View>
     )
   }
@@ -88,27 +93,34 @@ export default class extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    backgroundColor: Theme.COLOR_BACK
   },
-  containerData: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    padding: 10
+  navBarStyle: {
+    backgroundColor: Theme.COLOR_NAVBAR,
+    height: 60
+  },
+  inputs: {
+    backgroundColor: 'white',
+    margin: 10,
+    padding: 10,
+    borderRadius: 8,
+    shadowOffset: {
+      height: 5,
+      width: 0
+    },
+    shadowOpacity: 20,
+    shadowRadius: 5
   },
   button: {
-    backgroundColor: '#6ec740',
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginTop: 30,
-    marginBottom: 5,
-    padding: 5
+    backgroundColor: Theme.COLOR_BUTTON2,
+    padding: 15,
+    height: 60
   },
   textButton: {
     fontSize: 18,
+    color: 'white',
     textAlign: 'center',
-    fontWeight: '500'
+    fontWeight: 'bold'
   }
 })

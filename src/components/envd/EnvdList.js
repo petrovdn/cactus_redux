@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
   View
 } from 'react-native'
+import NavigationBar from 'react-native-navbar'
 import { SwipeListView } from 'react-native-swipe-list-view'
 var I18n = require('react-native-i18n')
 import Translations from '../../lib/Translations'
@@ -78,8 +79,7 @@ export default class extends Component {
 
 var styles = StyleSheet.create({
   container: {
-    flex: 8,
-    justifyContent: 'center'
+    flex: 1
   },
   bottom: {
     flex: 1

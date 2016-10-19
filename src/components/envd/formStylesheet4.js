@@ -18,7 +18,8 @@ var formStylesheet = Object.freeze({
   // the style applied to the container of all inputs
   formGroup: {
     normal: {
-      marginBottom: 10
+      marginTop: 15,
+      marginBottom: 15
     },
     error: {
       marginBottom: 10
@@ -28,7 +29,7 @@ var formStylesheet = Object.freeze({
     normal: {
       color: LABEL_COLOR,
       fontSize: FONT_SIZE,
-      marginBottom: 7,
+      marginBottom: 20,
       fontWeight: FONT_WEIGHT
     },
     // the style applied when a validation error occours
@@ -60,13 +61,13 @@ var formStylesheet = Object.freeze({
   textbox: {
     normal: {
       color: INPUT_COLOR,
-      fontSize: FONT_SIZE,
-      height: 36,
+      fontSize: 24,
+      height: 48,
       padding: 7,
       borderRadius: 4,
       borderColor: BORDER_COLOR,
       borderWidth: 1,
-      marginBottom: 5
+      marginBottom: 10
     },
     // the style applied when a validation error occours
     error: {

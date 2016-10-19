@@ -82,8 +82,7 @@ class cactus_redux extends Component {
             <Scene key='drawer' component={MyDrawer} open={false} >
               <Scene key='Tabbar' tabs >
                 <Scene key='EnvdBox' component={EnvdBox} hideNavBar
-                  sceneStyle={{marginTop: 50}} navigationBarStyle={{ backgroundColor: 'rgb(252,100,75)' }}
-                  titleStyle={{ color: 'white' }} getTitle={(step) => navState.key}/>
+                  titleStyle={{ color: 'white' }} />
                 <Scene key='Profile' component={Profile} sceneStyle={{marginTop: 50}} />
                 <Scene key='Logout'component={Logout} sceneStyle={{marginTop: 50}} />
               </Scene>
@@ -101,67 +100,3 @@ class cactus_redux extends Component {
 }
 
 export default cactus_redux
-
-// <Provider store={store}>
-//   <Router sceneStyle={{ backgroundColor: 'lightgreen' }} >
-//     <Scene key='root' hideNavBar>
-//       <Scene key='App'
-//         component={App}
-//         type='replace'
-//         initial />
-//
-//       <Scene key='InitialLoginForm'
-//         component={Login}
-//         type='replace' />
-//
-//       <Scene key='Login'
-//         component={Login}
-//         type='replace' />
-//
-//       <Scene key='Register'
-//         component={Register}
-//         type='replace' />
-//
-//       <Scene key='ForgotPassword'
-//         component={ForgotPassword}
-//         type='replace' />
-//
-//       <Scene key='Subview'
-//         component={Subview} />
-//
-//       <Scene key='drawer' component={Drawer} open={false} >
-//
-//         <Scene key='Tabbar'
-//           tabs
-//           hideNavBar
-//           tabBarStyle={styles.tabBar}
-//           default='Main'>
-//
-//           <Scene key='EnvdBox'
-//             title={I18n.t('cactus.reports')}
-//             iconName={'file-text'}
-//             icon={TabIcon}
-//             hideNavBar
-//             component={EnvdBox}
-//             />
-//
-//           <Scene key='Profile'
-//             title={I18n.t('cactus.profile')}
-//             icon={TabIcon}
-//             iconName={'gear'}
-//             hideNavBar
-//             component={Profile}
-//             initial
-//             />
-//
-//           <Scene key='Logout'
-//             title={I18n.t('cactus.logout')}
-//             icon={TabIcon}
-//             iconName={'sign-out'}
-//             hideNavBar
-//             component={Logout} />
-//         </Scene>
-//       </Scene>
-//     </Scene>
-//   </Router>
-// </Provider>

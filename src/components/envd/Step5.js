@@ -12,6 +12,9 @@ import
 }
 from 'react-native'
 
+import CONFIG from '../../lib/config'
+let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
+
 import ErrorAlert from '../../components/ErrorAlert'
 
 function number_format (number, decimals, dec_point, thousands_sep) {
@@ -65,9 +68,14 @@ export default class extends Component {
     return (
       <View style={styles.container}>
         <NavigationBar
-          title={{title: 'ЕНВД за 2 квартал 2016 года (3 из 6)'}}
+          style={styles.navBarStyle}
+          title={{
+            title: 'ЕНВД за ?? квартал (3 из 6)',
+            tintColor: 'white'
+          }}
           leftButton={{
-            title: '<-',
+            title: '<',
+            tintColor: 'white',
             handler: this.onPressBack.bind(this)
           }} />
         <View style={styles.containerData}>
@@ -156,14 +164,27 @@ export default class extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    backgroundColor: Theme.COLOR_BACK
+  },
+  navBarStyle: {
+    backgroundColor: Theme.COLOR_NAVBAR,
+    height: 60
   },
   containerData: {
+    backgroundColor: 'white',
+    margin: 10,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    padding: 5
+    padding: 5,
+    borderRadius: 8,
+    shadowOffset: {
+      height: 5,
+      width: 0
+    },
+    shadowOpacity: 20,
+    shadowRadius: 5
   },
   boxHor: {
     flex: 1,
@@ -191,17 +212,14 @@ var styles = StyleSheet.create({
     borderWidth: 1
   },
   button: {
-    backgroundColor: '#6ec740',
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginTop: 30,
-    marginBottom: 5,
-    padding: 5
+    backgroundColor: Theme.COLOR_BUTTON2,
+    padding: 15,
+    height: 60
   },
   textButton: {
     fontSize: 18,
+    color: 'white',
     textAlign: 'center',
-    fontWeight: '500'
+    fontWeight: 'bold'
   }
 })

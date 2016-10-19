@@ -125,25 +125,16 @@ export function logoutFailure (error) {
  * device and logged out there.
  */
 export function logout () {
-  console.log('bliyat')
   return dispatch => {
     dispatch(logoutRequest())
     return appAuthToken.getSessionToken()
 
       .then((token) => {
-          console.log(token)
         dispatch(deleteSessionToken())
-        console.log(token)
-
-        console.log('bliyat3')
         dispatch(logoutSuccess())
-        console.log('bliyat4')
-          console.log('bliyat5')
         dispatch(loginState())
         Actions.Login()
-
       })
-
       .catch((error) => {
         dispatch(loginState())
         dispatch(logoutFailure(error))
