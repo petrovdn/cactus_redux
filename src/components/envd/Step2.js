@@ -25,19 +25,19 @@ export default class extends Component {
 
   render () {
     return (
-      <View>
-      <NavigationBar
-        style={styles.navBarStyle}
-        title={{
-          title: 'Скопировать данные?',
-          tintColor: 'white'
-        }}
-        leftButton={{
-          title: '<',
-          tintColor: 'white',
-          handler: this.onPressBack.bind(this)
-        }} />
-        <View style={styles.container}>
+      <View style={styles.container}>
+        <NavigationBar
+          style={styles.navBarStyle}
+          title={{
+            title: 'Скопировать данные?',
+            tintColor: 'white'
+          }}
+          leftButton={{
+            title: '<',
+            tintColor: 'white',
+            handler: this.onPressBack.bind(this)
+          }} />
+        <View style={styles.containerData}>
           <Text style={styles.textBig}>Скопировать данные предыдущего периода (2 Квартал 2015 года)?</Text>
           <TouchableHighlight style={styles.button}
             underlayColor='lavenderblush'
@@ -57,7 +57,12 @@ export default class extends Component {
 }
 var styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: Theme.COLOR_BACK
+  },
+  containerData: {
     padding: 20,
+    justifyContent: 'center',
     backgroundColor: Theme.COLOR_BACK
   },
   navBarStyle: {
