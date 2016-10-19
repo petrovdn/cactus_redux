@@ -16,7 +16,7 @@ import {Actions} from 'react-native-router-flux'
 export default class extends Component {
 
   onPress () {
-    this.props.closeDrawer()
+    //this.props.closeDrawer()
   }
 
   render () {
@@ -44,7 +44,7 @@ export default class extends Component {
         </TouchableHighlight>
         <TouchableHighlight style={styles.button}
           underlayColor='lavenderblush'
-          onPress={() => this.props.closeDrawer()}>
+          onPress={() => this.onPress()}>
           <Text style={styles.textButton}>Закрыть меню</Text>
         </TouchableHighlight>
       </View>

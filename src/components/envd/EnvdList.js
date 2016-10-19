@@ -17,6 +17,83 @@ I18n.translations = Translations
 import CONFIG from '../../lib/config'
 let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
 
+class ENVDrow extends React.Component {
+
+
+    _onPressENVD (data) {
+    // in case of activityType choose the action
+      switch (data) {
+        case 1:
+          return
+
+        case 2:
+          this.props.addEnvd()
+          return
+      }
+    }
+    _onPressComplete () {
+
+    }
+
+  _getTaxDate (quarter) {
+    switch (quarter) {
+      case 1:
+        return 'c 1 по 20 апреля'
+      case 2:
+        return 'c 1 по 20 июля'
+      case 3:
+        return 'c 1 по 20 октября'
+      case 4:
+        return 'c 1 по 20 января'
+    }
+  }
+  _getActivityString (activityType) {
+    switch (activityType) {
+      case 1:
+        return '<Text>Ожидается оформление</Text>'
+      case 2:
+        return 'c 1 по 20 июля'
+      case 3:
+        return 'c 1 по 20 октября'
+      case 4:
+        return 'c 1 по 20 января'
+    }
+  }
+  render () {
+    const ColorRed = Theme.COLOR_NAVBAR
+    const ColorGreen = Theme.COLOR_BUTTON1
+    const ColorGrey = Theme.COLOR_BUTTON2
+    var actType = this.props.activityType
+    var colorLeft = (actType === 1||actType === 4)? ColorGrey:(actType === 2)? ColorGreen:ColorRed
+    if (actType === 1) {
+
+    }
+    var currentDate = new Date()
+    var currentMonth = currentDate.getMonth()
+    var currentDay = currentDate.getDay()
+
+
+
+    return (
+      <TouchableHighlight onPress={() => this._onPressENVD(this.props.acti)}
+        underlayColor={'#AAA'}>
+        <View style={styles.rowFront}>
+          <View>
+            <Text> Отчет в налоговую и оплата ЕНВД {this.props.quarter} квартал {this.props.year} </Text>
+            <Text> {this._getTaxDate(this.props.quarter)}</Text>
+            <Text> Статус: {this._getActivityString(this.props.activityType)}</Text>
+            <TouchableHighlight style={styles.buttonSmall}
+              underlayColor='lavenderblush'
+              onPress={() => this._onPressComplete()}>
+              <Text style={styles.textButton}>Завершить</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      </TouchableHighlight>
+         )
+  }
+}
+
 export default class extends Component {
   constructor (props) {
     super(props)
@@ -25,6 +102,22 @@ export default class extends Component {
       listViewData: this.props.envdlist
     }
   }
+
+
+    _onPressENVD (data) {
+    // in case of activityType choose the action
+      switch (data[3]) {
+        case 1:
+          return
+
+        case 2:
+          this.props.addEnvd()
+          return
+      }
+    }
+    _onPressComplete () {
+
+    }
 
   deleteRow (secId, rowId, rowMap) {
     rowMap[`${secId}${rowId}`].closeRow()
@@ -37,6 +130,9 @@ export default class extends Component {
     this.setState({ listViewData: nextprops.envdlist })
   }
 
+
+
+
   render () {
     return (
       <View style={styles.container}>
@@ -44,42 +140,13 @@ export default class extends Component {
           dataSource={this.ds.cloneWithRows(this.state.listViewData)}
           enableEmptySections
           renderRow={data => (
-            <TouchableHighlight onPress={() => console.log()}
-              underlayColor={'#AAA'}>
-              <View style={styles.rowFront}>
-                <View>
-                  <Text> {data[2]} {data[1]} </Text>
-                  <Text> {data[3]}</Text>
-                  <Text> Статус: {data[4]}</Text>
-                  <TouchableHighlight style={styles.buttonSmall}
-                    underlayColor='lavenderblush'
-                    onPress={() => this.onPressForvard()}>
-                    <Text style={styles.textButton}>Завершить</Text>
-                  </TouchableHighlight>
-                </View>
-              </View>
-            </TouchableHighlight>
+            <ENVDrow
+              activityType={data[3]}
+              year={data[1]}
+              quarter={data[2]}
+            />
       )}
-
-          renderHiddenRow={(data, secId, rowId, rowMap) => (
-            <View style={styles.rowBack}>
-              <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]}
-                onPress={() => Alert.alert(
-                              'Удалить заявку?',
-                              '',
-                  [
-                    {text: 'Отменить', onPress: () => console.log('Cancel Pressed!')},
-                    {text: 'Удалить', onPress: () => this.deleteRow(secId, rowId, rowMap)}
-                  ]
-              )}>
-                <Text style={styles.backTextWhite}>Удалить</Text>
-              </TouchableOpacity>
-            </View>
-      )}
-          leftOpenValue={0}
-          rightOpenValue={-100}
       />
-        <View style={styles.bottom} />
       </View>
     )
   }

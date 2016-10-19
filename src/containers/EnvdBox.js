@@ -185,28 +185,34 @@ _getTitle () {
     this.props.actions.getActivitylist(this.props.global.currentUser)
   }
 
+  handleSideMenu () {
+    Actions.refresh({key: 'drawer', open: value => !value });
+  }
+
   render () {
     switch (this.props.envdbox.form.state) {
       case 'ENVDLIST':
         return (
           <View style={styles.container}>
-              <NavigationBar
+            <NavigationBar
               style={styles.navBarStyle}
-                title={{
-                  title: 'Реквизиты ИП',
-                  tintColor:'white'
-                }}
-                leftButton={{
-                  title: '<',
-                  tintColor: 'white',
-                  handler: this._onPressBack
-                }} />
+              title={{
+                title: 'Реквизиты ИП',
+                tintColor: 'white'
+              }}
+              leftButton={{
+                title: '=',
+                tintColor: 'white',
+                handler: this._handleSideMenu
+              }} />
             <Button style={styles.button} onPress={this.handlePressAddEnvd.bind(this)}>
               {'Новая декларация'}
             </Button>
             <EnvdList
               envdlist={this.props.envdbox.form.envdlist}
-              addEnvd={this.handlePressAddEnvd.bind(this)} />
+              addEnvd={this.handlePressAddEnvd.bind(this)}
+              handleSideMenu={this.handleSideMenu.bind(this)}
+            />
           </View>
         )
       case 'STEP1':
