@@ -1,37 +1,17 @@
-/**
- * # Main.js
- *  This is the main app screen
- *
- */
+
 'use strict'
-/*
- * ## Imports
- *
- * Imports from redux
- */
+import NavigationBar from 'react-native-navbar'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-/**
- * The actions we need
- */
 import * as envdboxActions from '../reducers/envdbox/envdboxActions'
 import * as globalActions from '../reducers/global/globalActions'
 import * as profileActions from '../reducers/profile/profileActions'
 
-/**
- * Router
- */
 import {Actions} from 'react-native-router-flux'
 
-/**
- * The Header will display a Image and support Hot Loading
- */
 import Header from '../components/Header'
 
-/**
- * The components needed from React
- */
 import React, {Component} from 'react'
 import
 {
@@ -50,16 +30,8 @@ import Step6 from '../components/envd/Step6'
 import Step7 from '../components/envd/Step7'
 import Step8 from '../components/envd/Step8'
 
-/**
- * The platform neutral button
- */
 const Button = require('apsl-react-native-button')
 
-/**
- *  Instead of including all app states via ...state
- *  One could explicitly enumerate only those which Main.js will depend on.
- *
- */
 function mapStateToProps (state) {
   return {
     envdbox: {
@@ -111,23 +83,25 @@ function mapStateToProps (state) {
   }
 }
 
-/*
- * Bind all the actions
- */
 function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators({ ...envdboxActions, ...globalActions, ...profileActions }, dispatch)
   }
 }
 
-/**
- * ### Translations
- */
 var I18n = require('react-native-i18n')
 import Translations from '../lib/Translations'
 I18n.translations = Translations
 
 class EnvdBox extends Component {
+
+  componentWillReceiveProps (nextprops) {
+    this.setState({ navTitle: nextprops.state })
+  }
+
+_getTitle () {
+    return this.state.navTitle
+}
 
   handleSteps (direction, currentstep, value1, value2) {
     switch (currentstep) {
@@ -200,13 +174,12 @@ class EnvdBox extends Component {
   handlePressAddEnvd () {
     this.handleSteps('forvard', 'step0')
   }
-  /**
-   * ### componentDidMount
-   *
-   * During Hot Loading, when the component mounts due the state
-   * immediately being in a "logged in" state, we need to just set the
-   * form fields.  Otherwise, we need to go fetch the fields
-   */
+
+  _onPressBack () {
+    this.handleSteps('forvard', 'step0')
+  }
+
+
   componentDidMount () {
     this.props.actions.getEnvdList(this.props.global.currentUser)
     this.props.actions.getActivitylist(this.props.global.currentUser)
@@ -217,14 +190,23 @@ class EnvdBox extends Component {
       case 'ENVDLIST':
         return (
           <View style={styles.container}>
-            <View>
-              <Button style={styles.button} onPress={this.handlePressAddEnvd.bind(this)}>
-                {'Новая декларация'}
-              </Button>
-              <EnvdList
-                envdlist={this.props.envdbox.form.envdlist}
-                addEnvd={this.handlePressAddEnvd.bind(this)} />
-            </View>
+              <NavigationBar
+              style={styles.navBarStyle}
+                title={{
+                  title: 'Реквизиты ИП',
+                  tintColor:'white'
+                }}
+                leftButton={{
+                  title: '<',
+                  tintColor: 'white',
+                  handler: this._onPressBack
+                }} />
+            <Button style={styles.button} onPress={this.handlePressAddEnvd.bind(this)}>
+              {'Новая декларация'}
+            </Button>
+            <EnvdList
+              envdlist={this.props.envdbox.form.envdlist}
+              addEnvd={this.handlePressAddEnvd.bind(this)} />
           </View>
         )
       case 'STEP1':
@@ -310,9 +292,14 @@ class EnvdBox extends Component {
 
 var styles = StyleSheet.create({
   container: {
-    marginBottom: 80,
-    flexDirection: 'column',
     flex: 1
+  },
+  navBarStyle: {
+    backgroundColor: 'rgb(252,100,75)',
+    height: 60
+  },
+  titleStyle: {
+    fontSize: 20
   },
   summary: {
     fontFamily: 'BodoniSvtyTwoITCTT-Book',
@@ -321,10 +308,7 @@ var styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#6ec740',
-    borderColor: '#6ec740',
-    marginTop: 40,
-    marginLeft: 10,
-    marginRight: 10
+    borderColor: '#6ec740'
   }
 })
 

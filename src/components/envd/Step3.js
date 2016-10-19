@@ -10,6 +10,9 @@ import {
 import { SwipeListView } from 'react-native-swipe-list-view'
 import NavigationBar from 'react-native-navbar'
 
+import CONFIG from '../../lib/config'
+let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
+
 export default class extends Component {
   constructor (props) {
     super(props)
@@ -17,14 +20,14 @@ export default class extends Component {
     this.state = {
       listViewData: this.props.Activitylist,
       activityType: this.props.activityType,
-      taxBase:this.props.taxBase
+      taxBase: this.props.taxBase
     }
   }
   componentWillReceiveProps (nextprops) {
     this.setState({
       listViewData: nextprops.Activitylist,
       activityType: this.props.activityType,
-      taxBase:this.props.taxBase
+      taxBase: this.props.taxBase
     })
   }
 
@@ -71,9 +74,9 @@ export default class extends Component {
           underlayColor={'#AAA'}>
           <View style={styles.rowFrontDetail}>
             <View >
-              <Text style={styles.rowText}>
-                <Text style={{ color: 'rgb(252, 100, 75)' }}> {data[1]} </Text>
-                {data[3]} </Text>
+              <Text style={styles.rowTextDetail}>
+                {data[1]} {data[3]}
+              </Text>
               <Text style={styles.rowDetail}> {data[4]}</Text>
             </View>
           </View>
@@ -86,9 +89,14 @@ export default class extends Component {
     return (
       <View style={styles.container}>
         <NavigationBar
-          title={{title: 'Вид деятельности? (1 из 6)'}}
+          style={styles.navBarStyle}
+          title={{
+            title: 'Вид деятельности (1 из 6)',
+            tintColor: 'white'
+          }}
           leftButton={{
-            title: '<-',
+            title: '<',
+            tintColor: 'white',
             handler: this.onPressBack.bind(this)
           }} />
         <SwipeListView
@@ -96,11 +104,11 @@ export default class extends Component {
           enableEmptySections
           renderRow={(data, secId, rowId, rowMap) => this._renderRow(data, secId, rowId, rowMap)}
       />
-      <TouchableHighlight style={styles.button}
-        underlayColor='lavenderblush'
-        onPress={() => this.onPressForvard()}>
-        <Text style={styles.textButton}>Далее</Text>
-      </TouchableHighlight>
+        <TouchableHighlight style={styles.button}
+          underlayColor='lavenderblush'
+          onPress={() => this.onPressForvard()}>
+          <Text style={styles.textButton}>Далее</Text>
+        </TouchableHighlight>
       </View>
     )
   }
@@ -132,9 +140,8 @@ var styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     padding: 10,
-    backgroundColor: 'white',
+    backgroundColor: Theme.COLOR_BUTTON1,
     borderRadius: 10,
-    shadowColor: 'rgb(173,186,195)',
     shadowOffset: {
       height: 10,
       width: 0
@@ -146,21 +153,36 @@ var styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500'
   },
+  rowTextDetail: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: 'white'
+  },
   rowDetail: {
-    marginTop:5,
-    fontSize: 14
+    marginTop: 5,
+    fontSize: 14,
+    color: 'white'
+  },
+  navBarStyle: {
+    backgroundColor: Theme.COLOR_NAVBAR,
+    height: 60
   },
   button: {
-    backgroundColor: '#6ec740',
-    borderColor: 'black',
-    borderWidth: 1,
+    backgroundColor: Theme.COLOR_BUTTON2,
+    padding: 10,
+    height: 60,
     borderRadius: 8,
-    margin: 10,
-    padding: 5
+    shadowOffset: {
+      height: 5,
+      width: 0
+    },
+    shadowOpacity: 20,
+    shadowRadius: 5
   },
   textButton: {
     fontSize: 18,
+    color: 'white',
     textAlign: 'center',
-    fontWeight: '500'
+    fontWeight: 'bold'
   }
 })

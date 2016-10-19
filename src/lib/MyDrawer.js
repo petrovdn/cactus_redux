@@ -19,11 +19,11 @@ export default class extends Component {
         onOpen={() => Actions.refresh({key: state.key, open: true})}
         onClose={() => Actions.refresh({key: state.key, open: false})}
         type='displace'
-        content={<SideMenu closeDrawer={this.closeDrawer.bind(this)}/>}
-        tapToClose={true}
+        content={<SideMenu closeDrawer={this.closeDrawer.bind(this)} />}
+        tapToClose
         openDrawerOffset={0.2}
         panCloseMask={0.2}
-        negotiatePan={true}
+        negotiatePan
         tweenHandler={(ratio) => ({
           main: { opacity: Math.max(0.54, 1 - ratio) }
         })}>

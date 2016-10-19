@@ -8,10 +8,14 @@ import {
   TouchableHighlight,
   View
 } from 'react-native'
+import NavigationBar from 'react-native-navbar'
 import { SwipeListView } from 'react-native-swipe-list-view'
 var I18n = require('react-native-i18n')
 import Translations from '../../lib/Translations'
 I18n.translations = Translations
+
+import CONFIG from '../../lib/config'
+let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
 
 export default class extends Component {
   constructor (props) {
@@ -47,6 +51,11 @@ export default class extends Component {
                   <Text> {data[2]} {data[1]} </Text>
                   <Text> {data[3]}</Text>
                   <Text> Статус: {data[4]}</Text>
+                  <TouchableHighlight style={styles.buttonSmall}
+                    underlayColor='lavenderblush'
+                    onPress={() => this.onPressForvard()}>
+                    <Text style={styles.textButton}>Завершить</Text>
+                  </TouchableHighlight>
                 </View>
               </View>
             </TouchableHighlight>
@@ -78,8 +87,8 @@ export default class extends Component {
 
 var styles = StyleSheet.create({
   container: {
-    flex: 8,
-    justifyContent: 'center'
+    flex: 1,
+    padding: 5
   },
   bottom: {
     flex: 1
@@ -91,7 +100,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#CCC',
     borderBottomColor: 'darkgreen',
     borderBottomWidth: 1,
-    height: 70
+    height: 100
   },
   rowBack: {
     alignItems: 'stretch',
@@ -119,5 +128,15 @@ var styles = StyleSheet.create({
   },
   backTextWhite: {
     color: 'white'
+  },
+  buttonSmall: {
+    backgroundColor: Theme.COLOR_BUTTON2,
+    padding: 5,
+    height: 30,
+    width: 110,
+    borderRadius: 4,
+    borderColor: 'black',
+    borderWidth: 1,
+    alignItems: 'center'
   }
 })

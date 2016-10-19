@@ -12,6 +12,9 @@ import
 }
 from 'react-native'
 
+import CONFIG from '../../lib/config'
+let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
+
 export default class extends Component {
   onPressForvard (isCopy) {
     this.props.handleSteps('forvard', 'step2')
@@ -22,14 +25,19 @@ export default class extends Component {
 
   render () {
     return (
-      <View>
+      <View style={styles.container}>
         <NavigationBar
-          title={{title: 'Скопировать данные?'}}
+          style={styles.navBarStyle}
+          title={{
+            title: 'Скопировать данные?',
+            tintColor: 'white'
+          }}
           leftButton={{
-            title: '<-',
+            title: '<',
+            tintColor: 'white',
             handler: this.onPressBack.bind(this)
           }} />
-        <View style={styles.container}>
+        <View style={styles.containerData}>
           <Text style={styles.textBig}>Скопировать данные предыдущего периода (2 Квартал 2015 года)?</Text>
           <TouchableHighlight style={styles.button}
             underlayColor='lavenderblush'
@@ -49,29 +57,45 @@ export default class extends Component {
 }
 var styles = StyleSheet.create({
   container: {
-    padding: 20
+    flex: 1,
+    backgroundColor: Theme.COLOR_BACK
+  },
+  containerData: {
+    padding: 20,
+    justifyContent: 'center',
+    backgroundColor: Theme.COLOR_BACK
+  },
+  navBarStyle: {
+    backgroundColor: Theme.COLOR_NAVBAR,
+    height: 60
   },
   button: {
-    backgroundColor: '#6ec740',
-    borderColor: 'black',
-    borderWidth: 1,
+    backgroundColor: Theme.COLOR_BUTTON2,
+    padding: 10,
+    height: 60,
     borderRadius: 8,
-    marginTop: 30,
-    marginBottom: 5,
-    padding: 5
+    shadowOffset: {
+      height: 5,
+      width: 0
+    },
+    shadowOpacity: 20,
+    shadowRadius: 5
   },
   textButton: {
     fontSize: 18,
+    color: 'white',
     textAlign: 'center',
-    fontWeight: '500'
+    fontWeight: 'bold'
   },
   textBig: {
     marginTop: 40,
+    marginBottom: 10,
     textAlign: 'center',
     fontSize: 18,
     fontWeight: '500'
   },
   textSmall: {
+    marginTop: 30,
     textAlign: 'center',
     fontSize: 14
   }

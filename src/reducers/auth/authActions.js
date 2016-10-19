@@ -125,7 +125,6 @@ export function logoutFailure (error) {
  * device and logged out there.
  */
 export function logout () {
-  console.log('bliyat')
   return dispatch => {
     dispatch(logoutRequest())
     return appAuthToken.getSessionToken()
@@ -134,9 +133,12 @@ export function logout () {
         dispatch(deleteSessionToken())
         dispatch(logoutSuccess())
         dispatch(loginState())
+<<<<<<< HEAD
         Actions.Drawer()
+=======
+        Actions.Login()
+>>>>>>> origin/master
       })
-
       .catch((error) => {
         dispatch(loginState())
         dispatch(logoutFailure(error))
