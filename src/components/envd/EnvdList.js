@@ -1,25 +1,20 @@
 import React, { Component } from 'react'
 import {
-  Alert,
   ListView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   TouchableHighlight,
   View
 } from 'react-native'
-import NavigationBar from 'react-native-navbar'
 import { SwipeListView } from 'react-native-swipe-list-view'
-var I18n = require('react-native-i18n')
-import Translations from '../../lib/Translations'
-I18n.translations = Translations
 
 import CONFIG from '../../lib/config'
 let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
 
+var moment = require('moment')
+moment.locale('ru')
+
 class ENVDrow extends React.Component {
-
-
     _onPressENVD (data) {
     // in case of activityType choose the action
       switch (data) {
@@ -34,6 +29,7 @@ class ENVDrow extends React.Component {
     _onPressComplete () {
 
     }
+
 
   _getTaxDate (quarter) {
     switch (quarter) {
@@ -62,26 +58,38 @@ class ENVDrow extends React.Component {
   render () {
     const ColorRed = Theme.COLOR_NAVBAR
     const ColorGreen = Theme.COLOR_BUTTON1
-    const ColorGrey = Theme.COLOR_BUTTON2
+    const ColorGrey = 'grey'
     var actType = this.props.activityType
-    var colorLeft = (actType === 1||actType === 4)? ColorGrey:(actType === 2)? ColorGreen:ColorRed
-    if (actType === 1) {
+    // 1: ожидается оформление
+    // 2: Нужно готовить
+    // 3: Просрочено
+    // 4: Завершено
+    var quarter = this.props.quarter
+    var year = this.props.year
 
-    }
-    var currentDate = new Date()
-    var currentMonth = currentDate.getMonth()
-    var currentDay = currentDate.getDay()
-
-
+    var colorLeft = (actType === 1 || actType === 4) ? ColorGrey : (actType === 2) ? ColorGreen : ColorRed
+    var taxMonth = (quarter === 1) ? 3 : (quarter === 2) ? 6 : (quarter === 3) ? 9 : 0
+    var taxYear = (quarter === 4) ? year + 1 : year
+    var startDate = new Date(taxYear, taxMonth, 1)
+    var taxDate = new Date(taxYear, taxMonth, 20)
+    var payDate = new Date(taxYear, taxMonth, 25)
+    var currentDate = moment(new Date())
+    var daysForTax = Math.round((taxDate - currentDate) / 86400000)
+    var daysForPay = Math.round((payDate - currentDate) / 86400000)
+    var colorTax = (daysForTax <= 5) ? ColorRed : 'black'
+    var colorPay = (daysForPay <= 5) ? ColorRed : 'black'
 
     return (
       <TouchableHighlight onPress={() => this._onPressENVD(this.props.acti)}
         underlayColor={'#AAA'}>
         <View style={styles.rowFront}>
           <View>
-            <Text> Отчет в налоговую и оплата ЕНВД {this.props.quarter} квартал {this.props.year} </Text>
+            <Text style = {{color: colorLeft}}> Отчет в налоговую и оплата ЕНВД {quarter} квартал {year} </Text>
             <Text> {this._getTaxDate(this.props.quarter)}</Text>
-            <Text> Статус: {this._getActivityString(this.props.activityType)}</Text>
+            <Text style = {{color: colorTax}}> Сдать в ИФНС до {moment(taxDate).format('D.MM.YYYY')} (осталось {daysForTax} дн.)</Text>
+            <Text style = {{color: colorPay}}> Сдать в ИФНС до {moment(payDate).format('D.MM.YYYY')} (осталось {daysForPay} дн.)</Text>
+            <Text> Доступно c  {moment(startDate).format('D.MM.YYYY')}</Text>
+
             <TouchableHighlight style={styles.buttonSmall}
               underlayColor='lavenderblush'
               onPress={() => this._onPressComplete()}>
@@ -155,7 +163,8 @@ export default class extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 5
+    padding: 10,
+    backgroundColor: Theme.COLOR_BACK
   },
   bottom: {
     flex: 1
@@ -164,37 +173,9 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     padding: 10,
-    backgroundColor: '#CCC',
-    borderBottomColor: 'darkgreen',
     borderBottomWidth: 1,
-    height: 100
-  },
-  rowBack: {
-    alignItems: 'stretch',
-    backgroundColor: '#DDD',
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingLeft: 15
-  },
-  backRightBtn: {
-    alignItems: 'center',
-    bottom: 0,
-    justifyContent: 'center',
-    position: 'absolute',
-    top: 0,
-    width: 100
-  },
-  backRightBtnLeft: {
-    backgroundColor: 'blue',
-    right: 110
-  },
-  backRightBtnRight: {
-    backgroundColor: 'darkgreen',
-    right: 0
-  },
-  backTextWhite: {
-    color: 'white'
+    height: 200,
+    backgroundColor: 'white'
   },
   buttonSmall: {
     backgroundColor: Theme.COLOR_BUTTON2,

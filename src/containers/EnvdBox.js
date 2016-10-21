@@ -10,13 +10,18 @@ import * as profileActions from '../reducers/profile/profileActions'
 
 import {Actions} from 'react-native-router-flux'
 
+import CONFIG from '../lib/config'
+let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
+
 import Header from '../components/Header'
 
 import React, {Component} from 'react'
 import
 {
   StyleSheet,
-  View
+  View,
+  TouchableHighlight,
+  Text
 }
 from 'react-native'
 
@@ -186,7 +191,7 @@ _getTitle () {
   }
 
   handleSideMenu () {
-    Actions.refresh({key: 'drawer', open: value => !value });
+      Actions.refresh({key: 'drawer', open: value => !value });
   }
 
   render () {
@@ -197,22 +202,24 @@ _getTitle () {
             <NavigationBar
               style={styles.navBarStyle}
               title={{
-                title: 'Реквизиты ИП',
+                title: 'Отчетность ИП',
                 tintColor: 'white'
               }}
               leftButton={{
                 title: '=',
                 tintColor: 'white',
-                handler: this._handleSideMenu
+                handler: this.handleSideMenu.bind(this)
               }} />
-            <Button style={styles.button} onPress={this.handlePressAddEnvd.bind(this)}>
-              {'Новая декларация'}
-            </Button>
             <EnvdList
               envdlist={this.props.envdbox.form.envdlist}
               addEnvd={this.handlePressAddEnvd.bind(this)}
               handleSideMenu={this.handleSideMenu.bind(this)}
             />
+              <TouchableHighlight style={styles.button}
+                underlayColor='lavenderblush'
+                onPress={this.handlePressAddEnvd.bind(this)}>
+                <Text style={styles.textButton}>Новая декларация</Text>
+              </TouchableHighlight>
           </View>
         )
       case 'STEP1':
@@ -268,6 +275,7 @@ _getTitle () {
               factor2={this.props.envdbox.form.fields.factors[1]}
               factor3={this.props.envdbox.form.fields.factors[2]}
               k2={this.props.envdbox.form.fields.k2}
+              taxBeforeInsurance={this.props.envdbox.form.fields.taxBeforeInsurance}
                />
           </View>
         )
@@ -313,8 +321,15 @@ var styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   button: {
-    backgroundColor: '#6ec740',
-    borderColor: '#6ec740'
+    backgroundColor: Theme.COLOR_BUTTON2,
+    padding: 15,
+    height: 60
+  },
+  textButton: {
+    fontSize: 18,
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold'
   }
 })
 

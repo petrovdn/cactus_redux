@@ -1,15 +1,15 @@
 module.exports = {
   SESSION_TOKEN_KEY: 'SESSION_TOKEN_KEY',
   backend: {
-    hapiRemote: false,
-    hapiLocal: true
+    hapiRemote: true,
+    hapiLocal: false
   },
   HAPI: {
     local: {
       url: 'http://localhost:8080'
     },
     remote: {
-      url: 'https://snowflakeserver-bartonhammond.rhcloud.com/'
+      url: 'http://606ep.ru:8080'
     }
   },
   COLOR_SCHEME: {

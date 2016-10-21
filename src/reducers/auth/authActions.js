@@ -106,6 +106,7 @@ export function logoutFailure (error) {
     payload: error
   }
 }
+
 /**
  * ## Login
  * After dispatching the logoutRequest, get the sessionToken
@@ -133,11 +134,7 @@ export function logout () {
         dispatch(deleteSessionToken())
         dispatch(logoutSuccess())
         dispatch(loginState())
-<<<<<<< HEAD
         Actions.Drawer()
-=======
-        Actions.Login()
->>>>>>> origin/master
       })
       .catch((error) => {
         dispatch(loginState())
@@ -146,6 +143,7 @@ export function logout () {
       })
   }
 }
+
 /**
  * ## onAuthFormFieldChange
  * Set the payload so the reducer can work on it

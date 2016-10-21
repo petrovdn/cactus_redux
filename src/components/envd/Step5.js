@@ -53,7 +53,8 @@ export default class extends Component {
       factor2: this.props.factor2,
       factor3: this.props.factor3,
       taxRate: this.props.taxRate,
-      k2: this.props.k2
+      k2: this.props.k2,
+      taxBeforeInsurance: this.props.taxBeforeInsurance
     }
   }
 
@@ -62,6 +63,12 @@ export default class extends Component {
   }
   onPressBack () {
     this.props.handleSteps('back', 'step5')
+  }
+
+  _onChange (val) {
+    this.setState(val)
+    let taxBeforeInsurance = this.props.taxBase * (this.state.factor1 + this.state.factor2 + this.state.factor3) * 1.7980 * this.state.k2 * this.state.taxRate
+    this.setState({ taxBeforeInsurance: taxBeforeInsurance })
   }
 
   render () {
@@ -92,15 +99,15 @@ export default class extends Component {
             <Text>Площадь торгового зала</Text>
             <View style={styles.boxHor}>
               <TextInput
-                style={styles.factors} onChangeText={(data) => this.setState({factor1: Number(data)})}
+                style={styles.factors} onChangeText={(data) => this._onChange({factor1: data})}
                 value={String(this.state.factor1)}
                 placeholder='ИЮН' />
               <TextInput
-                style={styles.factors} onChangeText={(data) => this.setState({factor2: Number(data)})}
+                style={styles.factors} onChangeText={(data) => this._onChange({factor2: data})}
                 value={String(this.state.factor2)}
                 placeholder='ИЮЛ' />
               <TextInput
-                style={styles.factors} onChangeText={(data) => this.setState({factor3: Number(data)})}
+                style={styles.factors} onChangeText={(data) => this._onChange({factor3: data})}
                 value={String(this.state.factor3)}
                 placeholder='АВГ' />
             </View>
@@ -118,7 +125,7 @@ export default class extends Component {
             <View style={{flex: 2}}>
               <Text>k2</Text>
               <TextInput
-                style={styles.factors} onChangeText={(data) => this.setState({k2: Number(data)})}
+                style={styles.factors} onChangeText={(data) => this._onChange({k2: data})}
                 value={String(this.state.k2)}
                 placeholder='К2' />
             </View>
@@ -128,9 +135,9 @@ export default class extends Component {
             <View style={{flex: 2}}>
               <Text>Ставка налога</Text>
               <TextInput
-                style={styles.factors} onChangeText={(data) => this.setState({taxRate: Number(data)})}
+                style={styles.factors} onChangeText={(data) => this._onChange({taxRate: data})}
                 value={String(this.state.taxRate)}
-                placeholder='К2' />
+                placeholder='%' />
             </View>
             <View style={{flex: 1}}>
               <Text style={styles.textBigBig}> ? </Text>
@@ -144,7 +151,7 @@ export default class extends Component {
           <View style={styles.boxHor}>
             <View>
               <Text>Сумма налога</Text>
-              <Text style={styles.textBig}>0 рублей</Text>
+              <Text style={styles.textBig}>{this.state.taxBeforeInsurance} рублей</Text>
             </View>
             <View>
               <Text style={styles.textBigBig}> ? </Text>

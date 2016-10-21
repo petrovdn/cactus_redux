@@ -5,8 +5,8 @@ import {Actions, DefaultRenderer} from 'react-native-router-flux'
 
 export default class extends Component {
 
-  closeDrawer (val) {
-    Actions.refresh({key: 'EnvdBox', open: false})
+  closeDrawer () {
+    this._drawer.close()
   }
 
   render () {
