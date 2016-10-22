@@ -40,6 +40,10 @@ const {
   ENVDLIST_SUCCESS,
   ENVDLIST_FAILURE,
 
+  GETENVD_REQUEST,
+  GETENVD_SUCCESS,
+  GETENVD_FAILURE,
+
   ADDENVD_REQUEST,
   ADDENVD_SUCCESS,
   ADDENVD_FAILURE,
@@ -102,14 +106,34 @@ export default function envdboxReducer (state = initialState, action) {
           .setIn(['form', 'error'], null)
 
     case ENVDLIST_REQUEST:
+    case GETENVD_REQUEST:
       let nextState = state.setIn(['form', 'isFetching'], true)
       .setIn(['form', 'error'], null)
       return nextState
 
     case ENVDLIST_SUCCESS:
-      return state.setIn(['form', 'envdlist'], action.payload)
+      let envdlist = []
+      for (var i = 0; i < action.payload.length; i++) {
+
+        var data = action.payload[i].data
+        var parse = JSON.parse(data)
+        let envdRow = []
+        envdRow[0] = parse.userData.id
+        envdRow[1] = parse.userData.year
+        envdRow[2] = parse.userData.quarter
+        envdRow[3] = parse.userData.activityType
+        envdlist.push(envdRow)
+
+      }
+      return state.setIn(['form', 'envdlist'], envdlist)
         .setIn(['form', 'isFetching'], false)
+
+    case GETENVD_SUCCESS:
+      return state.setIn(['form', 'envdlist'], action.payload)
+            .setIn(['form', 'isFetching'], false)
+
     case ENVDLIST_FAILURE:
+    case GETENVD_FAILURE:
       return state.setIn(['form', 'isFetching'], false)
       .setIn(['form', 'error'], action.payload)
 

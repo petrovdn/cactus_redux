@@ -180,6 +180,10 @@ _getTitle () {
     this.handleSteps('forvard', 'step0')
   }
 
+  handlePressAddEnvdList () {
+    this.props.actions.addEnvd(this.props.global.currentUser)
+  }
+
   _onPressBack () {
     this.handleSteps('forvard', 'step0')
   }
@@ -212,7 +216,7 @@ _getTitle () {
               }} />
             <EnvdList
               envdlist={this.props.envdbox.form.envdlist}
-              addEnvd={this.handlePressAddEnvd.bind(this)}
+              editEnvd={this.handlePressAddEnvd.bind(this)}
               handleSideMenu={this.handleSideMenu.bind(this)}
             />
               <TouchableHighlight style={styles.button}

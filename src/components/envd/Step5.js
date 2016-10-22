@@ -7,6 +7,7 @@ import
   StyleSheet,
   View,
   Text,
+  Image,
   TouchableHighlight,
   TextInput
 }
@@ -67,7 +68,7 @@ export default class extends Component {
 
   _onChange (val) {
     this.setState(val)
-    let taxBeforeInsurance = this.props.taxBase * (this.state.factor1 + this.state.factor2 + this.state.factor3) * 1.7980 * this.state.k2 * this.state.taxRate
+    let taxBeforeInsurance = +this.props.taxBase * (+this.state.factor1 + +this.state.factor2 + +this.state.factor3) * 1.7980 * +this.state.k2 * this.state.taxRate/100
     this.setState({ taxBeforeInsurance: taxBeforeInsurance })
   }
 
@@ -77,7 +78,7 @@ export default class extends Component {
         <NavigationBar
           style={styles.navBarStyle}
           title={{
-            title: 'ЕНВД за ?? квартал (3 из 6)',
+            title: 'ЕНВД за ?? квартал',
             tintColor: 'white'
           }}
           leftButton={{
@@ -91,82 +92,74 @@ export default class extends Component {
               <Text>Базовая доходность</Text>
               <Text style={styles.textBig}>{this.props.taxBase} рублей</Text>
             </View>
-            <View>
-              <Text style={styles.textBigBig}> ? </Text>
+            <Image style={styles.mark}
+              source={require('../../images/question.png')}
+          />
+          </View>
+          <View style={[styles.boxVer, {marginRight: 20}, styles.line]}>
+            <Text style={{marginTop: 10}}>Площадь торгового зала</Text>
+            <View style={styles.boxHorMargin}>
+              <TextInput
+                style={styles.factors} onChangeText={(data) => this._onChange({factor1: +data})}
+                value={this.state.factor1}
+                placeholder='ИЮЛЬ' />
+              <TextInput
+                style={styles.factors} onChangeText={(data) => this._onChange({factor2: +data})}
+                value={this.state.factor2}
+                placeholder='АВГУСТ' />
+              <TextInput
+                style={styles.factors} onChangeText={(data) => this._onChange({factor3: +data})}
+                value={this.state.factor3}
+                placeholder='СЕНТЯБРЬ' />
             </View>
           </View>
-          <View style={styles.boxVer}>
-            <Text>Площадь торгового зала</Text>
-            <View style={styles.boxHor}>
-              <TextInput
-                style={styles.factors} onChangeText={(data) => this._onChange({factor1: data})}
-                value={String(this.state.factor1)}
-                placeholder='ИЮН' />
-              <TextInput
-                style={styles.factors} onChangeText={(data) => this._onChange({factor2: data})}
-                value={String(this.state.factor2)}
-                placeholder='ИЮЛ' />
-              <TextInput
-                style={styles.factors} onChangeText={(data) => this._onChange({factor3: data})}
-                value={String(this.state.factor3)}
-                placeholder='АВГ' />
+          <View style={[styles.boxHorMargin, styles.line]}>
+            <View style={styles.boxVer}>
+              <Text style={{marginTop: 10}}>K1 (за 2016 год)       (К2)              Ставка налога</Text>
+              <View style={styles.boxHorMargin}>
+                <TextInput
+                  style={styles.factors}
+                  editable={false}
+                  value={'1,7980'}
+                  />
+                <TextInput
+                  keyboardType='numeric'
+                  style={styles.factors} onChangeText={(data) => this._onChange({k2: +data})}
+                  value={this.state.k2}
+                  placeholder='K2' />
+                <TextInput
+                  style={styles.factors} onChangeText={(data) => this._onChange({taxRate: +data})}
+                  value={this.state.factor3}
+                  placeholder='%' />
+              </View>
             </View>
           </View>
-          <View style={styles.boxHor}>
-            <View>
-              <Text>k1 (2016 год)</Text>
-              <Text style={styles.textBig}>1,7980</Text>
-            </View>
-            <View>
-              <Text style={styles.textBigBig}> ? </Text>
-            </View>
-          </View>
-          <View style={styles.boxHor}>
+          <View style={[styles.boxHor, styles.line, {backgroundColor: Theme.COLOR_BACK2, marginRight: 20}]}>
             <View style={{flex: 2}}>
-              <Text>k2</Text>
-              <TextInput
-                style={styles.factors} onChangeText={(data) => this._onChange({k2: data})}
-                value={String(this.state.k2)}
-                placeholder='К2' />
-            </View>
-            <View style={{flex: 1}}>
-              <Text style={styles.textBigBig}> ? </Text>
-            </View>
-            <View style={{flex: 2}}>
-              <Text>Ставка налога</Text>
-              <TextInput
-                style={styles.factors} onChangeText={(data) => this._onChange({taxRate: data})}
-                value={String(this.state.taxRate)}
-                placeholder='%' />
-            </View>
-            <View style={{flex: 1}}>
-              <Text style={styles.textBigBig}> ? </Text>
-            </View>
-          </View>
-          <View style={styles.boxHor}>
-            <Text> чек </Text>
-            <Text> неполный период </Text>
-            <Text> галка </Text>
-          </View>
-          <View style={styles.boxHor}>
-            <View>
-              <Text>Сумма налога</Text>
+              <Text style={styles.rightBottomText}>Сумма налога</Text>
               <Text style={styles.textBig}>{this.state.taxBeforeInsurance} рублей</Text>
             </View>
-            <View>
-              <Text style={styles.textBigBig}> ? </Text>
+            <View style={styles.rightBottomBox}>
+              <Text style={styles.rightBottomText}></Text>
             </View>
           </View>
         </View>
         <TouchableHighlight style={styles.button}
           underlayColor='lavenderblush'
           onPress={() => this.onPressForvard()}>
-          <Text style={styles.textButton}>Далее</Text>
+          <Text style={styles.textButton}>3 / 6      ПРОДОЛЖИТЬ</Text>
         </TouchableHighlight>
       </View>
     )
   }
 }
+
+
+
+
+
+
+//
 
 var styles = StyleSheet.create({
   container: {
@@ -179,23 +172,20 @@ var styles = StyleSheet.create({
     height: 60
   },
   containerData: {
-    backgroundColor: 'white',
-    margin: 10,
     flex: 1,
-    flexDirection: 'column',
     justifyContent: 'flex-start',
-    padding: 5,
-    borderRadius: 8,
-    shadowOffset: {
-      height: 5,
-      width: 0
-    },
-    shadowOpacity: 20,
-    shadowRadius: 5
+    marginLeft: 20,
+    marginTop: 20
   },
   boxHor: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  boxHorMargin: {
+    flex: 1,
+    flexDirection: 'row',
+    marginRight: 20
   },
   boxVer: {
     flex: 1,
@@ -203,7 +193,7 @@ var styles = StyleSheet.create({
   },
   textBig: {
     fontSize: 22,
-    fontWeight: '500'
+    fontWeight: 'bold'
   },
   textBigBig: {
     fontSize: 26,
@@ -216,7 +206,11 @@ var styles = StyleSheet.create({
     padding: 4,
     margin: 5,
     fontSize: 18,
-    borderWidth: 1
+    textAlign: 'center',
+    borderWidth: 1,
+    borderRadius: 4,
+    backgroundColor: 'white',
+    borderColor: Theme.COLOR_LINE
   },
   button: {
     backgroundColor: Theme.COLOR_BUTTON2,
@@ -228,5 +222,20 @@ var styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontWeight: 'bold'
+  },
+  mark: {
+    height: 55,
+    width: 55
+  },
+  line: {
+    borderTopColor: Theme.COLOR_LINE,
+    borderTopWidth: 2
+  },
+  rightBottomBox: {
+    padding: 10
+  },
+  rightBottomText: {
+    borderLeftColor: Theme.COLOR_LINE,
+    borderLeftWidth: 2
   }
 })

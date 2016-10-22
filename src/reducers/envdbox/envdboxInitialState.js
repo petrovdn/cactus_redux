@@ -4,7 +4,7 @@
 import {Record} from 'immutable'
 const {
   ENVDLIST,
-  STEP7
+  STEP5
 } = require('../../lib/constants').default
 
 const Form = Record({

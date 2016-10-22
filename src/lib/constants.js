@@ -87,6 +87,10 @@ export default keyMirror({
   ENVDLIST_SUCCESS: null,
   ENVDLIST_FAILURE: null,
 
+  GETENVD_REQUEST: null,
+  GETENVD_SUCCESS: null,
+  GETENVD_FAILURE: null,
+
   ADDENVD_REQUEST: null,
   ADDENVD_SUCCESS: null,
   ADDENVD_FAILURE: null,

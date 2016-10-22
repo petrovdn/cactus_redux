@@ -91,7 +91,7 @@ export default class extends Component {
         <NavigationBar
           style={styles.navBarStyle}
           title={{
-            title: 'Вид деятельности (1 из 6)',
+            title: 'Вид деятельности',
             tintColor: 'white'
           }}
           leftButton={{
@@ -107,7 +107,7 @@ export default class extends Component {
         <TouchableHighlight style={styles.button}
           underlayColor='lavenderblush'
           onPress={() => this.onPressForvard()}>
-          <Text style={styles.textButton}>Далее</Text>
+          <Text style={styles.textButton}>1 / 6      ПРОДОЛЖИТЬ</Text>
         </TouchableHighlight>
       </View>
     )

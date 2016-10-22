@@ -83,20 +83,20 @@ export default class extends Component {
             tintColor: 'white',
             handler: this.onPressBack.bind(this)
           }} />
-          <View style={styles.inputs}>
-            <Form
-              ref='form'
-              type={Step1Form}
-              options={options}
-              value={this.state.value}
-              onChange={this.onChange.bind(this)}
-              />
-          </View>
-          <TouchableHighlight style={styles.button}
-            underlayColor='lavenderblush'
-            onPress={() => this.onPressForvard()}>
-            <Text style={styles.textButton}>Далее</Text>
-          </TouchableHighlight>
+        <View style={styles.inputs}>
+          <Form
+            ref='form'
+            type={Step1Form}
+            options={options}
+            value={this.state.value}
+            onChange={this.onChange.bind(this)}
+            />
+        </View>
+        <TouchableHighlight style={styles.button}
+          underlayColor='lavenderblush'
+          onPress={() => this.onPressForvard()}>
+          <Text style={styles.textButton}>     ПРОДОЛЖИТЬ</Text>
+        </TouchableHighlight>
 
       </View>
     )

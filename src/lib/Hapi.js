@@ -214,6 +214,46 @@ export class Hapi extends Backend {
       })
   }
 
+  async getEnvd (id) {
+    return await this._fetch({
+      method: 'GET',
+      url: '/envd/' + id
+    })
+      .then((res) => {
+        if ((res.status === 200 || res.status === 201)) {
+          return res.json
+        } else {
+          throw (res.json)
+        }
+      })
+      .catch((error) => {
+        throw (error)
+      })
+  }
+
+  async addEvndStart () {
+    return await this._fetch({
+      method: 'POST',
+      url: '/envd',
+      body: {
+        id: 4,
+        year: 2016,
+        quarter: 4,
+        activityType: 1
+      }
+    })
+      .then((res) => {
+        if ((res.status === 200 || res.status === 201)) {
+          return {}
+        } else {
+          throw (res.json)
+        }
+      })
+      .catch((error) => {
+        throw (error)
+      })
+  }
+
   /**
    * ### _fetch
    * A generic function that prepares the request

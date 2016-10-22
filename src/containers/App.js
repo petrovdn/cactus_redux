@@ -30,7 +30,7 @@ import
 {
     StyleSheet,
     View,
-    Text
+    Image
 }
 from 'react-native'
 
@@ -66,21 +66,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-var styles = StyleSheet.create({
-  container: {
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
-    marginTop: 80,
-    padding: 10
-  },
-  summary: {
-    fontFamily: 'BodoniSvtyTwoITCTT-Book',
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginTop: 10
-  }
-})
-
 /**
  * ## App class
  */
@@ -104,25 +89,40 @@ let App = React.createClass({
             () => {
               this.props.actions.getSessionToken()
             },
-            1000
+            2500
         )
   },
 
   render () {
     return (
       <View style={styles.container}>
-        <Header isFetching={this.props.auth.form.isFetching}
-          showState={this.props.global.showState}
-          currentState={this.props.global.currentState}
-          onGetState={this.props.actions.getState}
-          onSetState={this.props.actions.setState} />
-
-        <Text style={styles.summary}>cuctus {I18n.t('App.version')}:{this.props.deviceVersion}</Text>
+        <Image style={styles.mark}
+          source={require('../images/logo.png')}
+      />
 
       </View>
     )
   }
 })
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  summary: {
+    fontFamily: 'BodoniSvtyTwoITCTT-Book',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 10
+  },
+  mark: {
+    height: 150,
+    width: 150
+  }
+})
+
 // Since we're using ES6 classes, have to define the TimerMixin
 reactMixin(App.prototype, TimerMixin)
 /**

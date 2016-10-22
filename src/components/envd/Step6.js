@@ -119,7 +119,7 @@ export default class extends Component {
         <TouchableHighlight style={styles.button}
           underlayColor='lavenderblush'
           onPress={() => this.onPressForvard()}>
-          <Text style={styles.textButton}>Далее</Text>
+          <Text style={styles.textButton}>4 / 6      ПРОДОЛЖИТЬ</Text>
         </TouchableHighlight>
       </View>
     )

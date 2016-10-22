@@ -1,28 +1,6 @@
-/**
-* # Header.js
-*
- * This component initially displays a image. But when clicked, things
- * get interesting.
- *
- * On the initial display after being clicked, the
- * textinput will display the current ```state``` of the application.
- *
- * The button will be enabled and if clicked, whatever state is now
- * contained in the textinput will be processed and the application
- * will be restored to that state.
- *
- * By pasting in a previous state, the application will reset to that
- * state
- *
- * When the mark image is clicked, it is just toggled to display or hide.
-*/
+
 'use strict'
 
-/**
- * ## Imports
- *
- * React
-*/
 import React, {PropTypes} from 'react'
 import
 {
@@ -39,9 +17,7 @@ import
  * Project component that will respond to onPress
  */
 const FormButton = require('./FormButton')
-/**
- * ## Styles
- */
+
 var styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
@@ -120,19 +96,6 @@ var Header = React.createClass({
     this.props.onSetState(this.state.text)
   },
 
-  /**
-   * ### render
-   *
-   * if showState, stringify the currentState and display it to the
-   * browser for copying. Then display to the user.
-   *
-   * When the value of the input changes, call ```_onChangeText```
-   *
-   * When the 'Update State' button is pressed, we're off to the
-   * races with Hot Loading...just call the
-   * ```_updateStateButtonPress``` and away we go...
-   *
-   */
   render () {
     let displayText
     if (this.props.showState) {
@@ -147,7 +110,7 @@ var Header = React.createClass({
           <TouchableHighlight onPress={this._onPressMark}>
 
             <Image style={styles.mark}
-              source={require('../images/cactus.png')}
+              source={require('../images/logo.png')}
             />
           </TouchableHighlight>
           {this.props.isFetching
