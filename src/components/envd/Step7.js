@@ -42,7 +42,7 @@ export default class extends Component {
         <NavigationBar
           style={styles.navBarStyle}
           title={{
-            title: 'Налоговая инспекция (5 из 6)',
+            title: 'Налоговая инспекция',
             tintColor: 'white'
           }}
           leftButton={{

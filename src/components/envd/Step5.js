@@ -13,6 +13,8 @@ import
 }
 from 'react-native'
 
+import NumTextInput from 'react-native-num-textinput'
+
 import CONFIG from '../../lib/config'
 let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
 
@@ -66,7 +68,7 @@ export default class extends Component {
     this.props.handleSteps('back', 'step5')
   }
 
-  _onChange (val) {
+  onChange (val) {
     this.setState(val)
     let taxBeforeInsurance = +this.props.taxBase * (+this.state.factor1 + +this.state.factor2 + +this.state.factor3) * 1.7980 * +this.state.k2 * this.state.taxRate/100
     this.setState({ taxBeforeInsurance: taxBeforeInsurance })
@@ -78,7 +80,7 @@ export default class extends Component {
         <NavigationBar
           style={styles.navBarStyle}
           title={{
-            title: 'ЕНВД за ?? квартал',
+            title: 'ЕНВД за ' + this.props.quarter + ' квартал',
             tintColor: 'white'
           }}
           leftButton={{
@@ -99,17 +101,17 @@ export default class extends Component {
           <View style={[styles.boxVer, {marginRight: 20}, styles.line]}>
             <Text style={{marginTop: 10}}>Площадь торгового зала</Text>
             <View style={styles.boxHorMargin}>
-              <TextInput
-                style={styles.factors} onChangeText={(data) => this._onChange({factor1: +data})}
-                value={this.state.factor1}
+              <NumTextInput
+                style={styles.factors} onChangeText={(text) => this.onChange({factor1: text})}
+                value={this.state.factor1.toString() === '0' ? '' : this.state.factor1.toString()}
                 placeholder='ИЮЛЬ' />
-              <TextInput
-                style={styles.factors} onChangeText={(data) => this._onChange({factor2: +data})}
-                value={this.state.factor2}
+              <NumTextInput
+                style={styles.factors} onChangeText={(text) => this.onChange({factor2: text})}
+                value={this.state.factor2.toString() === '0' ? '' : this.state.factor2.toString()}
                 placeholder='АВГУСТ' />
-              <TextInput
-                style={styles.factors} onChangeText={(data) => this._onChange({factor3: +data})}
-                value={this.state.factor3}
+              <NumTextInput
+                style={styles.factors} onChangeText={(text) => this.onChange({factor3: text})}
+                value={this.state.factor3.toString() === '0' ? '' : this.state.factor3.toString()}
                 placeholder='СЕНТЯБРЬ' />
             </View>
           </View>
@@ -117,19 +119,19 @@ export default class extends Component {
             <View style={styles.boxVer}>
               <Text style={{marginTop: 10}}>K1 (за 2016 год)       (К2)              Ставка налога</Text>
               <View style={styles.boxHorMargin}>
-                <TextInput
+                <NumTextInput
                   style={styles.factors}
                   editable={false}
-                  value={'1,7980'}
+                  value={'1.7980'}
                   />
-                <TextInput
+                <NumTextInput
                   keyboardType='numeric'
-                  style={styles.factors} onChangeText={(data) => this._onChange({k2: +data})}
-                  value={this.state.k2}
+                  style={styles.factors} onChangeText={(text) => this.onChange({k2: text})}
+                  value={this.state.k2.toString() === '0' ? '' : this.state.k2.toString()}
                   placeholder='K2' />
                 <TextInput
-                  style={styles.factors} onChangeText={(data) => this._onChange({taxRate: +data})}
-                  value={this.state.factor3}
+                  style={styles.factors} onChangeText={(text) => this.onChange({taxRate: text})}
+                  value={this.state.taxRate.toString() === '0' ? '' : this.state.taxRate.toString()}
                   placeholder='%' />
               </View>
             </View>
@@ -153,11 +155,6 @@ export default class extends Component {
     )
   }
 }
-
-
-
-
-
 
 //
 

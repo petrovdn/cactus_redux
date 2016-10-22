@@ -240,6 +240,7 @@ export function getEnvdFailure (error) {
 }
 
 export function getEnvd (id, sessionToken) {
+  console.log(id, sessionToken)
   return dispatch => {
     dispatch(getEnvdRequest())
    // store or get a sessionToken
@@ -249,6 +250,7 @@ export function getEnvd (id, sessionToken) {
      })
      .then((json) => {
        dispatch(getEnvdSuccess(json))
+       dispatch(step1State())
      })
      .catch((error) => {
        dispatch(getEnvdFailure(error))
@@ -331,44 +333,27 @@ export function getActivitylist (sessionToken) {
 }
 
 
-/**
- * ## addTask actions
- */
-export function addEnvdRequest () {
-  return {
-    type: ADDENVD_REQUEST
-  }
-}
-
-export function addEnvdSuccess () {
-  return {
-    type: ADDENVD_SUCCESS
-  }
-}
-export function addEnvdFailure (error) {
-  return {
-    type: ADDENVD_FAILURE,
-    payload: error
-  }
-}
-
-/**
- * ## addEnvd
- * hz
- */
-export function addEnvd (sessionToken) {
+export function initializeServer (sessionToken) {
   return dispatch => {
-    dispatch(addEnvdRequest())
    // store or get a sessionToken
     return appAuthToken.getSessionToken(sessionToken)
-     .then((token) => {
-       return BackendFactory(token).addEvndStart()
-     })
-     .then((json) => {
-       dispatch(addEnvdSuccess(json))
-     })
+    .then((token) => {
+      return BackendFactory(token).editENVD(1)
+    })
+    //  .then((token) => {
+    //    return BackendFactory(token).addEvndStart()
+    //  })
      .catch((error) => {
-       dispatch(addEnvdFailure(error))
+       console.log(error)
+     })
+  }
+}
+
+export function deleteEnvd (sessionToken) {
+  return dispatch => {
+    return appAuthToken.getSessionToken(sessionToken)
+     .then((token) => {
+       return BackendFactory(token).deleteEvndStart()
      })
   }
 }

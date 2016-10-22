@@ -103,6 +103,7 @@ export default function envdboxReducer (state = initialState, action) {
       return state.setIn(['form', 'fields', 'factors'], factors)
           .setIn(['form', 'fields', 'k2'], action.payload.k2)
           .setIn(['form', 'fields', 'taxRate'], action.payload.taxRate)
+          .setIn(['form', 'fields', 'taxBeforeInsurance'], action.payload.taxBeforeInsurance)
           .setIn(['form', 'error'], null)
 
     case ENVDLIST_REQUEST:
@@ -123,14 +124,17 @@ export default function envdboxReducer (state = initialState, action) {
         envdRow[2] = parse.userData.quarter
         envdRow[3] = parse.userData.activityType
         envdlist.push(envdRow)
-
       }
       return state.setIn(['form', 'envdlist'], envdlist)
         .setIn(['form', 'isFetching'], false)
 
     case GETENVD_SUCCESS:
-      return state.setIn(['form', 'envdlist'], action.payload)
-            .setIn(['form', 'isFetching'], false)
+      return state
+    .setIn(['form', 'fields', 'id'], action.payload.data.id)
+    .setIn(['form', 'fields', 'year'], action.payload.data.year)
+    .setIn(['form', 'fields', 'quarter'], action.payload.data.quarter)
+    .setIn(['form', 'fields', 'k1'], action.payload.k1)
+    .setIn(['form', 'error'], null)
 
     case ENVDLIST_FAILURE:
     case GETENVD_FAILURE:

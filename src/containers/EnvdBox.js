@@ -180,6 +180,10 @@ _getTitle () {
     this.handleSteps('forvard', 'step0')
   }
 
+  editEnvd (id) {
+    this.props.actions.getEnvd (id, this.props.global.currentUser)
+  }
+
   handlePressAddEnvdList () {
     this.props.actions.addEnvd(this.props.global.currentUser)
   }
@@ -216,15 +220,15 @@ _getTitle () {
               }} />
             <EnvdList
               envdlist={this.props.envdbox.form.envdlist}
-              editEnvd={this.handlePressAddEnvd.bind(this)}
+              editEnvd={this.editEnvd.bind(this)}
               handleSideMenu={this.handleSideMenu.bind(this)}
             />
-              <TouchableHighlight style={styles.button}
-                underlayColor='lavenderblush'
-                onPress={this.handlePressAddEnvd.bind(this)}>
-                <Text style={styles.textButton}>Новая декларация</Text>
-              </TouchableHighlight>
           </View>
+          // <TouchableHighlight style={styles.button}
+          //   underlayColor='lavenderblush'
+          //   onPress={this.handlePressAddEnvd.bind(this)}>
+          //   <Text style={styles.textButton}>Новая декларация</Text>
+          // </TouchableHighlight>
         )
       case 'STEP1':
         return (
@@ -242,7 +246,9 @@ _getTitle () {
         return (
           <View style={styles.container}>
             <Step2
-              handleSteps={this.handleSteps.bind(this)} />
+              handleSteps={this.handleSteps.bind(this)}
+              year={this.props.envdbox.form.fields.year}
+              quarter={this.props.envdbox.form.fields.quarter} />
           </View>
         )
       case 'STEP3':
@@ -273,6 +279,7 @@ _getTitle () {
           <View style={styles.container}>
             <Step5
               handleSteps={this.handleSteps.bind(this)}
+              quarter={this.props.envdbox.form.fields.quarter}
               taxBase={this.props.envdbox.form.fields.taxBase}
               taxRate={this.props.envdbox.form.fields.taxRate}
               factor1={this.props.envdbox.form.fields.factors[0]}
@@ -287,7 +294,14 @@ _getTitle () {
         return (
           <View style={styles.container}>
             <Step6
-              handleSteps={this.handleSteps.bind(this)} />
+              handleSteps={this.handleSteps.bind(this)}
+              taxBeforeInsurance={this.props.envdbox.form.fields.taxBeforeInsurance}
+              insurancePayments={this.props.envdbox.form.fields.insurancePayments}
+              taxDecrease={this.props.envdbox.form.fields.taxDecrease}
+              taxToPay={this.props.envdbox.form.fields.taxToPay}
+              year={this.props.envdbox.form.fields.year}
+              quarter={this.props.envdbox.form.fields.quarter}
+              />
           </View>
         )
       case 'STEP7':

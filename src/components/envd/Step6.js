@@ -12,6 +12,8 @@ import
 }
 from 'react-native'
 
+import NumTextInput from 'react-native-num-textinput'
+
 import CONFIG from '../../lib/config'
 let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
 
@@ -49,11 +51,9 @@ export default class extends Component {
     super(props)
     this.errorAlert = new ErrorAlert()
     this.state = {
-      factor1: this.props.factor1,
-      factor2: this.props.factor2,
-      factor3: this.props.factor3,
-      taxRate: this.props.taxRate,
-      k2: this.props.k2
+      insurancePayments: this.props.taxBeforeInsurance,  // пока принимаем равным страховому взносу
+      taxDecrease: this.props.taxDecrease,
+      taxToPay: this.props.taxToPay
     }
   }
 
@@ -70,7 +70,7 @@ export default class extends Component {
         <NavigationBar
           style={styles.navBarStyle}
           title={{
-            title: 'Страховые взносы (4 из 6)',
+            title: 'Страховые взносы',
             tintColor: 'white'
           }}
           leftButton={{
@@ -81,12 +81,12 @@ export default class extends Component {
         <View style={styles.containerData}>
         <View style={styles.boxHor}>
           <View style={styles.box1}>
-            <Text style={styles.textBold}>Страховые взносы, уплаченные во 2 квартале 2016 года</Text>
+            <Text style={styles.textBold}>Страховые взносы, уплаченные в {this.props.quarter} квартале {this.props.year} года</Text>
           </View>
           <View style={styles.box1}>
-            <TextInput
-              style={styles.inputs}
-              value={'23 000'}
+            <NumTextInput
+              style={styles.inputs} onChangeText={(text) => this.onChange({factor1: text})}
+              value={this.state.insurancePayments.toString() === '0' ? '' : this.state.insurancePayments.toString()}
               />
           </View>
         </View>

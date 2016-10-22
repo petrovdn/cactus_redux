@@ -7,13 +7,35 @@ import
   StyleSheet,
   View,
   Text,
-  TouchableHighlight
+  TouchableHighlight,
+  Image
 }
 from 'react-native'
 
 import {Actions} from 'react-native-router-flux'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-export default class extends Component {
+import * as envdboxActions from '../reducers/envdbox/envdboxActions'
+import * as globalActions from '../reducers/global/globalActions'
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators({ ...envdboxActions, ...globalActions }, dispatch)
+  }
+}
+
+function mapStateToProps (state) {
+  return {
+    global: {
+      currentUser: state.global.currentUser,
+    }
+  }
+}
+
+class SideMenu extends Component {
+
+
 
   onPress (state) {
     switch (state) {
@@ -30,9 +52,15 @@ export default class extends Component {
     this.props.closeDrawer()
   }
 
+  initializeServer () {
+    this.props.actions.initializeServer(this.props.global.currentUser)
+  }
   render () {
     return (
       <View style={styles.container}>
+      <Image style={styles.logo}
+        source={require('../images/logo.png')}
+    />
         <TouchableHighlight style={styles.button}
           underlayColor='lavenderblush'
           onPress={() => this.onPress('ENVD')}>
@@ -48,6 +76,11 @@ export default class extends Component {
           onPress={() => this.onPress('Logout')}>
           <Text style={styles.textButton}>Выйти</Text>
         </TouchableHighlight>
+        <TouchableHighlight style={styles.button}
+          underlayColor='lavenderblush'
+          onPress={() => this.initializeServer()}>
+          <Text style={styles.textButton}>Инициализировать сервер</Text>
+        </TouchableHighlight>
       </View>
     )
   }
@@ -55,7 +88,6 @@ export default class extends Component {
 
 var styles = StyleSheet.create({
   container: {
-    marginTop: 100,
     flex: 1
   },
   button: {
@@ -66,5 +98,13 @@ var styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'left',
     fontWeight: '500'
+  },
+  logo: {
+    alignSelf: 'center',
+    margin: 20,
+    height: 70,
+    width: 70
   }
 })
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideMenu)

@@ -104,7 +104,8 @@ export default class extends Component {
         return
 
       case 2:
-        this.props.editEnvd()
+      case 3:
+        this.props.editEnvd(data[0])
         return
     }
   }

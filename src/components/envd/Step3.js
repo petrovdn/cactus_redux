@@ -170,14 +170,7 @@ var styles = StyleSheet.create({
   button: {
     backgroundColor: Theme.COLOR_BUTTON2,
     padding: 10,
-    height: 60,
-    borderRadius: 8,
-    shadowOffset: {
-      height: 5,
-      width: 0
-    },
-    shadowOpacity: 20,
-    shadowRadius: 5
+    height: 60
   },
   textButton: {
     fontSize: 18,

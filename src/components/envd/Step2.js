@@ -38,7 +38,7 @@ export default class extends Component {
             handler: this.onPressBack.bind(this)
           }} />
         <View style={styles.containerData}>
-          <Text style={styles.textBig}>Скопировать данные предыдущего периода (2 Квартал 2015 года)?</Text>
+          <Text style={styles.textBig}>Скопировать данные предыдущего периода ({this.props.quarter - 1} Квартал {this.props.year} года)?</Text>
           <TouchableHighlight style={styles.button}
             underlayColor='lavenderblush'
             onPress={() => this.onPressForvard(true)}>

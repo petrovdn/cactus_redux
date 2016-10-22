@@ -17,6 +17,7 @@ const Form = Record({
   isFetching: false,
   isChanged: false,
   fields: new (Record({
+    id: 0,
     inn: '',
     year: 0,
     name: '',
@@ -37,6 +38,7 @@ const Form = Record({
     okved: '',
     activityType: 0,
     quarter: 0,
+    k1: 0,
     k2: 0,
     factors: [0, 0, 0],
     taxBase: 0,

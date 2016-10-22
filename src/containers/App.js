@@ -29,6 +29,7 @@ import React from 'react'
 import
 {
     StyleSheet,
+    ActivityIndicator,
     View,
     Image
 }
@@ -99,8 +100,14 @@ let App = React.createClass({
         <Image style={styles.mark}
           source={require('../images/logo.png')}
       />
-
+      <View style={{margin: 30}}>
+       <ActivityIndicator
+        animating
+        color = 'rgb(252, 100, 75)'
+        size='small'
+         />
       </View>
+        </View>
     )
   }
 })

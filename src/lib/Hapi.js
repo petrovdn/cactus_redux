@@ -231,7 +231,37 @@ export class Hapi extends Backend {
       })
   }
 
-  async addEvndStart () {
+  async editENVD (id) {
+    return await this._fetch({
+      method: 'POST',
+      url: '/envd/' + id,
+      body: {
+        ifns: '',
+        okved: '',
+        k1: 0,
+        k2: 0,
+        factors: [0, 0, 0],
+        taxBase: 0,
+        taxRate: 0,
+        insurancePayments: 0,
+        taxDecrease: 0,
+        taxBeforeInsurance: 0,
+        taxToPay: 0
+      }
+    })
+      .then((res) => {
+        if ((res.status === 200 || res.status === 201)) {
+          return {}
+        } else {
+          throw (res.json)
+        }
+      })
+      .catch((error) => {
+        throw (error)
+      })
+  }
+
+  async addEvndStart (body) {
     return await this._fetch({
       method: 'POST',
       url: '/envd',
@@ -281,7 +311,7 @@ export class Hapi extends Backend {
       reqOpts.headers['Authorization'] = 'Bearer ' + this._sessionToken
     }
 
-    if (opts.method === 'POST' || opts.method === 'PUT') {
+    if (opts.method === 'POST' || opts.method === 'PUT' || opts.method === 'DELETE') {
       reqOpts.headers['Accept'] = 'application/json'
       reqOpts.headers['Content-Type'] = 'application/json'
     }
