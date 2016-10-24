@@ -13,6 +13,7 @@
  * ## Import
  */
 import {Record} from 'immutable'
+
 /**
  * ## InitialState
  *
@@ -30,7 +31,6 @@ var InitialState = Record({
   currentUser: null,
   showState: false,
   currentState: null,
-  store: null,
-  theme: null,
+  store: null
 })
 export default InitialState

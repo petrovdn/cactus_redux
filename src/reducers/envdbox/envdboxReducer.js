@@ -99,11 +99,18 @@ export default function envdboxReducer (state = initialState, action) {
         .setIn(['form', 'error'], null)
 
     case ADD_STEP5_DATA:
-      var factors = [action.payload.factor1, action.payload.factor2, action.payload.factor3]
+      var factors = [action.payload.data.factor1, action.payload.data.factor2, action.payload.data.factor3]
       return state.setIn(['form', 'fields', 'factors'], factors)
-          .setIn(['form', 'fields', 'k2'], action.payload.k2)
-          .setIn(['form', 'fields', 'taxRate'], action.payload.taxRate)
-          .setIn(['form', 'fields', 'taxBeforeInsurance'], action.payload.taxBeforeInsurance)
+          .setIn(['form', 'fields', 'k2'], action.payload.data.k2)
+          .setIn(['form', 'fields', 'taxRate'], action.payload.data.taxRate)
+          .setIn(['form', 'fields', 'taxBeforeInsurance'], action.payload.tax)
+          .setIn(['form', 'error'], null)
+
+    case ADD_STEP6_DATA:
+      return state
+        .setIn(['form', 'fields', 'insurancePayments'], action.payload.insurancePayments)
+          .setIn(['form', 'fields', 'taxDecrease'], action.payload.taxDecrease)
+          .setIn(['form', 'fields', 'taxToPay'], action.payload.taxToPay)
           .setIn(['form', 'error'], null)
 
     case ENVDLIST_REQUEST:

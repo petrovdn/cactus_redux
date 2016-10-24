@@ -30,7 +30,7 @@ import MyDrawer from './lib/MyDrawer'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import {setPlatform, setVersion} from './reducers/device/deviceActions'
+import {setPlatform, setVersion, setCurrendTheme} from './reducers/device/deviceActions'
 import {setStore} from './reducers/global/globalActions'
 
 import AuthInitialState from './reducers/auth/authInitialState'
@@ -74,6 +74,7 @@ class cactus_redux extends Component {
     store.dispatch(setVersion(VERSION))
     store.dispatch(setStore(store))
     store.dispatch(setPlatform('ios'))
+    store.dispatch(setCurrendTheme(1))
 
     return (
       <Provider store={store}>

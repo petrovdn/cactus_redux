@@ -14,9 +14,6 @@ from 'react-native'
 
 import NumTextInput from 'react-native-num-textinput'
 
-import CONFIG from '../../lib/config'
-let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
-
 import ErrorAlert from '../../components/ErrorAlert'
 
 function number_format (number, decimals, dec_point, thousands_sep) {
@@ -51,7 +48,7 @@ export default class extends Component {
     super(props)
     this.errorAlert = new ErrorAlert()
     this.state = {
-      insurancePayments: this.props.taxBeforeInsurance,  // пока принимаем равным страховому взносу
+      insurancePayments: this.props.insurancePayments,
       taxDecrease: this.props.taxDecrease,
       taxToPay: this.props.taxToPay
     }
@@ -63,60 +60,84 @@ export default class extends Component {
   onPressBack () {
     this.props.handleSteps('back', 'step6')
   }
+  _taxDecrease () {
+    Math.min(this.state.insurancePayments, this.props.taxBeforeInsurance)
+  }
+
+  onChange (insurancePayments) {
+    let taxDecrease = Math.min(insurancePayments, this.props.taxBeforeInsurance)
+    let taxToPay = this.props.taxBeforeInsurance - taxDecrease
+    this.setState({
+      insurancePayments: insurancePayments,
+      taxDecrease: taxDecrease,
+      taxToPay: taxToPay
+    })
+  }
 
   render () {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: this.props.theme.COLOR_BACK}]}>
         <NavigationBar
-          style={styles.navBarStyle}
+          style={{backgroundColor: this.props.theme.COLOR_NAVBAR, height: 60}}
           title={{
+            style: {fontSize: 20},
             title: 'Страховые взносы',
             tintColor: 'white'
           }}
           leftButton={{
-            title: '<',
+            title: '<=',
             tintColor: 'white',
             handler: this.onPressBack.bind(this)
           }} />
         <View style={styles.containerData}>
         <View style={styles.boxHor}>
-          <View style={styles.box1}>
+          <View style={styles.box2}>
             <Text style={styles.textBold}>Страховые взносы, уплаченные в {this.props.quarter} квартале {this.props.year} года</Text>
           </View>
           <View style={styles.box1}>
             <NumTextInput
-              style={styles.inputs} onChangeText={(text) => this.onChange({factor1: text})}
+              style={[styles.inputs, {borderColor: this.props.theme.COLOR_LINE}]} onChangeText={(text) => this.onChange(Number(text))}
               value={this.state.insurancePayments.toString() === '0' ? '' : this.state.insurancePayments.toString()}
               />
           </View>
         </View>
         <View style={styles.boxHor}>
-          <View style={{flex: 2}}>
+          <View style={styles.box2}>
             <Text>Сумма налога может быть уменьшена на:</Text>
           </View>
-          <View style={{flex: 1}}>
-            <Text style={styles.textBig}>19 356</Text>
+          <View style={styles.box1}>
+            <Text style={[styles.textBig, {
+              backgroundColor: this.props.theme.COLOR_BACK,
+              borderColor: this.props.theme.COLOR_LINE}]}>{number_format(this.state.taxDecrease, 0, '', ' ')}</Text>
           </View>
         </View>
         <View style={styles.boxHor}>
-          <View style={{flex: 2}}>
+          <View style={styles.box2}>
             <Text>Сумма налога до учета страховых взносов:</Text>
           </View>
-          <View style={{flex: 1}}>
-            <Text style={styles.textBig}>43 584</Text>
+          <View style={styles.box1}>
+            <Text style={[styles.textBig, {
+              backgroundColor: this.props.theme.COLOR_BACK,
+              borderColor: this.props.theme.COLOR_LINE}]}>{number_format(this.props.taxBeforeInsurance, 0, '', ' ')}</Text>
           </View>
         </View>
         <View style={styles.boxHor}>
-          <View style={{flex: 2}}>
+          <View style={styles.box2}>
             <Text style={styles.textBold}>Сумма налога к уплате за вычетом страховых взносов:</Text>
           </View>
-          <View style={{flex: 1}}>
-            <Text style={styles.textBig}>43 584</Text>
+          <View style={styles.box1}>
+            <Text style={[styles.textBig, {
+              backgroundColor: this.props.theme.COLOR_BACK,
+              borderColor: this.props.theme.COLOR_LINE}]}>{number_format(this.state.taxToPay, 0, '', ' ')}</Text>
           </View>
         </View>
 
   </View>
-        <TouchableHighlight style={styles.button}
+        <TouchableHighlight style={{
+          backgroundColor: this.props.theme.COLOR_BUTTON2,
+          padding: 15,
+          height: 60
+        }}
           underlayColor='lavenderblush'
           onPress={() => this.onPressForvard()}>
           <Text style={styles.textButton}>4 / 6      ПРОДОЛЖИТЬ</Text>
@@ -134,27 +155,13 @@ export default class extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
-    backgroundColor: Theme.COLOR_BACK
-  },
-  navBarStyle: {
-    backgroundColor: Theme.COLOR_NAVBAR,
-    height: 60
+    justifyContent: 'space-between'
   },
   containerData: {
-    backgroundColor: 'white',
-    margin: 10,
     flex: 1,
-    flexDirection: 'column',
     justifyContent: 'flex-start',
-    padding: 10,
-    borderRadius: 8,
-    shadowOffset: {
-      height: 5,
-      width: 0
-    },
-    shadowOpacity: 20,
-    shadowRadius: 5
+    marginLeft: 20,
+    marginTop: 20
   },
   boxHor: {
     flex: 1,
@@ -165,33 +172,37 @@ var styles = StyleSheet.create({
     flexDirection: 'column'
   },
   box2: {
-    flex: 2
+    flex: 2,
+    alignItems: 'flex-start'
   },
   box1: {
-    flex: 1
+    flex: 1,
+    alignItems: 'center'
   },
   textBig: {
+    height: 42,
+    width: 100,
+    padding: 5,
+    margin: 5,
     fontSize: 22,
-    fontWeight: '500'
+    textAlign: 'right',
+    borderWidth: 1,
+    borderRadius: 4
   },
   textBold: {
     fontSize: 16,
     fontWeight: '500'
   },
   inputs: {
-    flex: 1,
     height: 42,
-    padding: 4,
-    margin: 20,
+    width: 100,
+    padding: 5,
+    margin: 5,
     fontSize: 22,
-    fontWeight: '500',
-    textAlign: 'center',
-    borderWidth: 1
-  },
-  button: {
-    backgroundColor: Theme.COLOR_BUTTON2,
-    padding: 15,
-    height: 60
+    textAlign: 'right',
+    borderWidth: 1,
+    borderRadius: 4,
+    backgroundColor: 'white'
   },
   textButton: {
     fontSize: 18,

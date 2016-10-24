@@ -12,16 +12,20 @@ import
 }
 from 'react-native'
 
+import t from 'tcomb-form-native'
+let Form = t.form.Form
+
 import {Actions} from 'react-native-router-flux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import * as envdboxActions from '../reducers/envdbox/envdboxActions'
 import * as globalActions from '../reducers/global/globalActions'
+import * as deviceActions from '../reducers/device/deviceActions'
 
 function mapDispatchToProps (dispatch) {
   return {
-    actions: bindActionCreators({ ...envdboxActions, ...globalActions }, dispatch)
+    actions: bindActionCreators({ ...envdboxActions, ...globalActions, ...deviceActions }, dispatch)
   }
 }
 
@@ -34,7 +38,12 @@ function mapStateToProps (state) {
 }
 
 class SideMenu extends Component {
-
+  constructor (props) {
+    super(props)
+    this.state = {
+      theme: null
+    }
+  }
 
 
   onPress (state) {
@@ -51,11 +60,33 @@ class SideMenu extends Component {
     }
     this.props.closeDrawer()
   }
-
+  onChangeTheme (theme) {
+    this.props.actions.setCurrendTheme(Number(theme.theme))
+    this.props.closeDrawer()
+  }
   initializeServer () {
     this.props.actions.initializeServer(this.props.global.currentUser)
   }
   render () {
+    var theme = t.enums({
+      1: 'Цветовая схема 1',
+      2: 'Цветовая схема 2',
+      3: 'Цветовая схема 3',
+      4: 'Цветовая схема 4',
+      5: 'Цветовая схема 5'
+    })
+
+    var Theme = t.struct({
+      theme: theme
+    })
+    var options = {
+      fields: {
+        theme: {
+          label: 'Цветовая схема'
+        }
+      }
+    }
+
     return (
       <View style={styles.container}>
       <Image style={styles.logo}
@@ -81,6 +112,13 @@ class SideMenu extends Component {
           onPress={() => this.initializeServer()}>
           <Text style={styles.textButton}>Инициализировать сервер</Text>
         </TouchableHighlight>
+        <Form
+          ref='form'
+          type={Theme}
+          options={options}
+          value={this.state.theme}
+          onChange={this.onChangeTheme.bind(this)}
+          />
       </View>
     )
   }

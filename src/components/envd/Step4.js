@@ -11,6 +11,7 @@ import
 }
 from 'react-native'
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import ErrorAlert from '../../components/ErrorAlert'
 
 import t from 'tcomb-form-native'
@@ -60,28 +61,35 @@ export default class extends Component {
     }
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: this.props.theme.COLOR_BACK}]}>
         <NavigationBar
-          style={styles.navBarStyle}
+          style={{backgroundColor: this.props.theme.COLOR_NAVBAR, height: 60}}
           title={{
+            style: {fontSize: 20},
             title: 'Адрес деятельности',
             tintColor: 'white'
           }}
           leftButton={{
-            title: '<',
+            title: '<=',
             tintColor: 'white',
             handler: this.onPressBack.bind(this)
           }} />
-        <View style={styles.inputs}>
-          <Form
-            ref='form'
-            type={Step4Form}
-            options={options}
-            value={this.state.value}
-            onChange={this.onChange.bind(this)}
-              />
-        </View>
-        <TouchableHighlight style={styles.button}
+        <KeyboardAwareScrollView>
+          <View style={styles.inputs}>
+            <Form
+              ref='form'
+              type={Step4Form}
+              options={options}
+              value={this.state.value}
+              onChange={this.onChange.bind(this)}
+                />
+          </View>
+        </KeyboardAwareScrollView>
+        <TouchableHighlight style={{
+          backgroundColor: this.props.theme.COLOR_BUTTON2,
+          padding: 15,
+          height: 60
+        }}
           underlayColor='lavenderblush'
           onPress={() => this.onPressForvard()}>
           <Text style={styles.textButton}>2 / 6      ПРОДОЛЖИТЬ</Text>
@@ -93,12 +101,7 @@ export default class extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
-    backgroundColor: Theme.COLOR_BACK
-  },
-  navBarStyle: {
-    backgroundColor: Theme.COLOR_NAVBAR,
-    height: 60
+    justifyContent: 'space-between'
   },
   inputs: {
     backgroundColor: 'white',
@@ -111,11 +114,6 @@ var styles = StyleSheet.create({
     },
     shadowOpacity: 20,
     shadowRadius: 5
-  },
-  button: {
-    backgroundColor: Theme.COLOR_BUTTON2,
-    padding: 15,
-    height: 60
   },
   textButton: {
     fontSize: 18,

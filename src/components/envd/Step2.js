@@ -25,27 +25,36 @@ export default class extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: this.props.theme.COLOR_BACK}]}>
         <NavigationBar
-          style={styles.navBarStyle}
+          style={{backgroundColor: this.props.theme.COLOR_NAVBAR, height: 60}}
           title={{
+            style: {fontSize: 20},
             title: 'Скопировать данные?',
             tintColor: 'white'
           }}
           leftButton={{
-            title: '<',
+            title: '<=',
             tintColor: 'white',
             handler: this.onPressBack.bind(this)
           }} />
-        <View style={styles.containerData}>
+        <View style={[styles.containerData, {backgroundColor: this.props.theme.COLOR_BACK}]}>
           <Text style={styles.textBig}>Скопировать данные предыдущего периода ({this.props.quarter - 1} Квартал {this.props.year} года)?</Text>
-          <TouchableHighlight style={styles.button}
+          <TouchableHighlight style={{
+            backgroundColor: this.props.theme.COLOR_BUTTON2,
+            padding: 15,
+            height: 60
+          }}
             underlayColor='lavenderblush'
             onPress={() => this.onPressForvard(true)}>
             <Text style={styles.textButton}>Да, использовать данные предыдущего периода</Text>
           </TouchableHighlight>
           <Text style={styles.textSmall}> Информацию можно будет проверить и изменить</Text>
-          <TouchableHighlight style={styles.button}
+          <TouchableHighlight style={{
+            backgroundColor: this.props.theme.COLOR_BUTTON2,
+            padding: 15,
+            height: 60
+          }}
             underlayColor='lavenderblush'
             onPress={() => this.onPressForvard(false)}>
             <Text style={styles.textButton}>Нет, оформить декларацию заново</Text>
@@ -57,29 +66,11 @@ export default class extends Component {
 }
 var styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: Theme.COLOR_BACK
+    flex: 1
   },
   containerData: {
     padding: 20,
-    justifyContent: 'center',
-    backgroundColor: Theme.COLOR_BACK
-  },
-  navBarStyle: {
-    backgroundColor: Theme.COLOR_NAVBAR,
-    height: 60
-  },
-  button: {
-    backgroundColor: Theme.COLOR_BUTTON2,
-    padding: 10,
-    height: 60,
-    borderRadius: 8,
-    shadowOffset: {
-      height: 5,
-      width: 0
-    },
-    shadowOpacity: 20,
-    shadowRadius: 5
+    justifyContent: 'center'
   },
   textButton: {
     fontSize: 18,

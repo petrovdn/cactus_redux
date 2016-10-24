@@ -17,8 +17,7 @@ import formStylesheet from '../envd/formStylesheet1'
 import t from 'tcomb-form-native'
 let Form = t.form.Form
 
-import CONFIG from '../../lib/config'
-let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class extends Component {
   constructor (props) {
@@ -71,18 +70,20 @@ export default class extends Component {
     }
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: this.props.theme.COLOR_BACK}]}>
         <NavigationBar
-          style={styles.navBarStyle}
+          style={{backgroundColor: this.props.theme.COLOR_NAVBAR, height: 60}}
           title={{
+            style: {fontSize: 20},
             title: 'Реквизиты ИП',
             tintColor: 'white'
           }}
           leftButton={{
-            title: '<',
+            title: '<=',
             tintColor: 'white',
             handler: this.onPressBack.bind(this)
           }} />
+          <KeyboardAwareScrollView>
         <View style={styles.inputs}>
           <Form
             ref='form'
@@ -92,7 +93,12 @@ export default class extends Component {
             onChange={this.onChange.bind(this)}
             />
         </View>
-        <TouchableHighlight style={styles.button}
+        </KeyboardAwareScrollView>
+        <TouchableHighlight style={{
+          backgroundColor: this.props.theme.COLOR_BUTTON2,
+          padding: 15,
+          height: 60
+        }}
           underlayColor='lavenderblush'
           onPress={() => this.onPressForvard()}>
           <Text style={styles.textButton}>     ПРОДОЛЖИТЬ</Text>
@@ -102,15 +108,12 @@ export default class extends Component {
     )
   }
 }
+
+var Theme
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
-    backgroundColor: Theme.COLOR_BACK
-  },
-  navBarStyle: {
-    backgroundColor: Theme.COLOR_NAVBAR,
-    height: 60
+    justifyContent: 'space-between'
   },
   inputs: {
     margin: 5,
@@ -123,11 +126,6 @@ var styles = StyleSheet.create({
     },
     shadowOpacity: 20,
     shadowRadius: 5
-  },
-  button: {
-    backgroundColor: Theme.COLOR_BUTTON2,
-    padding: 15,
-    height: 60
   },
   textButton: {
     fontSize: 18,

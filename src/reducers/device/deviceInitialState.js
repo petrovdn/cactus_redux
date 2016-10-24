@@ -13,6 +13,7 @@
  * ## Import immutable record
  */
 import {Record} from 'immutable'
+import CONFIG from '../../lib/config'
 
 /**
  * ## InitialState
@@ -22,7 +23,9 @@ import {Record} from 'immutable'
 var InitialState = Record({
   isMobile: false,
   platform: '',
-  version: null
+  version: null,
+  theme: null
+
 })
 
 export default InitialState

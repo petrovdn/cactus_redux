@@ -11,7 +11,6 @@
  * formValidation for setting the form's valid flag
  */
 const {
-  SET_THEME,
 
   SET_SESSION_TOKEN,
 
@@ -41,8 +40,6 @@ export default function globalReducer (state = initialState, action) {
 
   switch (action.type) {
 
-    case SET_THEME:
-      return state.set('theme', action.payload)
     /**
      * ### Save the sessionToken
      */

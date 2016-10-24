@@ -38,15 +38,16 @@ export default class extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: this.props.theme.COLOR_BACK}]}>
         <NavigationBar
-          style={styles.navBarStyle}
+          style={{backgroundColor: this.props.theme.COLOR_NAVBAR, height: 60}}
           title={{
+            style: {fontSize: 20},
             title: 'Документы сформированы',
             tintColor: 'white'
           }}
           leftButton={{
-            title: '<',
+            title: '<=',
             tintColor: 'white',
             handler: this.onPressBack.bind(this)
           }} />
@@ -84,7 +85,11 @@ export default class extends Component {
 
 
   </View>
-        <TouchableHighlight style={styles.button}
+        <TouchableHighlight style={{
+          backgroundColor: this.props.theme.COLOR_BUTTON2,
+          padding: 15,
+          height: 60
+        }}
           underlayColor='lavenderblush'
           onPress={() => this.onPressForvard()}>
           <Text style={styles.textButton}>Выслать все на konstantin@yandex.ru</Text>
@@ -102,12 +107,7 @@ export default class extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
-    backgroundColor: Theme.COLOR_BACK
-  },
-  navBarStyle: {
-    backgroundColor: Theme.COLOR_NAVBAR,
-    height: 60
+    justifyContent: 'space-between'
   },
   containerData: {
     flex: 1,
@@ -151,11 +151,6 @@ var styles = StyleSheet.create({
     fontWeight: '500',
     textAlign: 'center',
     borderWidth: 1
-  },
-  button: {
-    backgroundColor: Theme.COLOR_BUTTON2,
-    padding: 15,
-    height: 60
   },
   textButton: {
     fontSize: 18,

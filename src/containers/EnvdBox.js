@@ -84,6 +84,9 @@ function mapStateToProps (state) {
     global: {
       currentUser: state.global.currentUser,
       showState: state.global.showState
+    },
+    device: {
+      theme: state.device.theme
     }
   }
 }
@@ -146,14 +149,15 @@ _getTitle () {
         return
       case 'step5': // ввод коэффициентов и факторов
         if (direction === 'forvard') {
+          this.props.actions.addStep5Data(value1, value2)
           this.props.actions.step6State()
-          this.props.actions.addStep5Data(value1)
         } else {
           this.props.actions.step4State()
         }
         return
       case 'step6':
         if (direction === 'forvard') {
+          this.props.actions.addStep6Data(value1)
           this.props.actions.step7State()
         } else {
           this.props.actions.step5State()
@@ -208,17 +212,19 @@ _getTitle () {
         return (
           <View style={styles.container}>
             <NavigationBar
-              style={styles.navBarStyle}
+              style={{backgroundColor: this.props.device.theme.COLOR_NAVBAR, height: 60}}
               title={{
+                style: {fontSize: 20},
                 title: 'Отчетность ИП',
                 tintColor: 'white'
               }}
               leftButton={{
-                title: '=',
+                title: '==',
                 tintColor: 'white',
                 handler: this.handleSideMenu.bind(this)
               }} />
             <EnvdList
+              theme={this.props.device.theme}
               envdlist={this.props.envdbox.form.envdlist}
               editEnvd={this.editEnvd.bind(this)}
               handleSideMenu={this.handleSideMenu.bind(this)}
@@ -234,6 +240,7 @@ _getTitle () {
         return (
           <View style={styles.container}>
             <Step1
+              theme={this.props.device.theme}
               inn={this.props.envdbox.form.fields.inn}
               name={this.props.envdbox.form.fields.name}
               lastName={this.props.envdbox.form.fields.lastName}
@@ -246,6 +253,7 @@ _getTitle () {
         return (
           <View style={styles.container}>
             <Step2
+              theme={this.props.device.theme}
               handleSteps={this.handleSteps.bind(this)}
               year={this.props.envdbox.form.fields.year}
               quarter={this.props.envdbox.form.fields.quarter} />
@@ -255,6 +263,7 @@ _getTitle () {
         return (
           <View style={styles.container}>
             <Step3
+              theme={this.props.device.theme}
               handleSteps={this.handleSteps.bind(this)}
               Activitylist={this.props.envdbox.form.Activitylist}
               activityType={this.props.envdbox.form.fields.activityType}
@@ -266,6 +275,7 @@ _getTitle () {
         return (
           <View style={styles.container}>
             <Step4
+              theme={this.props.device.theme}
               handleSteps={this.handleSteps.bind(this)}
               city={this.props.envdbox.form.fields.address.city}
               street={this.props.envdbox.form.fields.address.street}
@@ -278,6 +288,7 @@ _getTitle () {
         return (
           <View style={styles.container}>
             <Step5
+              theme={this.props.device.theme}
               handleSteps={this.handleSteps.bind(this)}
               quarter={this.props.envdbox.form.fields.quarter}
               taxBase={this.props.envdbox.form.fields.taxBase}
@@ -294,6 +305,7 @@ _getTitle () {
         return (
           <View style={styles.container}>
             <Step6
+              theme={this.props.device.theme}
               handleSteps={this.handleSteps.bind(this)}
               taxBeforeInsurance={this.props.envdbox.form.fields.taxBeforeInsurance}
               insurancePayments={this.props.envdbox.form.fields.insurancePayments}
@@ -308,6 +320,7 @@ _getTitle () {
         return (
           <View style={styles.container}>
             <Step7
+              theme={this.props.device.theme}
               handleSteps={this.handleSteps.bind(this)} />
           </View>
         )
@@ -315,6 +328,7 @@ _getTitle () {
         return (
           <View style={styles.container}>
             <Step8
+              theme={this.props.device.theme}
               handleSteps={this.handleSteps.bind(this)} />
           </View>
         )
@@ -325,10 +339,6 @@ _getTitle () {
 var styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  navBarStyle: {
-    backgroundColor: 'rgb(252,100,75)',
-    height: 60
   },
   titleStyle: {
     fontSize: 20

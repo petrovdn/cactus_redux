@@ -127,16 +127,26 @@ export function step5State () {
   }
 }
 
-export function addStep5Data (data) {
+export function addStep5Data (data, tax) {
   return {
     type: ADD_STEP5_DATA,
-    payload: data
+    payload: {
+      data,
+      tax
+    }
   }
 }
 
 export function step6State () {
   return {
     type: STEP6
+  }
+}
+
+export function addStep6Data (data) {
+  return {
+    type: ADD_STEP6_DATA,
+    payload: data
   }
 }
 

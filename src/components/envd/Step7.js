@@ -11,8 +11,7 @@ import
 }
 from 'react-native'
 
-import CONFIG from '../../lib/config'
-let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
+var MapView = require('react-native-maps')
 
 import ErrorAlert from '../../components/ErrorAlert'
 
@@ -38,15 +37,16 @@ export default class extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: this.props.theme.COLOR_BACK}]}>
         <NavigationBar
-          style={styles.navBarStyle}
+          style={{backgroundColor: this.props.theme.COLOR_NAVBAR, height: 60}}
           title={{
+            style: {fontSize: 20},
             title: 'Налоговая инспекция',
             tintColor: 'white'
           }}
           leftButton={{
-            title: '<',
+            title: '<=',
             tintColor: 'white',
             handler: this.onPressBack.bind(this)
           }} />
@@ -62,8 +62,15 @@ export default class extends Component {
           <View>
             <Text style={styles.textBig}>№5258 ИФНС по Ленинскому району г. Нижнего Новгорода:</Text>
           </View>
-          <View style={{margin: 40}}>
-            <Text style={styles.textBig}>а тут такая оч. красивая карта)</Text>
+          <View>
+            <MapView
+              initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421
+              }}
+            />
           </View>
           <View>
             <Text style={styles.text}>603000, Нижний Новгород, ул. Ильинская, 52А. (831) 422-22-01</Text>
@@ -72,7 +79,11 @@ export default class extends Component {
 
 
   </View>
-        <TouchableHighlight style={styles.button}
+        <TouchableHighlight style={{
+          backgroundColor: this.props.theme.COLOR_BUTTON2,
+          padding: 15,
+          height: 60
+        }}
           underlayColor='lavenderblush'
           onPress={() => this.onPressForvard()}>
           <Text style={styles.textButton}>5 / 6      ПРОДОЛЖИТЬ</Text>
@@ -90,12 +101,7 @@ export default class extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
-    backgroundColor: Theme.COLOR_BACK
-  },
-  navBarStyle: {
-    backgroundColor: Theme.COLOR_NAVBAR,
-    height: 60
+    justifyContent: 'space-between'
   },
   containerData: {
     flex: 1,
@@ -135,11 +141,6 @@ var styles = StyleSheet.create({
     fontWeight: '500',
     textAlign: 'center',
     borderWidth: 1
-  },
-  button: {
-    backgroundColor: Theme.COLOR_BUTTON2,
-    padding: 15,
-    height: 60
   },
   textButton: {
     fontSize: 18,

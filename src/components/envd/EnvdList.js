@@ -8,9 +8,6 @@ import {
 } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view'
 
-import CONFIG from '../../lib/config'
-let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
-
 var moment = require('moment')
 moment.locale('ru')
 
@@ -30,8 +27,8 @@ class ENVDrow extends React.Component {
   }
 
   render () {
-    const ColorRed = Theme.COLOR_NAVBAR
-    const ColorGreen = Theme.COLOR_BUTTON1
+    const ColorRed = this.props.theme.COLOR_NAVBAR
+    const ColorGreen = this.props.theme.COLOR_BUTTON1
     const ColorGrey = 'grey'
     var data = this.props.data
     var year = data[1]
@@ -126,12 +123,13 @@ export default class extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: this.props.theme.COLOR_BACK}]}>
         <SwipeListView
           dataSource={this.ds.cloneWithRows(this.state.listViewData)}
           enableEmptySections
           renderRow={data => (
             <ENVDrow
+              theme = {this.props.theme}
               data={data}
               onPressENVD={this.onPressENVD.bind(this)}
             />
@@ -141,11 +139,11 @@ export default class extends Component {
     )
   }
 };
-
+// this.props.theme.COLOR_BACK
+//this.props.theme.COLOR_BUTTON2
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Theme.COLOR_BACK,
     marginTop: 5,
     marginBottom: 5
   },
@@ -165,16 +163,6 @@ var styles = StyleSheet.create({
     borderBottomWidth: 1,
     height: 50,
     backgroundColor: 'white'
-  },
-  buttonSmall: {
-    backgroundColor: Theme.COLOR_BUTTON2,
-    padding: 5,
-    height: 30,
-    width: 110,
-    borderRadius: 4,
-    borderColor: 'black',
-    borderWidth: 1,
-    alignItems: 'center'
   },
   text: {
     fontSize: 16

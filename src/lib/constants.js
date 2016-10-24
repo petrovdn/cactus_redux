@@ -3,6 +3,7 @@ import keyMirror from 'key-mirror'
 export default keyMirror({
   SET_PLATFORM: null,
   SET_VERSION: null,
+  SET_THEME: null,
 
   SESSION_TOKEN_REQUEST: null,
   SESSION_TOKEN_SUCCESS: null,

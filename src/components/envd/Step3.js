@@ -87,15 +87,16 @@ export default class extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: this.props.theme.COLOR_BACK}]}>
         <NavigationBar
-          style={styles.navBarStyle}
+          style={{backgroundColor: this.props.theme.COLOR_NAVBAR, height: 60}}
           title={{
+            style: {fontSize: 20},
             title: 'Вид деятельности',
             tintColor: 'white'
           }}
           leftButton={{
-            title: '<',
+            title: '<=',
             tintColor: 'white',
             handler: this.onPressBack.bind(this)
           }} />
@@ -104,7 +105,11 @@ export default class extends Component {
           enableEmptySections
           renderRow={(data, secId, rowId, rowMap) => this._renderRow(data, secId, rowId, rowMap)}
       />
-        <TouchableHighlight style={styles.button}
+        <TouchableHighlight style={{
+          backgroundColor: this.props.theme.COLOR_BUTTON2,
+          padding: 15,
+          height: 60
+        }}
           underlayColor='lavenderblush'
           onPress={() => this.onPressForvard()}>
           <Text style={styles.textButton}>1 / 6      ПРОДОЛЖИТЬ</Text>
@@ -118,7 +123,6 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'rgb(240,240,240)'
   },
   rowFront: {
     marginTop: 10,
@@ -162,15 +166,6 @@ var styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 14,
     color: 'white'
-  },
-  navBarStyle: {
-    backgroundColor: Theme.COLOR_NAVBAR,
-    height: 60
-  },
-  button: {
-    backgroundColor: Theme.COLOR_BUTTON2,
-    padding: 10,
-    height: 60
   },
   textButton: {
     fontSize: 18,
