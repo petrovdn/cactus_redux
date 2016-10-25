@@ -1,8 +1,8 @@
 module.exports = {
   SESSION_TOKEN_KEY: 'SESSION_TOKEN_KEY',
   backend: {
-    hapiRemote: true,
-    hapiLocal: false
+    hapiRemote: false,
+    hapiLocal: true
   },
   HAPI: {
     local: {
