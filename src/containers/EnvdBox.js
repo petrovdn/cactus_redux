@@ -13,15 +13,11 @@ import {Actions} from 'react-native-router-flux'
 import CONFIG from '../lib/config'
 let Theme = CONFIG.COLOR_SCHEME.SCHEME_CURRENT
 
-import Header from '../components/Header'
-
 import React, {Component} from 'react'
 import
 {
   StyleSheet,
-  View,
-  TouchableHighlight,
-  Text
+  View
 }
 from 'react-native'
 
